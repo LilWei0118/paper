@@ -1,0 +1,30 @@
+\section{Discussion}
+\label{sec:discussion}
+
+\bylyz{
+Practical LLM deployments can combine pipeline parallelism (PP) with tensor parallelism (TP) or expert parallelism (EP). 
+In such configurations, GPUs can be organized into groups, with PP across groups and TP or EP within each group. 
+Additional postprocessing in the last group can still create load imbalance across groups. 
+\thisproj{} could be extended to these configurations by profiling group execution times and selecting appropriate frequencies for GPUs in non-critical groups. 
+Keeping the last group's frequency settings unchanged and slowing other groups within their available slack could also optimize energy effiency without sacrificing performance.
+}
+
+% \bygpt{
+% Practical LLM deployments can combine pipeline parallelism (PP) with tensor parallelism (TP) or expert parallelism (EP). In such configurations, GPUs can be organized into groups, with PP across groups and TP or EP within each group. Additional postprocessing in the last group can still create load imbalance across groups. \thisproj{} could be extended to these configurations by profiling group execution times, including communication within each group, and selecting appropriate frequencies for GPUs in non-critical groups. Keeping the last group's frequency settings unchanged and slowing other groups only within their available slack could reduce energy consumption without creating new bottlenecks.
+% }
+
+% \bygemini{
+% Real-world scenarios typically involve a combination of parallel strategies, including Pipeline Parallelism, Tensor Parallelism, Expert Parallelism, and others. \thisproj{} is equally applicable to these hybrid parallel configurations. Such parallel combinations generally partition GPUs into multiple groups, where inter-group communication employs Pipeline Parallelism, while intra-group communication utilizes Tensor or Expert Parallelism. However, workload imbalances persist across these groups because the last group computes additional postprocessing tasks. Consequently, we can profile and set appropriate frequencies for all groups except the last one to achieve energy savings.
+% }
+
+\bylyz{
+\thisproj{} specifically targets the workload imbalance resulting from the postprocessing phase. The severity of this workload imbalance dictates the potential effectiveness of our optimization. In most scenarios, the cost of postprocessing is substantial due to the large vocabulary size required for next-token generation. Consequently, this pronounced imbalance serves to provide ample headroom and opportunity for our optimization.
+}
+
+% \bygpt{
+% \thisproj{} targets load imbalance caused by postprocessing in the final pipeline stage. Its potential benefit therefore depends on the amount of available slack in non-critical stages. For models with large vocabularies, output projection can impose substantial computational overhead on the final stage. When this additional work leaves earlier stages waiting, \thisproj{} can exploit the resulting slack by lowering their frequencies to save energy.
+% }
+
+% \bygemini{
+% \thisproj{} specifically targets the workload imbalance resulting from the postprocessing phase. The severity of this workload imbalance dictates the potential effectiveness of our optimization. In most scenarios, the cost of postprocessing is substantial due to the large vocabulary size required for next-token generation. Consequently, this pronounced imbalance serves to provide ample headroom and opportunity for our optimization.
+% }

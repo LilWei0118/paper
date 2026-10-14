@@ -1,0 +1,40 @@
+\section{Related Works}
+\label{sec:relatedworks}
+
+%\bygxl{Follow the list below}
+%1. scheduling, batch scheduling, continuous batching
+%2. power management of GPU, Power management of LLM
+
+\textbf{Pipeline Scheduling in LLMs.} 
+Pipeline parallelism is widely adopted in frameworks such as FedPipe~\cite{fang2024automated}, PipeLLM~\cite{ma2023poster}, and CEBench~\cite{sun2024cebench} to address GPU memory limits that prevent single-device model hosting.
+To maximize resources, systems like DeepSpeed~\cite{aminabadi2022deepspeed}, vLLM~\cite{kwon2023efficient}, and PyTorch~\cite{paszke2019pytorch} use batch scheduling.
+Eliminating pipeline bubbles is key to performance optimization.
+Prior works~\cite{arfeen2024pipefill, zheng2024response, lin2024syncintellects} focus on batch alignment, while micro-batching~\cite{athlur2022varuna, narayanan2019pipedream} enables smaller, parallelized batches.
+Continuous batching, from Orca~\cite{yu2022orca}, schedules at token-level granularity to minimize misalignment bubbles and is adopted in vLLM~\cite{kwon2023efficient} and Sarathi~\cite{agrawal2024taming}.
+However, we show that inherent bubbles from compute-memory mismatches cause significant energy waste.
+We address this by controlling the frequency to extend computation time and reduce bubbles.
+
+\noindent
+\textbf{GPU Energy Effiency.}
+Dynamic Voltage and Frequency Scaling (DVFS) dynamically adjusts CPU voltage and frequency to optimize energy efficiency, and has been extended to GPUs~\cite{mei2013measurement, tang2019impact, kakolyris2024slo, jia2024pccl}.
+Research, such as~\cite{guerreiro2019dvfs}, shows DVFS achieves 16\% average energy improvements at the workload level.
+% Power-capping techniques~\cite{zhao2023sustainable, patel2024characterizing, stojkovic2024towards} significantly reduce LLM inference energy, while TAPAS~\cite{stojkovic2025tapas} demonstrates power-capping prevents overheating and power failures.
+% Recent work~\cite{kakolyris2025throttll} optimizes GPU energy in LLMs by dynamically adjusting frequency based on batch size and KV cache usage.
+% In contrast, \thisproj{} targets energy waste from millisecond-scale pipeline bubbles, using static power-capping to extend batch execution time and eliminate bubbles.
+% Its model-guided approach ensures energy efficiency without compromising throughput, orthogonal to~\cite{kakolyris2025throttll}.
+% Recent work~\cite{kakolyris2025throttll} optimizes GPU energy in LLMs by dynamically adjusting frequency based on batch size and KV cache usage.
+% Similarly, Perseus~\cite{chung2024reducing} dynamically scales frequencies for computations on non-critical paths during training to achieve energy savings.
+% However, we observe that during inference, the duration of pipeline bubbles aligns with the overhead of dynamic GPU frequency adjustments, making it challenging to eliminate these bubbles.
+% In contrast, \thisproj{} targets energy waste from these millisecond-scale bubbles through static power capping, which extends batch execution times to eliminate bubbles while preserving GPU smart power management via DVFS.
+Recent work throttLL’eM~\cite{kakolyris2025throttll} examines the impact of GPU frequency and environmental factors on performance and energy consumption, employing dynamic frequency scaling to enhance energy efficiency.
+In contrast, \thisproj{} addresses pipeline bubbles arising from workload imbalances in pipeline parallelism.
+Perseus~\cite{chung2024reducing} dynamically scales frequencies for non-critical-path computations during training and models the energy-time relationship for each computation to inform scaling decisions.
+However, we observe that pipeline bubbles during inference are considerably shorter, typically lasting several to tens of milliseconds, which aligns with the overhead of frequency adjustments.
+Consequently, \thisproj{} adopts static frequency setting to avoid constant frequency adjustment and reduce energy consumption.
+Furthermore, we model the relationship between iteration time and frequency during inference to guide frequency settings; unlike Perseus, our approach incorporates the effects of batch size and sequence length, yielding a more granular and precise model.
+
+
+
+
+
+

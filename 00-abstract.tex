@@ -1,0 +1,42 @@
+
+
+% Large Language Models (LLMs) have achieved remarkable success in almost every important field of applications, and the growing computational and memory demands often require them to scale up and run on many GPUs.
+%     %exceed a single GPU’s capacity.
+% Pipeline parallelism has become the dominant standard allowing workloads to be distributed across multiple GPUs.
+% Yet, this approach can suffer from inefficiencies due to potential pipeline bubbles caused by resource imbalance and memory constraints, which can lead to significant energy waste.
+
+% We present \thisproj{}, a framework that improves energy efficiency in pipeline-parallel LLM inference engines through GPU power scaling.
+% %By modeling the relationship between GPU power caps and computation latency, 
+% By taking the GPU power settings and the computation latency of the application into consideration, 
+% \thisproj{} aligns power settings statically with pipeline stages to eliminate GPU idle time.
+% In this way, it can use a lower power cap to readjust the computation time in each pipeline stage, and thus reduce the energy use without sacrificing the application throughput.
+% Experiment results show that \thisproj{} improves system energy efficiency by up to 21.75\%.
+% On average, energy consumption drops by 14.81\% for Llama3-8B and 14.24\% for Llama3-70B, with negligible performance impact.
+% % \textcolor{red}{This approach can also be applied to more advanced and future LLM models that exploits similar pipeline parallelism.}
+% This approach can also be applied to more advanced and future LLM models that exploits similar pipeline parallelism.
+
+% Large Language Models (LLMs) have become indispensable in artificial intelligence, achieving remarkable success across diverse applications such as code generation, text translation, and intelligent dialogue systems. 
+% However, their growing complexity demands substantial computational and memory resources, often exceeding the capabilities of a single GPU. 
+% To meet these demands, pipeline parallelism has emerged as a dominant approach, enabling distributed execution across multiple GPUs. 
+% Despite its benefits, pipeline parallelism introduces inefficiencies, such as pipeline bubbles, which arise due to resource mismatches and GPU memory constraints, leading to significant energy waste.
+
+% This paper presents \thisproj{}, a novel framework designed to optimize energy efficiency in pipeline-parallel LLM inference by leveraging GPU power scaling. 
+% \thisproj{} employs a data-driven approach to model the relationship between GPU power cap and computation latency, enabling precise power adjustments that align with pipeline stages to eliminate bubbles. 
+% By statically capping GPU power and redistributing execution time, \thisproj{} reduces energy consumption while maintaining high inference throughput.
+
+% Large Language Models (LLMs) have achieved remarkable success across diverse applications, but their rapidly increasing scale imposes immense computational and energy demands. Pipeline parallelism has become the dominant approach for distributing LLM workloads across GPUs, yet it inherently suffers from pipeline bubbles. Our analysis reveals that such bubbles are inevitable, primarily due to compute–memory mismatches across stages, and that they are difficult to eliminate dynamically, since existing GPU power management operates at coarse time scales and cannot react to millisecond-level variations in stage workloads. 
+
+% To address this challenge, we present \thisproj{}, a framework that improves the energy efficiency of pipeline-parallel LLM inference via static GPU power scaling. At its core is a lightweight analytical model that quantitatively captures the relationship between GPU power caps and stage latencies, exploiting the input-insensitive stability of stage execution times. Using one-time offline profiling, \thisproj{} aligns stage execution by assigning tailored power caps, thereby slowing faster stages to eliminate bubbles without sacrificing throughput. 
+
+% Evaluations on Llama3-8B and Llama3-70B demonstrate that \thisproj{} enhances energy efficiency by up to 21.8\%, with average improvements of 14.8\% and 14.2\%, respectively, while incurring negligible overhead. 
+% This approach can also be applied to more advanced and future LLM models that exploits similar pipeline parallelism.
+
+
+Large Language Models (LLMs) have achieved remarkable success across diverse applications, but their rapidly growing scale imposes immense computational and memory demands.
+Pipeline parallelism has become one of the dominant methods for distributing LLM workloads across GPUs, yet it inevitably suffers from pipeline bubbles caused by execution time imbalances across stages.
+Our analysis shows that these bubbles are unavoidable, primarily due to compute–memory mismatches, and that they are difficult to reduce dynamically since existing GPU frequency management operates at coarse time scales (e.g., seconds) and cannot react to millisecond-level variations. 
+To overcome this challenge, we present \thisproj{}, a framework that improves the energy efficiency of pipeline-parallel LLM inference through static GPU frequency scaling.
+In \thisproj{} an analytical model is proposed to capture the relationship between GPU frequency and stage execution time, leveraging the input-insensitive stability of stage execution times. 
+With only one-time offline profiling, \thisproj{} derives tailored frequency settings that align stage execution without sacrificing performance. 
+Experiments on Llama3-8B and Llama3-70B show that \thisproj{} improves energy efficiency by up to XXX\%, with average gains of XXX\% and XXX\%, respectively, while incurring negligible overhead. 
+%These results highlight the practicality and generality of our approach, which can be readily applied to future LLMs employing pipeline parallelism.

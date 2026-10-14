@@ -1,0 +1,318 @@
+\newpage
+
+\section{Rebutal}
+
+% 实验部分
+\subsection{Experiments / Results}
+
+\begin{itemize}
+\item \textbf{SOTA experiments}:
+
+- More or less gpu (R1 Q5); 
+
+- A100/H100 + llama 405b(R2 Q1+Q11; R3 Q1); 
+
+- Tensor parallel multi-node(R2 Q4); 
+
+- More GPU memory (R2 Q11); 
+
+- LLM inference relevant (R4 Q1)
+% 硬件
+% 软件部分相关性，我觉得软件推理执行过程并不会从本质上减少显存的限制，所以我们的方法依然work，并且甚至并不依赖于
+
+model swap in/out(R1 Q8)
+% 这并不是我们关注的重点
+
+
+\item \textbf{analysis model:} 
+
+trial repeatedly (R2 Q2); 
+% 功率范围较大，且现在最高的功率上限到了600W甚至更多，哪怕是二分应该也需要多次测试才能得到结论，但是我们的拟合模型仅仅需要6、7个点的测试就可以得到准确率较高
+
+static burstiness more irregularity (R2 Q8+Q10)
+% 如果是消除气泡来不及
+% 通过其他的计算填补空闲时间：显存已经满了，gpu无法进行其他的计算，我觉得无关的计算也不行
+% 引用一下审稿人的论文
+
+fit model consider bsz (R2 Q9)
+% bsz不是连续的，不能放到回归模型中拟合，审稿人说的是对的，每个bsz都有不同的模型，不确定要不要强调，趋势相同，仅仅是参数不同
+
+repeatable / error bar (R2 Q5)
+% 这个
+
+fine grained fit model(R1 Q9)
+% paper中强调了20W的步长，有机会不牺牲性能，可以手动调整，不知道这样的解释是否可行，我觉得问题或许不出现在粒度上，而是出现在profile的时候忽略了很多东西，所以和fit这一步没有太大关系
+
+
+
+\item \textbf{experiment result:} 
+
+bsz --> throughput (R1 Q2);  bsz --> power cap(R1 Q3)
+% 做了不同bsz 性能和power trade off的实验，但是performance部分没有进行throughoput的结果
+% 这个有记录，rebuttal的时候补上
+
+\end{itemize}
+
+
+
+
+
+
+
+
+\subsection{Theoretical part}
+
+\begin{itemize}
+\item \textbf{Unclear non}:
+
+GPU P-state vs Power cap
+% page 6右半部分，可以根据fig 7讲清楚
+
+Figure 1 (R1 Q1)
+% 图片没有解释清楚，emmm，直接说Figure 6吧，说类似于图6，
+
+blocked state high power (R1 Q4)
+%  -----  (hardware limitation)
+
+how determine the model coefficients (R1 Q7)
+% 论文中只是简单陈述，让时间相等，或许可以给个公式？
+
+
+\item \textbf{Unclear erperiment / result}:
+
+7.9\% bubble ,more work(R3 Q3)
+% 这里确实没有解释清楚，有更多的气泡产生来源，比如致命的通信时间无法消除
+
+stage split (R4 Q1)
+% 论文中也描述了不能拆分，因为和层数/显存严格绑定
+
+power measured (R4 Q2)
+% nvidia-smi 0.1ms的频率
+
+slow and fast GPU(R4 Q3)
+
+\end{itemize}
+
+
+
+\subsection{mistake}
+
+perfetto
+
+
+
+% 感觉这里的解释跳跃性有点大，应该先说为了充分利用显存资源，模型参数被平均划分为若干个Stage分配到不同GPU上计算，最后一个Stage对应的GPU需要额外处理top-p和top-k的操作（这些操作无需模型参数），导致最后一个Stage的时间大于前面的Stage，Stage间的不对齐引入流水线的气泡。
+% The gap between GPU memory and compute resource and the load imbalance of LLM pipeline lead to the inevitable existence of bubbles.
+% The former creates GPU memory bottlenecks limiting the parallelism of the LLMs pipeline, which is a technical limitation.
+% The latter is reflected in the fact that the last stage of the pipeline handles compute intensive operations like top-p and top-k sampling, creating significant time delays compared to earlier stages.
+% Therefore, the greater the difference in execution time between the last stage and other stages, the greater the proportion of bubbles in the pipeline.
+% This problem cannot be balanced by replacing transformer layers.
+% 这里的worse results是指什么？更差的端到端延迟还是更多的能耗。其实我感觉balance workloads使得每个Stage的运行时间相等这种思路是可以的，但是这会导致处理最后一个Stage的GPU加载的模型参数少于其它GPU，从而无法充分利用最后一块GPU的显存资源，因此实际中均采用本文中介绍的划分wordloads的方式。
+% 这里我觉得可以说理论上可以，但是实际中选择设备保证最后一个Stage和前面的Stage对齐是非常困难的，异构设备的维护也会带来更多的麻烦。（另外，我们的方法按理说好像也可以在异构设备上推理吧）
+
+ 
+% We promise that in the final version we will correct the grammatical issues and font sizes in it to ensure that the text and images are correct and readable. (We will incorporate the underline info into the revised version of the paper.)
+
+% 问题可以简洁一点
+% and bsz
+% 决定显存的是parameter and  bsz，
+% 通过实验，这个latency相当于8个leayer的计算时间in RTX3090，transformer的执行时间< top-p
+% Second, this redistribution severely limits the KV Cache capacity available in these preceding stages. 
+
+% bsz 
+% GPU utilization
+% % 
+% memory=parameter+bsz
+% impratical
+% These two constraints make the approach operationally unfeasible.
+
+\subsection{Response}
+
+Thanks to all of the reviewers for their efforts and feedback! We address their questions and comments as follows.
+
+\textbf{Q1: LLM pipeline bubbles (Reviewers A-D)}
+Large LLMs necessitate an excessive number of model parameters that surpass the memory capacity of modern GPUs.
+To overcome this constraint, current inference engines predominantly implement a pipelining strategy.
+A widely adopted pipeline partitioning approach involves maintaining uniform memory allocation across multiple GPUs, which typically achieved by assigning an equal number of transformer layers and the same batch size (bsz) on all GPUs.
+
+While this achieves a balanced memory usage, it introduces workload imbalances across GPUs during execution.
+Specifically, the final pipeline stage is responsible for token generation, primarily employing top‑p and top‑k sampling algorithms.
+Though these sampling operations require no model parameters, they involve compute-intensive tasks such as high-dimensional matrix multiplications and sorting algorithms.
+Consequently, the last stage takes far longer time than the preceding stages, creating a workload imbalance and introducing pipeline bubbles.
+
+Our preliminary experiments demonstrate that the execution time of top-p/top-k operations in the last stage exceeds that of all other transformer layers in their corresponding GPUs, as shown in Figure 5(a).
+More importantly, the limited GPU memory capacity prevents concurrent scheduling of new batches during the idle periods when the preceding stages are stalled.
+The GPU is forced to stop and wait thus creating bubbles.
+
+However, attempts to mitigate workload imbalance through redistribution of transformer layers across stages will result in substantially higher memory demands in earlier stages compared to the last stage. 
+Such a disparity will necessitate smaller batch sizes for preceding stages, leading to further underutilize the GPU resources and hurt performance. 
+Moreover, varying memory demands across different stages will result in different batch sizes in each stage.
+Maintaining such inconsistent batch sizes across pipeline stages is difficult to track, rendering it an operationally impractical solution.
+
+As noted by Reviewer D, deploying a specialized high-speed GPU for the last pipeline stage can improve compute efficiency. 
+However, our study focuses on power/energy optimization for a homogeneous computing environment, which remains predominant in real-world deployment.
+
+
+
+
+
+\textbf{Q2: Performance on larger models and better GPU (Reviewers A-D)}
+The further increase in the number of parameters in recent larger models directly translates to a greater number of transformer layers. 
+The last pipeline stage remains burdened with non-parametric sampling operations for the token generation, while persistent GPU memory constraints continue to prevent full parallelization through batch scheduling.
+Consequently, in a homogeneous computing environment, pipeline bubbles remain inevitable regardless of the model scale.
+
+Notably, while model scaling increases the pipeline depth, the latency discrepancy between the last stage and the preceding stages remains the same.
+The magnitude of pipeline bubbles is fundamentally governed by the execution time disparity between the last stage and the preceding stages. 
+Thus, as the number of pipeline stages increases, more stages will have pipeline bubbles, resulting in more energy waste.
+Our approach can effectively align the execution time across pipeline stages, thereby reducing more pipeline bubbles and yielding more energy saving.
+
+To substantiate these claims, we will include more data in the final version, which will include recent A100/H100 GPUs with variable GPU node counts using two model scales i.e., Llama2-70B and Llama3-80B, as suggested by the reviewers.
+
+\textbf{Q3: Performance of increased GPU memory capacity (Reviewer B)}
+Increasing GPU memory capacity can reduce the required number of pipeline stages.
+Therefore, the pipeline bubbles across stages can be reduced.
+It also allows concurrent scheduling of multiple inference batches through enhanced parallelization capabilities. 
+The computational gaps between the last stage and preceding stages can be reduced across concurrent batches. 
+Consequently, enhancing GPU memory capacity will indeed mitigate pipeline bubbles.
+
+\textbf{Q4: Performance of bubble removal (Reviewer C)}
+SpongeSqueezer achieves a 7.9 percentage point reduction (30.1\% → 22.2\%) in the pipeline bubble ratio.  
+It does represent a 26.2\% (7.9/30.1 = 26.2\%) relative improvement in energy saving.
+The power capping corresponding to this result is the theoretical upper bound calculated by equation (1). 
+Further reduction of power capping will have a negative impact on end-to-end latency. 
+
+Note that the duration of each pipeline bubble is not the same, the execution time of each stage and each batch is also not the same.
+Even after setting the power capping, it is impractical/impossible to make the computation time of all stages consistent.
+Therefore, if the power capping is further reduced, the execution time of some stages will exceed the execution time of the last stage, thereby increasing the execution time of the entire pipeline.
+This phenomenon is empirically demonstrated in Figure 11, where reducing power capping to 150W results in a latency increase exceeding 5\%.
+
+
+\textbf{Q5: Performance variation and the measurement noises (Reviewer A)}
+Figure 10 demonstrates performance degradation in most experimental scenarios, with only marginal improvement observed in limited cases.
+These rare deviations can be attributed to measurement noise combined with intrinsic variability in LLM outputs.
+Specifically, variations in the length of the response generated by LLMs even with identical input prompts, resulting in a variation in the end-to-end latency. 
+But, response lengths still mostly maintain relative stable in practice.
+
+
+
+
+\textbf{Q6: The details of \textit{Batch-PowerCapping Model}(Reviewers A and B)}.
+The \textit{Batch-PowerCapping model} is an analytical model obtained by curve fitting to quantify the relationship between power capping and batch stage execution time. 
+It is not a machine learning model. 
+The \textit{Batch-PowerCapping model} is used to determine the level of the GPU power capping.
+Our method is to determine the parameters k1, k2, k3 in Equation 1 by offline profiling and curve fitting.
+Specifically, we sampled batch stage execution time $T$ at different power cappings, ranging from 150W to 250W with a step size of 25W, running on a small dataset.
+The lowest power cap is chosen at 150W because configurations below this threshold will substantially degrade the performance of the inference engine as shown in Figure 11.
+The highest power cap of 250W is chosen because it meets the maximum power requirement necessary for the engine's execution, as depicted in Figure 7.
+
+During the profiling, we obtained the the batch execution time $T$ of each stage that corresponds to different power caps $P$ in Equation 1.
+Substituting them into Equation 1, we derived the parameters k1, k2 and k3 with just seven complete runs, which requires negligible overhead.
+In the offline phase, we also got last-stage batch execution time T without setting power capping. 
+To achieve pipeline balancing, we calculated the target power capping for each GPU (excluding the last stage) by setting its batch execution time $T_i$ to the fixed $T_n$ of the last stage (whose power capping remains unchanged).
+Specifically, we calculated the target power cap for each GPU (excluding the last stage) according to Equation 1 by setting $T$ to the execution time of the last pipeline stage.
+
+As answer to reviewer A, for llama2-7b, the target power cappings are 150W(bsz=16), 155W(32), 155W(64), 160W(128) and 165W(256) respectively. 
+And llama3-8b used 145W(16), 145W(32), 150W(64), 150W(128) and 155W(256).
+The numbers in the parentheses are batch sizes.
+
+Theoretically, as described in reviewer B, optimal power configurations could be identified through progressive reduction of power capping thresholds until inference latency is impacted.
+However, this method needs to be repeated several times. 
+While SpongeSqueezer only needs 7 profiles to determine the optimal power capping setting.
+More importantly, for each deployment of LLMs, the previous approach needs to be repeated. 
+However, for our method, \textit{Batch-PowerCapping Model} parameters can be reused on similar hardware and software platforms.
+
+
+
+
+
+% As the reviewers pointe out, bsz can be put into the Batch-PowerCapping model for fitting together.
+% It is feasible to put bsz as a fitting variable into equation(1), but it may interfere with the fitting accuracy. 
+% Therefore, SpongeSqueezer choosed to refit different bsz to obtain new parameters.
+% 展示了bsz，实际和大部分工作的选择
+% bsz不是2的指数的情况下，理论上可行，可以放入到eq1中，赞同观点，但是实际不会采用这些bsz
+% 这里为什么bsz might interfere fitting accuracy，个人感觉不要提这句话
+% Compared to the continuous selection of bsz values, the actual bsz selection is small.
+% Since bsz usually remains stable after the inference engine runs, the overhead of such refitting is negligible.
+\textbf{Q7: Bsz in \textit{Batch-PowerCapping Model}.(reviewer A and B.)} 
+As the reviewer B points out, it is reasonable to put bsz into the Batch-PowerCapping model for fitting together.
+However, current inference engines usually set bsz to an exponent of 2 for performance reasons considering GPU memory management and wrap design, etc.
+Compared to the continuous selection of bsz values, the actual choice of bsz selection is really limited.
+And bsz will complicate the curve fitting, so we choose to refit different bsz to obtain new parameters.
+Besides, bsz usually remains stable during the LLM engine running, so we rarely fit the curve repeatedly and the overhead of such fitting can be negligible.
+
+
+
+% 强调一下，dvfs依旧可以进行细粒度的管理
+% 调节的同时
+% 问的应该时Power Cap和P-State的区别
+% 在我们的方法中，我们仅仅调节了Power Cap，并没有干预p-state，期间GPU DVFS依旧可以根据负载的变化动态调节p-state。
+% Power capping and p-state are different concepts in this article. 
+% Power capping refers to the manually set GPU power upper bound, while p-state refers to the different voltages and powers that the GPU DVFS automatically adjusts according to the computing workload.
+% In our approach, we adjusted power capping but did not adjust other factors such as voltage. 
+% The GPU's DVFS can still automatically select the performance state (P-state) based on the load, that is, it can adjust the voltage and adjust the real-time power within the power capping limit.
+\textbf{Q8: P-State.(reviewer B.)}
+Power cap and p-state are different concepts in this article. 
+Power cap refers to the upper bound of GPU power, which is set manually.
+But p-state refers to the different level of GPU voltage and power, which is set by GPU DVFS automatically according to the computing workload.
+SpongeSqueezer only adjust the GPU power cap without intervening in the p-state management. As a result, the GPU DVFS mechanism remains active and is able to dynamically adjust the P-state according to workload fluctuations.
+
+
+
+\textbf{Q9: Power measured and granularity.(Reviewer B.)}
+We use \textit{nvidia-smi} command to obtain real-time power of the engine at a granularity of 1ms, which is the minimum time interval that we can obtain.
+
+
+% B 在说我们没有考虑动态性，选择了静态的调整
+% 我们的方法是基于LLM推理引擎以长期稳定的情况下完成的，此时流水线中的气泡是呈规律性呈现的，像图4展示的那样。这样的气泡时间很短，往往仅有tens of millseconds，从而导致动态检测气泡和实时地调整GPU功率异常困难。因此，我们选择静态地设置GPU的PowerCap，这样保证在降低能耗的同时，不影响系统的稳定运行。像Reviewer B提到的，当紧急情况发生时，including user queries show up, burstiness, etc,  引擎的BatchSize也会相应的增加以满足吞吐率的需求。此时，只需要按照Q4中描述的那样，重新采样和确定Equation 1或直接使用现有的Equation 1 at the new bsz configuration(如果之前计算过的话)，根据Equation 1计算并更新新一轮GPU的PowerCap。相比于引擎的推理，这部分时间很小，是可以忽略的。
+% \textcolor{blue}{
+% SpongeSqueezer is developed based on the long-term stable behavior of the LLM inference engine, during which pipeline bubbles appear in a regular and predictable pattern, as illustrated in Figure 4.
+% }
+% This article believes that during the process of LLMs engine inference, the hardware and software related settings will not change
+% \textcolor{blue}{and does not address unexpected situations.}
+% power capping一起进行调整
+% reference paper也会放进去
+\textbf{Q10: Methodology.(Reviewer B.)}
+The inherent dynamism of pipeline stage execution times arises from the unpredictable occurrence and duration of pipeline bubbles
+Moreover, these bubbles are typically short-lived, lasting only tens of milliseconds, which makes it particularly challenging to dynamically detect them and adjust GPU power in real time.
+To address this, we adopt to set a static configuration of the GPU power capping, which effectively reduces energy consumption without compromising system latency.
+
+As noted by reviewer B, during sudden situation, including user queries show up, burstiness and so on, the LLM engine will adaptively increases its batch size to meet throughput requirements.
+In such cases, SpongeSqueezer can simply resample and recalculate equation 1 or directly use the equation 1 under the new batch size configuration, if it has been calculated before. 
+Subsequently, the GPU power capping is recomputed and applied in accordance with the equation.
+The time required for this adjustment is negligible compared to the inference latency and does not impact the responsiveness of the engine.
+
+Adagio in the HPC space is a method that uses dynamic DVFS to optimize performance. 
+It can be used together with our method. We will also analyze and cite this article in the final version.
+
+
+% 如果字数过多的话，感觉Q2和Q6可以合并
+% 在不能提供数据的时候，如何说我们结果的可重复性？
+\textbf{Q11: More experiments.(Reviewer A and B.)}
+We will provide throughput under different bsz and error bars of fit model.
+Our previous experiments were repeated multiple times to obtain the average value. 
+We believe that SpongeSqueezer will also achieve good results in throughput.
+
+
+
+
+
+
+% We believe that there will be more technical means to solve the pipeline bubble problem. SpongeSqueezer is not in conflict with these methods. We will also further study HPC and other directions in the future.
+% 邮件里面说不能说if accept or future的东西
+
+
+% p-state power cap
+
+% keep lowering power cap until inference speed is impacted)
+% % 这样做也可以，但是过于浪费，分析模型可以避免试错的过程，也是赞同观点
+
+
+
+
+
+% stage变多，bubble ratio
+% 是被最后一个pipeline stage多的决定，所以bubble stage ratio会变大
+% 同样是取决于最后一个pipeline stage的时间
+
+% slow and fast
+% 赞同观点，是的，possible，我们只是角度不一样，

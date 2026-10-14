@@ -1,0 +1,903 @@
+
+% Journals
+
+% First the Full Name is given, then the abbreviation used in the AMS Math
+% Reviews, with an indication if it could not be found there.
+% Note the 2nd overwrites the 1st, so swap them if you want the full name.
+
+ %{AMS}
+ @String{AMSTrans = "American Mathematical Society Translations" }
+ @String{AMSTrans = "Amer. Math. Soc. Transl." }
+ @String{BullAMS = "Bulletin of the American Mathematical Society" }
+ @String{BullAMS = "Bull. Amer. Math. Soc." }
+ @String{ProcAMS = "Proceedings of the American Mathematical Society" }
+ @String{ProcAMS = "Proc. Amer. Math. Soc." }
+ @String{TransAMS = "Transactions of the American Mathematical Society" }
+ @String{TransAMS = "Trans. Amer. Math. Soc." }
+
+ %ACM
+ @String{CACM = "Communications of the {ACM}" }
+ @String{CACM = "Commun. {ACM}" }
+ @String{CompServ = "Comput. Surveys" }
+ @String{JACM = "J. ACM" }
+ @String{ACMMathSoft = "{ACM} Transactions on Mathematical Software" }
+ @String{ACMMathSoft = "{ACM} Trans. Math. Software" }
+ @String{SIGNUM = "{ACM} {SIGNUM} Newsletter" }
+ @String{SIGNUM = "{ACM} {SIGNUM} Newslett." }
+
+ @String{AmerSocio = "American Journal of Sociology" }
+ @String{AmerStatAssoc = "Journal of the American Statistical Association" }
+ @String{AmerStatAssoc = "J. Amer. Statist. Assoc." }
+ @String{ApplMathComp = "Applied Mathematics and Computation" }
+ @String{ApplMathComp = "Appl. Math. Comput." }
+ @String{AmerMathMonthly = "American Mathematical Monthly" }
+ @String{AmerMathMonthly = "Amer. Math. Monthly" }
+ @String{BIT = "{BIT}" }
+ @String{BritStatPsych = "British Journal of Mathematical and Statistical
+          Psychology" }
+ @String{BritStatPsych = "Brit. J. Math. Statist. Psych." }
+ @String{CanMathBull = "Canadian Mathematical Bulletin" }
+ @String{CanMathBull = "Canad. Math. Bull." }
+ @String{CompApplMath = "Journal of Computational and Applied Mathematics" }
+ @String{CompApplMath = "J. Comput. Appl. Math." }
+ @String{CompPhys = "Journal of Computational Physics" }
+ @String{CompPhys = "J. Comput. Phys." }
+ @String{CompStruct = "Computers and Structures" }
+ @String{CompStruct = "Comput. \& Structures" }
+ @String{CompJour = "The Computer Journal" }
+ @String{CompJour = "Comput. J." }
+ @String{CompSysSci = "Journal of Computer and System Sciences" }
+ @String{CompSysSci = "J. Comput. System Sci." }
+ @String{Computing = "Computing" }
+ @String{ContempMath = "Contemporary Mathematics" }
+ @String{ContempMath = "Contemp. Math." }
+ @String{Crelle = "Crelle's Journal" }
+ @String{GiornaleMath = "Giornale di Mathematiche" }
+ @String{GiornaleMath = "Giorn. Mat." } % didn't find in AMS MR., ibid.
+
+ %IEEE
+ @String{Computer = "{IEEE} Computer" }
+ @String{IEEETransComp = "{IEEE} Transactions on Computers" }
+ @String{IEEETransComp = "{IEEE} Trans. Comput." }
+ @String{IEEETransAC = "{IEEE} Transactions on Automatic Control" }
+ @String{IEEETransAC = "{IEEE} Trans. Automat. Control" }
+ @String{IEEESpec = "{IEEE} Spectrum" } % didn't find in AMS MR
+ @String{ProcIEEE = "Proceedings of the {IEEE}" }
+ @String{ProcIEEE = "Proc. {IEEE}" } % didn't find in AMS MR
+ @String{IEEETransAeroElec = "{IEEE} Transactions on Aerospace and Electronic
+     Systems" }
+ @String{IEEETransAeroElec = "{IEEE} Trans. Aerospace Electron. Systems" }
+
+ @String{IMANumerAna = "{IMA} Journal of Numerical Analysis" }
+ @String{IMANumerAna = "{IMA} J. Numer. Anal." }
+ @String{InfProcLet = "Information Processing Letters" }
+ @String{InfProcLet = "Inform. Process. Lett." }
+ @String{InstMathApp = "Journal of the Institute of Mathematics and
+     its Applications" }
+ @String{InstMathApp = "J. Inst. Math. Appl." }
+ @String{IntControl = "International Journal of Control" }
+ @String{IntControl = "Internat. J. Control" }
+ @String{IntNumerEng = "International Journal for Numerical Methods in
+     Engineering" }
+ @String{IntNumerEng = "Internat. J. Numer. Methods Engrg." }
+ @String{IntSuper = "International Journal of Supercomputing Applications" }
+ @String{IntSuper = "Internat. J. Supercomputing Applic." } % didn't find
+%% in AMS MR
+ @String{Kibernetika = "Kibernetika" }
+ @String{JResNatBurStand = "Journal of Research of the National Bureau
+     of Standards" }
+ @String{JResNatBurStand = "J. Res. Nat. Bur. Standards" }
+ @String{LinAlgApp = "Linear Algebra and its Applications" }
+ @String{LinAlgApp = "Linear Algebra Appl." }
+ @String{MathAnaAppl = "Journal of Mathematical Analysis and Applications" }
+ @String{MathAnaAppl = "J. Math. Anal. Appl." }
+ @String{MathAnnalen = "Mathematische Annalen" }
+ @String{MathAnnalen = "Math. Ann." }
+ @String{MathPhys = "Journal of Mathematical Physics" }
+ @String{MathPhys = "J. Math. Phys." }
+ @String{MathComp = "Mathematics of Computation" }
+ @String{MathComp = "Math. Comp." }
+ @String{MathScand = "Mathematica Scandinavica" }
+ @String{MathScand = "Math. Scand." }
+ @String{TablesAidsComp = "Mathematical Tables and Other Aids to Computation" }
+ @String{TablesAidsComp = "Math. Tables Aids Comput." }
+ @String{NumerMath = "Numerische Mathematik" }
+ @String{NumerMath = "Numer. Math." }
+ @String{PacificMath = "Pacific Journal of Mathematics" }
+ @String{PacificMath = "Pacific J. Math." }
+ @String{ParDistComp = "Journal of Parallel and Distributed Computing" }
+ @String{ParDistComp = "J. Parallel and Distrib. Comput." } % didn't find
+%% in AMS MR
+ @String{ParComputing = "Parallel Computing" }
+ @String{ParComputing = "Parallel Comput." }
+ @String{PhilMag = "Philosophical Magazine" }
+ @String{PhilMag = "Philos. Mag." }
+ @String{ProcNAS = "Proceedings of the National Academy of Sciences
+                    of the USA" }
+ @String{ProcNAS = "Proc. Nat. Acad. Sci. U. S. A." }
+ @String{Psychometrika = "Psychometrika" }
+ @String{QuartMath = "Quarterly Journal of Mathematics, Oxford, Series (2)" }
+ @String{QuartMath = "Quart. J. Math. Oxford Ser. (2)" }
+ @String{QuartApplMath = "Quarterly of Applied Mathematics" }
+ @String{QuartApplMath = "Quart. Appl. Math." }
+ @String{RevueInstStat = "Review of the International Statisical Institute" }
+ @String{RevueInstStat = "Rev. Inst. Internat. Statist." }
+
+ %SIAM
+ @String{JSIAM = "Journal of the Society for Industrial and Applied
+     Mathematics" }
+ @String{JSIAM = "J. Soc. Indust. Appl. Math." }
+ @String{JSIAMB = "Journal of the Society for Industrial and Applied
+     Mathematics, Series B, Numerical Analysis" }
+ @String{JSIAMB = "J. Soc. Indust. Appl. Math. Ser. B Numer. Anal." }
+ @String{SIAMAlgMeth = "{SIAM} Journal on Algebraic and Discrete Methods" }
+ @String{SIAMAlgMeth = "{SIAM} J. Algebraic Discrete Methods" }
+ @String{SIAMAppMath = "{SIAM} Journal on Applied Mathematics" }
+ @String{SIAMAppMath = "{SIAM} J. Appl. Math." }
+ @String{SIAMComp = "{SIAM} Journal on Computing" }
+ @String{SIAMComp = "{SIAM} J. Comput." }
+ @String{SIAMMatrix = "{SIAM} Journal on Matrix Analysis and Applications" }
+ @String{SIAMMatrix = "{SIAM} J. Matrix Anal. Appl." }
+ @String{SIAMNumAnal = "{SIAM} Journal on Numerical Analysis" }
+ @String{SIAMNumAnal = "{SIAM} J. Numer. Anal." }
+ @String{SIAMReview = "{SIAM} Review" }
+ @String{SIAMReview = "{SIAM} Rev." }
+ @String{SIAMSciStat = "{SIAM} Journal on Scientific and Statistical
+     Computing" }
+ @String{SIAMSciStat = "{SIAM} J. Sci. Statist. Comput." }
+
+ @String{SoftPracExp = "Software Practice and Experience" }
+ @String{SoftPracExp = "Software Prac. Experience" } % didn't find in AMS MR
+ @String{StatScience = "Statistical Science" }
+ @String{StatScience = "Statist. Sci." }
+ @String{Techno = "Technometrics" }
+ @String{USSRCompMathPhys = "{USSR} Computational Mathematics and Mathematical
+     Physics" }
+ @String{USSRCompMathPhys = "{U. S. S. R.} Comput. Math. and Math. Phys." }
+ @String{VLSICompSys = "Journal of {VLSI} and Computer Systems" }
+ @String{VLSICompSys = "J. {VLSI} Comput. Syst." }
+ @String{ZAngewMathMech = "Zeitschrift fur Angewandte Mathematik und
+     Mechanik" }
+ @String{ZAngewMathMech = "Z. Angew. Math. Mech." }
+ @String{ZAngewMathPhys = "Zeitschrift fur Angewandte Mathematik und Physik" }
+ @String{ZAngewMathPhys = "Z. Angew. Math. Phys." }
+
+% Publishers % ================================================= |
+
+ @String{Academic = "Academic Press" }
+ @String{ACMPress = "{ACM} Press" }
+ @String{AdamHilger = "Adam Hilger" }
+ @String{AddisonWesley = "Addison-Wesley" }
+ @String{AllynBacon = "Allyn and Bacon" }
+ @String{AMS = "American Mathematical Society" }
+ @String{Birkhauser = "Birkh{\"a}user" }
+ @String{CambridgePress = "Cambridge University Press" }
+ @String{Chelsea = "Chelsea" }
+ @String{ClaredonPress = "Claredon Press" }
+ @String{DoverPub = "Dover Publications" }
+ @String{Eyolles = "Eyolles" }
+ @String{HoltRinehartWinston = "Holt, Rinehart and Winston" }
+ @String{Interscience = "Interscience" }
+ @String{JohnsHopkinsPress = "The Johns Hopkins University Press" }
+ @String{JohnWileySons = "John Wiley and Sons" }
+ @String{Macmillan = "Macmillan" }
+ @String{MathWorks = "The Math Works Inc." }
+ @String{McGrawHill = "McGraw-Hill" }
+ @String{NatBurStd = "National Bureau of Standards" }
+ @String{NorthHolland = "North-Holland" }
+ @String{OxfordPress = "Oxford University Press" }  %address Oxford or London?
+ @String{PergamonPress = "Pergamon Press" }
+ @String{PlenumPress = "Plenum Press" }
+ @String{PrenticeHall = "Prentice-Hall" }
+ @String{SIAMPub = "{SIAM} Publications" }
+ @String{Springer = "Springer-Verlag" }
+ @String{TexasPress = "University of Texas Press" }
+ @String{VanNostrand = "Van Nostrand" }
+ @String{WHFreeman = "W. H. Freeman and Co." }
+
+%Entries
+@ARTICLE{10549890,
+  author={Argerich, Mauricio Fadel and Patiño-Martínez, Marta},
+  journal={IEEE Access}, 
+  title={Measuring and Improving the Energy Efficiency of Large Language Models Inference}, 
+  year={2024},
+  volume={12},
+  number={},
+  pages={80194-80207},
+  keywords={Energy measurement;Energy consumption;Training;Graphics processing units;Software measurement;Computational modeling;Machine learning;Large language models;Energy consumption;energy efficiency;machine learning;deep learning;large language models},
+  doi={10.1109/ACCESS.2024.3409745}}
+
+@ARTICLE{10540202,
+  author={Kakolyris, Andreas Kosmas and Masouros, Dimosthenis and Xydis, Sotirios and Soudris, Dimitrios},
+  journal={IEEE Computer Architecture Letters}, 
+  title={SLO-Aware GPU DVFS for Energy-Efficient LLM Inference Serving}, 
+  year={2024},
+  volume={23},
+  number={2},
+  pages={150-153},
+  keywords={Graphics processing units;Predictive models;Tail;Frequency measurement;Optimization;Time-frequency analysis;Servers;Dynamic voltage frequency scaling (DVFS);inference serving;large language models;system optimization},
+  doi={10.1109/LCA.2024.3406038}}
+
+
+
+@article{price2016optimizing,
+  title={Optimizing performance-per-watt on GPUs in high performance computing: Temperature, frequency and voltage effects},
+  author={Price, Danny C and Clark, Michael A and Barsdell, Benjamin R and Babich, Ronald and Greenhill, Lincoln J},
+  journal={Computer Science-Research and Development},
+  volume={31},
+  number={4},
+  pages={185--193},
+  year={2016},
+  publisher={Springer}
+}
+
+@article{zhong2024distserve,
+  title={Distserve: Disaggregating prefill and decoding for goodput-optimized large language model serving},
+  author={Zhong, Yinmin and Liu, Shengyu and Chen, Junda and Hu, Jianbo and Zhu, Yibo and Liu, Xuanzhe and Jin, Xin and Zhang, Hao},
+  journal={arXiv preprint arXiv:2401.09670},
+  year={2024}
+}
+
+
+@misc{wu2024fastdistributedinferenceserving,
+      title={Fast Distributed Inference Serving for Large Language Models}, 
+      author={Bingyang Wu and Yinmin Zhong and Zili Zhang and Shengyu Liu and Fangyue Liu and Yuanhang Sun and Gang Huang and Xuanzhe Liu and Xin Jin},
+      year={2024},
+      eprint={2305.05920},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2305.05920}, 
+}
+
+
+@article{patterson2021carbon,
+  title={Carbon emissions and large neural network training},
+  author={Patterson, David and Gonzalez, Joseph and Le, Quoc and Liang, Chen and Munguia, Lluis-Miquel and Rothchild, Daniel and So, David and Texier, Maud and Dean, Jeff},
+  journal={arXiv preprint arXiv:2104.10350},
+  year={2021}
+}
+
+
+@inproceedings{kwon2023efficient,
+  title={Efficient memory management for large language model serving with pagedattention},
+  author={Kwon, Woosuk and Li, Zhuohan and Zhuang, Siyuan and Sheng, Ying and Zheng, Lianmin and Yu, Cody Hao and Gonzalez, Joseph and Zhang, Hao and Stoica, Ion},
+  booktitle={Proceedings of the 29th Symposium on Operating Systems Principles},
+  pages={611--626},
+  year={2023}
+}
+
+@misc{agrawal2023sarathiefficientllminference,
+      title={SARATHI: Efficient LLM Inference by Piggybacking Decodes with Chunked Prefills}, 
+      author={Amey Agrawal and Ashish Panwar and Jayashree Mohan and Nipun Kwatra and Bhargav S. Gulavani and Ramachandran Ramjee},
+      year={2023},
+      eprint={2308.16369},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2308.16369}, 
+}
+
+@inproceedings{koto-etal-2023-indommlu,
+    title = {Large Language Models Only Pass Primary School Exams in Indonesia: A Comprehensive Test on IndoMMLU},
+    author = "Fajri Koto and Nurul Aisyah and Haonan Li and Timothy Baldwin",
+    booktitle = "Proceedings of the 2023 Conference on Empirical Methods in Natural Language Processing (EMNLP)",
+    month = "December",
+    year = "2023",
+    address = "Singapore",
+    publisher = "Association for Computational Linguistics",
+}
+
+
+@article{touvron2023llama,
+  title={Llama: Open and efficient foundation language models},
+  author={Touvron, Hugo and Lavril, Thibaut and Izacard, Gautier and Martinet, Xavier and Lachaux, Marie-Anne and Lacroix, Timoth{\'e}e and Rozi{\`e}re, Baptiste and Goyal, Naman and Hambro, Eric and Azhar, Faisal and others},
+  journal={arXiv preprint arXiv:2302.13971},
+  year={2023}
+}
+
+@inproceedings{10.1145/3672198.3673797,
+author = {Li, Hanchen and Liu, Yuhan and Cheng, Yihua and Ray, Siddhant and Du, Kuntai and Jiang, Junchen},
+title = {Eloquent: A More Robust Transmission Scheme for LLM Token Streaming},
+year = {2024},
+isbn = {9798400707131},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3672198.3673797},
+doi = {10.1145/3672198.3673797},
+booktitle = {Proceedings of the 2024 SIGCOMM Workshop on Networks for AI Computing},
+pages = {34–40},
+numpages = {7},
+keywords = {Large Language Models, Real-Time Communication, Token Streaming},
+location = {Sydney, NSW, Australia},
+series = {NAIC '24}
+}
+
+@inproceedings{agrawal2024taming,
+  title={Taming $\{$Throughput-Latency$\}$ Tradeoff in $\{$LLM$\}$ Inference with $\{$Sarathi-Serve$\}$},
+  author={Agrawal, Amey and Kedia, Nitin and Panwar, Ashish and Mohan, Jayashree and Kwatra, Nipun and Gulavani, Bhargav and Tumanov, Alexey and Ramjee, Ramachandran},
+  booktitle={18th USENIX Symposium on Operating Systems Design and Implementation (OSDI 24)},
+  pages={117--134},
+  year={2024}
+}
+
+
+@article{huang2019gpipe,
+  title={Gpipe: Efficient training of giant neural networks using pipeline parallelism},
+  author={Huang, Yanping and Cheng, Youlong and Bapna, Ankur and Firat, Orhan and Chen, Dehao and Chen, Mia and Lee, HyoukJoong and Ngiam, Jiquan and Le, Quoc V and Wu, Yonghui and others},
+  journal={Advances in neural information processing systems},
+  volume={32},
+  year={2019}
+}
+
+@inproceedings{aminabadi2022deepspeed,
+  title={Deepspeed-inference: enabling efficient inference of transformer models at unprecedented scale},
+  author={Aminabadi, Reza Yazdani and Rajbhandari, Samyam and Awan, Ammar Ahmad and Li, Cheng and Li, Du and Zheng, Elton and Ruwase, Olatunji and Smith, Shaden and Zhang, Minjia and Rasley, Jeff and others},
+  booktitle={SC22: International Conference for High Performance Computing, Networking, Storage and Analysis},
+  pages={1--15},
+  year={2022},
+  organization={IEEE}
+}
+
+@inproceedings{davoodi2019tensorrt,
+  title={Tensorrt inference with tensorflow},
+  author={Davoodi, Pooya and Gwon, Chul and Lai, Guangda and Morris, Trevor},
+  booktitle={GPU Technology Conference},
+  year={2019}
+}
+
+@article{shi2024efficient,
+  title={Efficient and green large language models for software engineering: Vision and the road ahead},
+  author={Shi, Jieke and Yang, Zhou and Lo, David},
+  journal={ACM Transactions on Software Engineering and Methodology},
+  year={2024},
+  publisher={ACM New York, NY}
+}
+
+@inproceedings{yu2022orca,
+  title={Orca: A distributed serving system for $\{$Transformer-Based$\}$ generative models},
+  author={Yu, Gyeong-In and Jeong, Joo Seong and Kim, Geon-Woo and Kim, Soojeong and Chun, Byung-Gon},
+  booktitle={16th USENIX Symposium on Operating Systems Design and Implementation (OSDI 22)},
+  pages={521--538},
+  year={2022}
+}
+
+@inproceedings{patel2024splitwise,
+  title={Splitwise: Efficient generative llm inference using phase splitting},
+  author={Patel, Pratyush and Choukse, Esha and Zhang, Chaojie and Shah, Aashaka and Goiri, {\'I}{\~n}igo and Maleki, Saeed and Bianchini, Ricardo},
+  booktitle={2024 ACM/IEEE 51st Annual International Symposium on Computer Architecture (ISCA)},
+  pages={118--132},
+  year={2024},
+  organization={IEEE}
+}
+
+
+@article{jin2023s,
+  title={S3: Increasing GPU Utilization during Generative Inference for Higher Throughput},
+  author={Jin, Yunho and Wu, Chun-Feng and Brooks, David and Wei, Gu-Yeon},
+  journal={Advances in Neural Information Processing Systems},
+  volume={36},
+  pages={18015--18027},
+  year={2023}
+}
+
+
+@INPROCEEDINGS{10363447,
+  author={Samsi, Siddharth and Zhao, Dan and McDonald, Joseph and Li, Baolin and Michaleas, Adam and Jones, Michael and Bergeron, William and Kepner, Jeremy and Tiwari, Devesh and Gadepally, Vijay},
+  booktitle={2023 IEEE High Performance Extreme Computing Conference (HPEC)}, 
+  title={From Words to Watts: Benchmarking the Energy Costs of Large Language Model Inference}, 
+  year={2023},
+  volume={},
+  number={},
+  pages={1-9},
+  keywords={Training;Sharding;Costs;Energy resources;Computational modeling;Finance;Benchmark testing;Large Language Models;Natural Language Processing;Inference;Green AI;LLM;NLP;Deep Learning;Distributed Computing;Energy;Sustainability},
+  doi={10.1109/HPEC58863.2023.10363447}}
+
+
+@inproceedings{wilkins2024hybrid,
+  title={Hybrid Heterogeneous Clusters Can Lower the Energy Consumption of LLM Inference Workloads},
+  author={Wilkins, Grant and Keshav, Srinivasan and Mortier, Richard},
+  booktitle={Proceedings of the 15th ACM International Conference on Future and Sustainable Energy Systems},
+  pages={506--513},
+  year={2024}
+}
+
+@inproceedings{li2024collm,
+  title={CoLLM: A Collaborative LLM Inference Framework for Resource-Constrained Devices},
+  author={Li, Jinrong and Han, Biao and Li, Sudan and Wang, Xiaoyan and Li, Jie},
+  booktitle={2024 IEEE/CIC International Conference on Communications in China (ICCC)},
+  pages={185--190},
+  year={2024},
+  organization={IEEE}
+}
+
+@article{dabre2020survey,
+  title={A survey of multilingual neural machine translation},
+  author={Dabre, Raj and Chu, Chenhui and Kunchukuttan, Anoop},
+  journal={ACM Computing Surveys (CSUR)},
+  volume={53},
+  number={5},
+  pages={1--38},
+  year={2020},
+  publisher={ACM New York, NY, USA}
+}
+
+@inproceedings{roller2021recipes,
+  title={Recipes for Building an Open-Domain Chatbot},
+  author={Roller, Stephen and Dinan, Emily and Goyal, Naman and Ju, Da and Williamson, Mary and Liu, Yinhan and Xu, Jing and Ott, Myle and Smith, Eric Michael and Boureau, Y-Lan and others},
+  booktitle={Proceedings of the 16th Conference of the European Chapter of the Association for Computational Linguistics: Main Volume},
+  pages={300--325},
+  year={2021}
+}
+
+@inproceedings{mathews2024test,
+  title={Test-Driven Development and LLM-based Code Generation},
+  author={Mathews, Noble Saji and Nagappan, Meiyappan},
+  booktitle={Proceedings of the 39th IEEE/ACM International Conference on Automated Software Engineering},
+  pages={1583--1594},
+  year={2024}
+}
+
+@inproceedings{howe2024exploring,
+  title={Exploring scaling trends in llm robustness},
+  author={Howe, Nikolaus HR and Zaj{\k{a}}c, Micha{\l} and McKenzie, Ian R and Hollinsworth, Oskar John and Bacon, Pierre-Luc and Gleave, Adam},
+  booktitle={ICML 2024 Next Generation of AI Safety Workshop},
+  year={2024}
+}
+
+@inproceedings{athlur2022varuna,
+  title={Varuna: scalable, low-cost training of massive deep learning models},
+  author={Athlur, Sanjith and Saran, Nitika and Sivathanu, Muthian and Ramjee, Ramachandran and Kwatra, Nipun},
+  booktitle={Proceedings of the Seventeenth European Conference on Computer Systems},
+  pages={472--487},
+  year={2022}
+}
+
+@inproceedings{narayanan2019pipedream,
+  title={PipeDream: Generalized pipeline parallelism for DNN training},
+  author={Narayanan, Deepak and Harlap, Aaron and Phanishayee, Amar and Seshadri, Vivek and Devanur, Nikhil R and Ganger, Gregory R and Gibbons, Phillip B and Zaharia, Matei},
+  booktitle={Proceedings of the 27th ACM symposium on operating systems principles},
+  pages={1--15},
+  year={2019}
+}
+
+@misc{qin2024mooncake,
+      title={Mooncake: A KVCache-centric Disaggregated Architecture for LLM Serving}, 
+      author={Ruoyu Qin and Zheming Li and Weiran He and Mingxing Zhang and Yongwei Wu and Weimin Zheng and Xinran Xu},
+      year={2024},
+      eprint={2407.00079},
+      archivePrefix={arXiv},
+      primaryClass={cs.DC},
+      url={https://arxiv.org/abs/2407.00079}, 
+}
+
+@article{zheng2024response,
+  title={Response length perception and sequence scheduling: An llm-empowered llm inference pipeline},
+  author={Zheng, Zangwei and Ren, Xiaozhe and Xue, Fuzhao and Luo, Yang and Jiang, Xin and You, Yang},
+  journal={Advances in Neural Information Processing Systems},
+  volume={36},
+  year={2024}
+}
+
+@inproceedings{oh2024exegpt,
+  title={Exegpt: Constraint-aware resource scheduling for llm inference},
+  author={Oh, Hyungjun and Kim, Kihong and Kim, Jaemin and Kim, Sungkyun and Lee, Junyeol and Chang, Du-seong and Seo, Jiwon},
+  booktitle={Proceedings of the 29th ACM International Conference on Architectural Support for Programming Languages and Operating Systems, Volume 2},
+  pages={369--384},
+  year={2024}
+}
+
+@article{moon2024lpu,
+  title={Lpu: A latency-optimized and highly scalable processor for large language model inference},
+  author={Moon, Seungjae and Kim, Jung-Hoon and Kim, Junsoo and Hong, Seongmin and Cha, Junseo and Kim, Minsu and Lim, Sukbin and Choi, Gyubin and Seo, Dongjin and Kim, Jongho and others},
+  journal={IEEE Micro},
+  year={2024},
+  publisher={IEEE}
+}
+
+@inproceedings{lin2024syncintellects,
+  title={SyncIntellects: Orchestrating LLM Inference with Progressive Prediction and QoS-Friendly Control},
+  author={Lin, Xue and Zhang, Zhibo and Yue, Peining and Li, Haoran and Zhang, Jin and Fan, Baoyu and Su, Huayou and Gong, Xiaoli},
+  booktitle={2024 IEEE/ACM 32nd International Symposium on Quality of Service (IWQoS)},
+  pages={1--10},
+  year={2024},
+  organization={IEEE}
+}
+
+@article{paszke2019pytorch,
+  title={Pytorch: An imperative style, high-performance deep learning library},
+  author={Paszke, Adam and Gross, Sam and Massa, Francisco and Lerer, Adam and Bradbury, James and Chanan, Gregory and Killeen, Trevor and Lin, Zeming and Gimelshein, Natalia and Antiga, Luca and others},
+  journal={Advances in neural information processing systems},
+  volume={32},
+  year={2019}
+}
+
+@article{olston2017tensorflow,
+  title={Tensorflow-serving: Flexible, high-performance ml serving},
+  author={Olston, Christopher and Fiedel, Noah and Gorovoy, Kiril and Harmsen, Jeremiah and Lao, Li and Li, Fangwei and Rajashekhar, Vinu and Ramesh, Sukriti and Soyke, Jordan},
+  journal={arXiv preprint arXiv:1712.06139},
+  year={2017}
+}
+
+@inproceedings{lee2024infinigen,
+  title={$\{$InfiniGen$\}$: Efficient generative inference of large language models with dynamic $\{$KV$\}$ cache management},
+  author={Lee, Wonbeom and Lee, Jungi and Seo, Junghwan and Sim, Jaewoong},
+  booktitle={18th USENIX Symposium on Operating Systems Design and Implementation (OSDI 24)},
+  pages={155--172},
+  year={2024}
+}
+
+@misc{perfetto2021,
+  author = {Perfetto},
+  title = {Perfetto - System profiling, app tracing and trace analysis},
+  year = {2021},
+  howpublished = {\url{https://perfetto.dev}},
+  note = {Accessed: 2025-01-01}
+}
+
+@article{kwiatkowski2019natural,
+  title={Natural questions: a benchmark for question answering research},
+  author={Kwiatkowski, Tom and Palomaki, Jennimaria and Redfield, Olivia and Collins, Michael and Parikh, Ankur and Alberti, Chris and Epstein, Danielle and Polosukhin, Illia and Devlin, Jacob and Lee, Kenton and others},
+  journal={Transactions of the Association for Computational Linguistics},
+  volume={7},
+  pages={453--466},
+  year={2019},
+  publisher={MIT Press One Rogers Street, Cambridge, MA 02142-1209, USA journals-info~…}
+}
+
+@inproceedings{kandiah2021accelwattch,
+  title={AccelWattch: A power modeling framework for modern GPUs},
+  author={Kandiah, Vijay and Peverelle, Scott and Khairy, Mahmoud and Pan, Junrui and Manjunath, Amogh and Rogers, Timothy G and Aamodt, Tor M and Hardavellas, Nikos},
+  booktitle={MICRO-54: 54th Annual IEEE/ACM International Symposium on Microarchitecture},
+  pages={738--753},
+  year={2021}
+}
+
+@inproceedings{kayiran2016muc,
+  title={$\mu$C-States: Fine-grained GPU datapath power management},
+  author={Kayiran, Onur and Jog, Adwait and Pattnaik, Ashutosh and Ausavarungnirun, Rachata and Tang, Xulong and Kandemir, Mahmut T and Loh, Gabriel H and Mutlu, Onur and Das, Chita R},
+  booktitle={Proceedings of the 2016 International Conference on Parallel Architectures and Compilation},
+  pages={17--30},
+  year={2016}
+}
+
+@misc{chatgpt,
+  title = {Chatgpt},
+  howpublished = {\url{https://chatgpt.com}},
+}
+
+@misc{nvidia,
+  title = {Nvidia GPU Reference},
+  howpublished = {\url{https://www.nvidia.com}},
+}
+
+@article{team2023gemini,
+  title={Gemini: a family of highly capable multimodal models},
+  author={Team, Gemini and Anil, Rohan and Borgeaud, Sebastian and Alayrac, Jean-Baptiste and Yu, Jiahui and Soricut, Radu and Schalkwyk, Johan and Dai, Andrew M and Hauth, Anja and Millican, Katie and others},
+  journal={arXiv preprint arXiv:2312.11805},
+  year={2023}
+}
+
+@article{achiam2023gpt,
+  title={Gpt-4 technical report},
+  author={Achiam, Josh and Adler, Steven and Agarwal, Sandhini and Ahmad, Lama and Akkaya, Ilge and Aleman, Florencia Leoni and Almeida, Diogo and Altenschmidt, Janko and Altman, Sam and Anadkat, Shyamal and others},
+  journal={arXiv preprint arXiv:2303.08774},
+  year={2023}
+}
+
+@article{vaswani2017attention,
+  title={Attention is all you need},
+  author={Vaswani, A},
+  journal={Advances in Neural Information Processing Systems},
+  year={2017}
+}
+
+@inproceedings{narayanan2021efficient,
+  title={Efficient large-scale language model training on gpu clusters using megatron-lm},
+  author={Narayanan, Deepak and Shoeybi, Mohammad and Casper, Jared and LeGresley, Patrick and Patwary, Mostofa and Korthikanti, Vijay and Vainbrand, Dmitri and Kashinkunti, Prethvi and Bernauer, Julie and Catanzaro, Bryan and others},
+  booktitle={Proceedings of the International Conference for High Performance Computing, Networking, Storage and Analysis},
+  pages={1--15},
+  year={2021}
+}
+
+@inproceedings{jiang2024dynapipe,
+  title={DynaPipe: Optimizing multi-task training through dynamic pipelines},
+  author={Jiang, Chenyu and Jia, Zhen and Zheng, Shuai and Wang, Yida and Wu, Chuan},
+  booktitle={Proceedings of the Nineteenth European Conference on Computer Systems},
+  pages={542--559},
+  year={2024}
+}
+
+@article{bridges2016understanding,
+  title={Understanding GPU power: A survey of profiling, modeling, and simulation methods},
+  author={Bridges, Robert A and Imam, Neena and Mintz, Tiffany M},
+  journal={ACM Computing Surveys (CSUR)},
+  volume={49},
+  number={3},
+  pages={1--27},
+  year={2016},
+  publisher={ACM New York, NY, USA}
+}
+
+@inproceedings{mercati2017multi,
+  title={Multi-variable dynamic power management for the GPU subsystem},
+  author={Mercati, Pietro and Ayoub, Raid and Kishinevsky, Michael and Samson, Eric and Beuchat, Marc and Paterna, Francesco and Rosing, Tajana {\v{S}}imuni{\'c}},
+  booktitle={Proceedings of the 54th Annual Design Automation Conference 2017},
+  pages={1--6},
+  year={2017}
+}
+
+@article{krzywaniak2023dynamic,
+  title={Dynamic GPU power capping with online performance tracing for energy efficient GPU computing using DEPO tool},
+  author={Krzywaniak, Adam and Czarnul, Pawe{\l} and Proficz, Jerzy},
+  journal={Future Generation Computer Systems},
+  volume={145},
+  pages={396--414},
+  year={2023},
+  publisher={Elsevier}
+}
+
+@article{wang2021dynamic,
+  title={Dynamic GPU energy optimization for machine learning training workloads},
+  author={Wang, Farui and Zhang, Weizhe and Lai, Shichao and Hao, Meng and Wang, Zheng},
+  journal={IEEE Transactions on Parallel and Distributed Systems},
+  volume={33},
+  number={11},
+  pages={2943--2954},
+  year={2021},
+  publisher={IEEE}
+}
+
+@inproceedings{rasley2020deepspeed,
+  title={Deepspeed: System optimizations enable training deep learning models with over 100 billion parameters},
+  author={Rasley, Jeff and Rajbhandari, Samyam and Ruwase, Olatunji and He, Yuxiong},
+  booktitle={Proceedings of the 26th ACM SIGKDD International Conference on Knowledge Discovery \& Data Mining},
+  pages={3505--3506},
+  year={2020}
+}
+
+@article{devlin2018bert,
+  title={Bert: Pre-training of deep bidirectional transformers for language understanding},
+  author={Devlin, Jacob},
+  journal={arXiv preprint arXiv:1810.04805},
+  year={2018}
+}
+
+@article{kim2024effect,
+  title={The Effect of Scheduling and Preemption on the Efficiency of LLM Inference Serving},
+  author={Kim, Kyoungmin and Hong, Kijae and Gulcehre, Caglar and Ailamaki, Anastasia},
+  journal={arXiv preprint arXiv:2411.07447},
+  year={2024}
+}
+
+@article{singhania2024methodology,
+  title={Methodology for Fine-Grain GPU Power Visibility and Insights},
+  author={Singhania, Varsha and Aga, Shaizeen and Ibrahim, Mohamed Assem},
+  journal={arXiv preprint arXiv:2412.12426},
+  year={2024}
+}
+
+
+@inproceedings{fu2024serverlessllm,
+  title={ServerlessLLM: Low-latency serverless inference for large language models},
+  author={Fu, Yao and Xue, Leyang and Huang, Yeqi and Brabete, Andrei-Octavian and Ustiugov, Dmitrii and Patel, Yuvraj and Mai, Luo},
+  booktitle={18th USENIX Symposium on Operating Systems Design and Implementation},
+  pages={135--153},
+  year={2024},
+  organization={USENIX Association}
+}
+
+
+@inproceedings{chen2023joss,
+  title={JOSS: Joint Exploration of CPU-Memory DVFS and Task Scheduling for Energy Efficiency},
+  author={Chen, Jing and Manivannan, Madhavan and Goel, Bhavishya and Peric{\`a}s, Miquel},
+  booktitle={Proceedings of the 52nd International Conference on Parallel Processing},
+  pages={828--838},
+  year={2023}
+}
+
+@misc{fastertransformers,
+  title = {FasterTransformers},
+  howpublished = {\url{https://github.com/NVIDIA/ FasterTransformer}},
+}
+
+@article{stojkovic2024towards,
+  title={Towards Greener LLMs: Bringing Energy-Efficiency to the Forefront of LLM Inference},
+  author={Stojkovic, Jovan and Choukse, Esha and Zhang, Chaojie and Goiri, Inigo and Torrellas, Josep},
+  journal={arXiv preprint arXiv:2403.20306},
+  year={2024}
+}
+
+@article{stojkovic2024dynamollm,
+  title={Dynamollm: Designing llm inference clusters for performance and energy efficiency},
+  author={Stojkovic, Jovan and Zhang, Chaojie and Goiri, {\'I}{\~n}igo and Torrellas, Josep and Choukse, Esha},
+  journal={arXiv preprint arXiv:2408.00741},
+  year={2024}
+}
+
+@inproceedings{wilkins2024hybrid,
+  title={Hybrid Heterogeneous Clusters Can Lower the Energy Consumption of LLM Inference Workloads},
+  author={Wilkins, Grant and Keshav, Srinivasan and Mortier, Richard},
+  booktitle={Proceedings of the 15th ACM International Conference on Future and Sustainable Energy Systems},
+  pages={506--513},
+  year={2024}
+}
+
+@article{khoshsirat2024decentralized,
+  title={Decentralized LLM Inference over Edge Networks with Energy Harvesting},
+  author={Khoshsirat, Aria and Perin, Giovanni and Rossi, Michele},
+  journal={arXiv preprint arXiv:2408.15907},
+  year={2024}
+}
+
+@article{wilkins2024online,
+  title={Online Workload Allocation and Energy Optimization in Large Language Model Inference Systems},
+  author={Wilkins, Grant},
+  year={2024}
+}
+
+@article{fang2024automated,
+  title={Automated federated pipeline for parameter-efficient fine-tuning of large language models},
+  author={Fang, Zihan and Lin, Zheng and Chen, Zhe and Chen, Xianhao and Gao, Yue and Fang, Yuguang},
+  journal={arXiv preprint arXiv:2404.06448},
+  year={2024}
+}
+
+@inproceedings{ma2023poster,
+  title={Poster: PipeLLM: Pipeline LLM Inference on Heterogeneous Devices with Sequence Slicing},
+  author={Ma, Ruilong and Wang, Jingyu and Qi, Qi and Yang, Xiang and Sun, Haifeng and Zhuang, Zirui and Liao, Jianxin},
+  booktitle={Proceedings of the ACM SIGCOMM 2023 Conference},
+  pages={1126--1128},
+  year={2023}
+}
+
+@article{sun2024cebench,
+  title={Cebench: A benchmarking toolkit for the cost-effectiveness of llm pipelines},
+  author={Sun, Wenbo and Wang, Jiaqi and Guo, Qiming and Li, Ziyu and Wang, Wenlu and Hai, Rihan},
+  journal={arXiv preprint arXiv:2407.12797},
+  year={2024}
+}
+
+@article{arfeen2024pipefill,
+  title={PipeFill: Using GPUs During Bubbles in Pipeline-parallel LLM Training},
+  author={Arfeen, Daiyaan and Zhang, Zhen and Fu, Xinwei and Ganger, Gregory R and Wang, Yida},
+  journal={arXiv preprint arXiv:2410.07192},
+  year={2024}
+}
+
+@inproceedings{mei2013measurement,
+  title={A measurement study of GPU DVFS on energy conservation},
+  author={Mei, Xinxin and Yung, Ling Sing and Zhao, Kaiyong and Chu, Xiaowen},
+  booktitle={Proceedings of the Workshop on Power-Aware Computing and Systems},
+  pages={1--5},
+  year={2013}
+}
+
+@inproceedings{tang2019impact,
+  title={The impact of GPU DVFS on the energy and performance of deep learning: An empirical study},
+  author={Tang, Zhenheng and Wang, Yuxin and Wang, Qiang and Chu, Xiaowen},
+  booktitle={Proceedings of the Tenth ACM International Conference on Future Energy Systems},
+  pages={315--325},
+  year={2019}
+}
+
+@article{kakolyris2024slo,
+  title={SLO-aware GPU DVFS for energy-efficient LLM inference serving},
+  author={Kakolyris, Andreas Kosmas and Masouros, Dimosthenis and Xydis, Sotirios and Soudris, Dimitrios},
+  journal={IEEE Computer Architecture Letters},
+  year={2024},
+  publisher={IEEE}
+}
+
+@inproceedings{jia2024pccl,
+  title={PCCL: Energy-Efficient LLM Training with Power-Aware Collective Communication},
+  author={Jia, Ziyang and Bhuyan, Laxmi N and Wong, Daniel},
+  booktitle={2024 IEEE 42nd International Conference on Computer Design (ICCD)},
+  pages={84--91},
+  year={2024},
+  organization={IEEE}
+}
+
+@inproceedings{zhao2023sustainable,
+  title={Sustainable supercomputing for AI: GPU power capping at HPC scale},
+  author={Zhao, Dan and Samsi, Siddharth and McDonald, Joseph and Li, Baolin and Bestor, David and Jones, Michael and Tiwari, Devesh and Gadepally, Vijay},
+  booktitle={Proceedings of the 2023 ACM Symposium on Cloud Computing},
+  pages={588--596},
+  year={2023}
+}
+
+@inproceedings{patel2024characterizing,
+  title={Characterizing Power Management Opportunities for LLMs in the Cloud},
+  author={Patel, Pratyush and Choukse, Esha and Zhang, Chaojie and Goiri, {\'I}{\~n}igo and Warrier, Brijesh and Mahalingam, Nithish and Bianchini, Ricardo},
+  booktitle={Proceedings of the 29th ACM International Conference on Architectural Support for Programming Languages and Operating Systems, Volume 3},
+  pages={207--222},
+  year={2024}
+}
+
+@article{stojkovic2025tapas,
+  title={TAPAS: Thermal-and Power-Aware Scheduling for LLM Inference in Cloud Platforms},
+  author={Stojkovic, Jovan and Zhang, Chaojie and Goiri, {\'I}{\~n}igo and Choukse, Esha and Qiu, Haoran and Fonseca, Rodrigo and Torrellas, Josep and Bianchini, Ricardo},
+  journal={arXiv preprint arXiv:2501.02600},
+  year={2025}
+}
+
+@article{guerreiro2019dvfs,
+  title={DVFS-aware application classification to improve GPGPUs energy efficiency},
+  author={Guerreiro, Jo{\~a}o and Ilic, Aleksandar and Roma, Nuno and Tom{\'a}s, Pedro},
+  journal={Parallel Computing},
+  volume={83},
+  pages={93--117},
+  year={2019},
+  publisher={Elsevier}
+}
+
+
+@article{chiang2023vicuna,
+  title={Vicuna: An open-source chatbot impressing gpt-4 with 90\%* chatgpt quality},
+  author={Chiang, Wei-Lin and Li, Zhuohan and Lin, Zi and Sheng, Ying and Wu, Zhanghao and Zhang, Hao and Zheng, Lianmin and Zhuang, Siyuan and Zhuang, Yonghao and Gonzalez, Joseph E and others},
+  journal={See https://vicuna. lmsys. org (accessed 14 April 2023)},
+  volume={2},
+  number={3},
+  pages={6},
+  year={2023}
+}
+
+@article{hendrycks2021measuring,
+  title={Measuring mathematical problem solving with the math dataset},
+  author={Hendrycks, Dan and Burns, Collin and Kadavath, Saurav and Arora, Akul and Basart, Steven and Tang, Eric and Song, Dawn and Steinhardt, Jacob},
+  journal={arXiv preprint arXiv:2103.03874},
+  year={2021}
+}
+
+@article{ye2025flashinfer,
+  title={Flashinfer: Efficient and customizable attention engine for llm inference serving},
+  author={Ye, Zihao and Chen, Lequn and Lai, Ruihang and Lin, Wuwei and Zhang, Yineng and Wang, Stephanie and Chen, Tianqi and Kasikci, Baris and Grover, Vinod and Krishnamurthy, Arvind and others},
+  journal={arXiv preprint arXiv:2501.01005},
+  year={2025}
+}
+
+@article{hong2023flashdecoding++,
+  title={Flashdecoding++: Faster large language model inference on gpus},
+  author={Hong, Ke and Dai, Guohao and Xu, Jiaming and Mao, Qiuli and Li, Xiuhong and Liu, Jun and Chen, Kangdi and Dong, Yuhan and Wang, Yu},
+  journal={arXiv preprint arXiv:2311.01282},
+  year={2023}
+}
+
+@inproceedings{kakolyris2025throttll,
+  title={throttLL’eM: Predictive GPU Throttling for Energy Efficient LLM Inference Serving},
+  author={Kakolyris, Andreas Kosmas and Masouros, Dimosthenis and Vavaroutsos, Petros and Xydis, Sotirios and Soudris, Dimitrios},
+  booktitle={2025 IEEE International Symposium on High Performance Computer Architecture (HPCA)},
+  pages={1363--1378},
+  year={2025},
+  organization={IEEE}
+}
+
+@article{xuftp,
+  title={FTP: Efficient Prefilling for Long-Context LLM Inference via FFN Token Pruning},
+  author={Xu, Guo-Hao and Ding, Jingzhen and Ding, Huping and Xu, Zhao and Zhang, Kaifu}
+}
+@inproceedings{alizadeh2024llm,
+  title={Llm in a flash: Efficient large language model inference with limited memory},
+  author={Alizadeh, Keivan and Mirzadeh, Seyed Iman and Belenko, Dmitry and Khatamifard, S and Cho, Minsik and Del Mundo, Carlo C and Rastegari, Mohammad and Farajtabar, Mehrdad},
+  booktitle={Proceedings of the 62nd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)},
+  pages={12562--12584},
+  year={2024}
+}
+@inproceedings{cheng2025ecco,
+  title={Ecco: Improving Memory Bandwidth and Capacity for LLMs via Entropy-Aware Cache Compression},
+  author={Cheng, Feng and Guo, Cong and Wei, Chiyue and Zhang, Junyao and Zhou, Changchun and Hanson, Edward and Zhang, Jiaqi and Liu, Xiaoxiao and Li, Hai and Chen, Yiran},
+  booktitle={Proceedings of the 52nd Annual International Symposium on Computer Architecture},
+  pages={793--807},
+  year={2025}
+}
+@article{recasens2025mind,
+  title={Mind the memory gap: Unveiling gpu bottlenecks in large-batch llm inference},
+  author={Recasens, Pol G and Agullo, Ferran and Zhu, Yue and Wang, Chen and Lee, Eun Kyung and Tardieu, Olivier and Torres, Jordi and Berral, Josep Ll},
+  journal={arXiv preprint arXiv:2503.08311},
+  year={2025}
+}
+@inproceedings{chung2024reducing,
+  title={Reducing energy bloat in large model training},
+  author={Chung, Jae-Won and Gu, Yile and Jang, Insu and Meng, Luoxi and Bansal, Nikhil and Chowdhury, Mosharaf},
+  booktitle={Proceedings of the ACM SIGOPS 30th Symposium on Operating Systems Principles},
+  pages={144--159},
+  year={2024}
+}
