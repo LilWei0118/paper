@@ -88,7 +88,7 @@ def load_points(run):
 
 def write_csv(path, rows, fields):
     with path.open("w", newline="") as file:
-        writer = csv.DictWriter(file, fieldnames=fields)
+        writer = csv.DictWriter(file, fieldnames=fields, lineterminator="\n")
         writer.writeheader()
         writer.writerows(rows)
 
