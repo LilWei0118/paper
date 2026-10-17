@@ -1,0 +1,13 @@
+{
+  "source": "dataset_runs/sarathi_llama3_8b_3090_freq_bs64_128_256/sharegpt/bs256/scan/freq1200/rep1",
+  "setting": "1200 MHz on stages 0\u20132; last stage Auto",
+  "repeat": 1,
+  "request_count": 64,
+  "selected_batches": 512,
+  "exact_x_points": 512,
+  "selection": "pure decode with modal request count",
+  "x": "sum of request context lengths before this decode batch",
+  "y": "mean CUDA Event stage duration of stages 1 and 2",
+  "aggregation": "mean of batches with exactly equal x; no smoothing or duration filtering",
+  "checks": "stage batch IDs and request metadata match; reconstructed prompt and decode counts match output summaries"
+}

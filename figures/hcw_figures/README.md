@@ -5,6 +5,7 @@ This folder holds the PDF and PNG figures generated for the local paper revision
 | Figure group | Files |
 | --- | --- |
 | Fig. 3 and Fig. 4 | `Fig3_*`, `Fig4_*` |
+| Fig. 4 fixed-frequency example | `fig4_sarathi_sharegpt_bs256_freq1200/` contains the Sarathi ShareGPT BS256 1200 MHz rep1 plot, script, and derived tables. |
 | Fig. 6 and Fig. 7 | `Fig6_*`, `Fig7_*` (model and dataset variants) |
 | Fig. 9 and Fig. 10 | `Fig9_*`, `Fig10_*` |
 | Fig. 11 | `Fig11_sharegpt_a100_qwen_bs256_*` is the requested two-panel selection; `Fig11_all_configs_*` contains the 27-configuration overview and model sheets; `Fig11_frequency_*` is an earlier preview. |
