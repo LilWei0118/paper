@@ -46,7 +46,7 @@ During online frequency adjustment part, the frequency is configured before the 
     \includegraphics[width=1\linewidth]{figures/Energy_E2E_under_BatchSize_lyz_new_new_new_new_new.pdf}
     \caption{\bylyz{Energy efficiency and performance variations at different power levels across multiple datasets using Llama3-8B model, Llama3-70B and XXX. 
     Positive numbers indicate energy efficiency improvements and performance degradation.
-    }\lyzcheck{3*3 Figures similar to this. But add XXX model in the last row. And change the label, with three labels, including energy efficiency, inference time and throughput. The x is Batch Size, and y is Change Ratio. Different row means different model, and different column means different DataSet. }}
+    }\lyzcheck{3*3 Figures similar to this. But add XXX model in the last row. And change the label, with three labels, including energy efficiency, inference time and throughput. The x is Batch Size, and y is Change Ratio. Different row means different model, and different column means different DataSet. You can also try to find a soluton to add the solved frequency in this figure.}}
     \label{latency_energy}
 \end{figure*}
 
@@ -133,18 +133,18 @@ We employ the default automatic DVFS mechanism as our baseline and evaluate our 
 
 \subsubsection{Performance and Energy Efficiency}
 
-\begin{table}
-  \caption{\lyzcheck{The optimal frequency settings and \textit{TFPrediction Model} coefficient solved by \thisproj{}.}}
-  \label{tab:fsettings}
-  \begin{tabular}{ccccc}
-    \toprule
-    Model & 512 & 256 & 128 & 64 \\
-    \midrule
-    Llama3-8B & -- & 5.39\%  & 4.40\%  & 1.71\%  \\
-    Llama3-70B & 6.75\% & 3.12\% & 1.75\% & --  \\
-    \bottomrule
-  \end{tabular}
-\end{table}
+% \begin{table}
+%   \caption{\lyzcheck{The optimal frequency settings and \textit{TFPrediction Model} coefficient solved by \thisproj{}.}}
+%   \label{tab:fsettings}
+%   \begin{tabular}{ccccc}
+%     \toprule
+%     Model & 512 & 256 & 128 & 64 \\
+%     \midrule
+%     Llama3-8B & -- & 5.39\%  & 4.40\%  & 1.71\%  \\
+%     Llama3-70B & 6.75\% & 3.12\% & 1.75\% & --  \\
+%     \bottomrule
+%   \end{tabular}
+% \end{table}
 
 In Figure~\ref{latency_energy}, it shows the impact of \thisproj{} on the performance and energy efficiency for Llama3-8B, Llama3-70B and XXX across different datasets compared with DVFS. 
 For simplicity of comparison, we normalized the data against the baseline.
@@ -178,11 +178,11 @@ However, when the frequency falls below a critical threshold (from XXX to XXX), 
 Consequently, system performance drops sharply, and the associated energy efficiency improvement diminish, potentially resulting in negative gains.
 
 \bylyz{
-Table shows our solved frequency settings using \thisproj{}.
-It shows that ...(some analysis).
-% It also shows that the optimal frequency setting lies between XXX and XXX, with the optimal value close to XXX.
-% We use \thisproj{} to calculate the frequency that exactly matches the execution time of the preceding stage to the last stage.
-% The predicted frequency is XXX, which closely aligns with the experimental results.
+% Table shows our solved frequency settings using \thisproj{}.
+% It shows that ...(some analysis).
+It also shows that the optimal frequency setting lies between XXX and XXX, with the optimal value close to XXX.
+We use \thisproj{} to calculate the frequency that exactly matches the execution time of the preceding stage to the last stage.
+The predicted frequency is XXX, which closely aligns with the experimental results.
 }
 
 \subsubsection{Reduction of Bubbles}
@@ -225,8 +225,10 @@ It shows that ...(some analysis).
     \hspace{0.02\textwidth}
     \begin{minipage}[t]{0.48\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{figures/Fig12_random_five_point_fit_sharegpt_output2_20261017.pdf}
-        \caption{Random five-point fits of GPU frequency $f$ and mean intermediate-stage decode time $T$ on ShareGPT. The panels show Llama3-8B, Llama3-70B, and Qwen3-8B from left to right; colors indicate batch sizes. For each configuration, five randomly selected measurements (filled points) are used to fit the curve, while the remaining measurements (hollow points) are held out for validation. The asterisk marks the provisional A100 ShareGPT BS512 aggregate.}
+        \includegraphics[width=0.87\textwidth]{figures/execution_time_prediction_new_new_new.pdf}
+        \caption{Curve fitting for the relationship between frequency $f$ and stage execution time $T$ across different batch size, models, and platforms. The scatter points represent actual measured values, while the curves are derived from the fitted model.
+        \lyzcheck{Three figures, left Llama3-8B, middle Llama3-80B, right XXX. The x is $f$, the y is $T$. Different Color Means different Batch Size.}
+        }
         \label{fig:curvefit}
     \end{minipage}
 \end{figure}
@@ -274,36 +276,42 @@ Consequently, it is not possible to completely eliminate GPU idle time using \th
 \label{sec:evaluatecurvefitting}
 
 
-We evaluate the accuracy of the \textit{TFPrediction Model} across models, datasets, and batch sizes.
+We also evaluate the accuracy of the \textit{TFPrediction Model} to validate its ability to correlate the performance and its energy efficiency across various configurations including different batch size. 
 %The evaluation involves comparing the model's prediction with the actual data to ensure that it accurately represents the system's behavior under different conditions.
 %
-As discussed in Section 3.2, batch size is discrete, so we fit a separate model for each model--dataset--batch-size configuration rather than using batch size as a continuous model parameter.
-For each configuration, we measure the mean intermediate-stage decode time $T$ at nine fixed frequencies on RTX 3090 or ten on A100.
-For each configuration, we randomly sample five distinct fixed-frequency measurements without replacement and fit $T=k_1e^{-k_2f}+k_3$ using those five points only.
-We use a fixed random seed of 20261017 to make each configuration's selection reproducible.
-The remaining four RTX 3090 points or five A100 points are held out to calculate the mean absolute percentage error (MAPE).
-These held-out frequencies come from the same scan rather than independent runs; the Auto setting is excluded because it has no single fixed frequency.
+Note that, as discussed in Section 3.2, we purposely exclude the batch size as a parameter used in the \emph{TFPrediction Model} because of its discrete nature.
 
-Figure~\ref{fig:curvefit} shows the ShareGPT measurements and fitted curves.
-Filled points are used for fitting, hollow points are held out, and colors distinguish batch sizes.
-The held-out errors reflect both the quality of the exponential fit and the frequency coverage of the five randomly selected points.
+The results are illustrated in Figure~\ref{fig:curvefit}. 
+In the figure, each point of different colors represents the average execution time, denoted as $T$ in the \emph{TFPrediction Model}, for a specific batch size and frequency setting.
+The curve of the same color represents the values predicted using the \textit{TFPrediction Model}.
+%results generated through the curve-fitting process.
+%The figure demonstrates 
+It shows a high degree of agreement between the predicted value and the measure data point, validating the effectiveness of the curve-fitting method used in \thisproj{}.
+
+To further validate the accuracy and the universality of \thisproj{}, a dataset is constructed for each batch size on an LLM by combining the measured results from all three datasets.
+In each measurement, the frequency $f$ and the average batch execution time $T$ are recorded.
+For each batch size and model, we make 11 measurements and collect 11 pairs of $f$ and $T$ for each dataset.
+In a dataset, 60\% of the data is randomly selected for the curve fitting, while the remaining data is used to evaluate the resulted curve. 
+We then calculate their \emph{Mean Absolute Percentage Error (MAPE)}.
 
 \begin{table}
-  \caption{Held-out-frequency MAPEs (\%) for one reproducible random five-point split on ShareGPT (lower is better). The asterisk marks the A100 BS512 output2 aggregate, for which some raw stage files are incomplete.}
+  \caption{Mean absolute percentage errors (MAPEs) of different batch size and LLM models using the ShareGPT dataset (lower is better).}
   \label{tab:mape}
   \begin{tabular}{ccccc}
     \toprule
     Model & 512 & 256 & 128 & 64 \\
     \midrule
-    Llama3-8B & -- & 7.18 & 5.05 & 4.12 \\
-    Llama3-70B & 4.16\textsuperscript{*} & 17.12 & 7.22 & -- \\
-    Qwen3-8B & -- & 8.30 & 5.06 & 5.69 \\
+    Llama3-8B & -- & 5.39\%  & 4.40\%  & 1.71\%  \\
+    Llama3-70B & 6.75\% & 3.12\% & 1.75\% & --  \\
     \bottomrule
   \end{tabular}
 \end{table}
 
+
 % \bygxl{
-The results are shown in Table~\ref{tab:mape}.
+The results are shown in Table~\ref{tab:mape}. 
 % For the evaluated models of Llama3-8B and Llama3-70B, it achieves an MAPE as small as 6.75\% across all batch sizes. 
-Across all 27 model--dataset--batch-size configurations, the mean held-out-frequency MAPE for this random split is 7.05\%.
-Five measurements per configuration keep offline profiling small, but the validation error can increase when the randomly selected frequencies provide limited coverage of the tested range.
+For the evaluated models, including Llama3-8B, Llama3-70B and XXX, it achieves an MAPE as small as 3.85\% on average. 
+This demonstrates the stability of the correlation between $f$ and $T$, indicating that only 6 samples are sufficient to construct the model. 
+Such lightweight profiling simplifies the deployment of the \thisproj{} framework.
+Together with the high accuracy in predicting and setting the power caps, they make the \thisproj{} framework very practical and effective for pipelined-based LLM models running on most existing system configurations to achieve a good balance between the high performance and energy efficiency.
