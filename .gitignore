@@ -1,0 +1,31 @@
+# LaTeX build products (keep source figures and bibliography files)
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.glg
+*.glo
+*.gls
+*.idx
+*.ilg
+*.ind
+*.ist
+*.lof
+*.log
+*.lot
+*.nav
+*.out
+*.run.xml
+*.snm
+*.synctex.gz
+*.toc
+*.xdv
+_minted-*/
+
+# Editor and OS files
+.DS_Store
+*~
+*.swp
+*.swo
