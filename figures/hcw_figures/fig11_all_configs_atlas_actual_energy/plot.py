@@ -65,10 +65,12 @@ def panel(ax, group, title):
     ax.set_axisbelow(True)
     energy_range = max(energy) - min(energy)
     time_range = max(time) - min(time)
-    ax.set_ylim(max(0, min(energy) - max(1, energy_range * 0.10)),
-                max(energy) + max(1, energy_range * 0.16))
-    right.set_ylim(min(time) - max(1, time_range * 0.10),
-                   max(time) + max(1, time_range * 0.14))
+    # Leave more room below the blue series and above the red series so their
+    # similar U-shaped sweeps remain visually distinct on the twin axes.
+    ax.set_ylim(max(0, min(energy) - max(1, energy_range * 0.25)),
+                max(energy) + max(1, energy_range * 0.14))
+    right.set_ylim(min(time) - max(1, time_range * 0.02),
+                   max(time) + max(1, time_range * 0.30))
     ax.set_title(title, fontsize=8.5)
     ax.tick_params(axis="x", labelsize=6.5)
     ax.tick_params(axis="y", labelsize=7.5, colors=ENERGY_COLOR)
