@@ -9,7 +9,7 @@ This repository contains the LaTeX source for a collaborative research paper. Gi
 - **Bibliography:** BibTeX, using `sample-base.bib` and `ACM-Reference-Format.bst`
 - **Overleaf:** Import this GitHub repository into a personal project, set `sample-sigconf.tex` as the Main document, select pdfLaTeX, then Recompile. The source uses relative figure paths, so no path changes are needed.
 
-The root contains the ACM class and style files used by the manuscript. `figures/` contains PDF and PNG figures referenced from the LaTeX source. `software.bib` and `07-rebuttal.tex` are retained as project material even though the current main document does not include them.
+The root contains the ACM class and style files used by the manuscript. `figures/` contains PDF and PNG figures referenced from the LaTeX source; newly redrawn previews are organized in `figures/hcw_figures/`. `software.bib` and `07-rebuttal.tex` are retained as project material even though the current main document does not include them.
 
 ## Manuscript structure
 

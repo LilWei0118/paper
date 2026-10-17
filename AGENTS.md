@@ -6,3 +6,4 @@
 - When the user asks to **sync the paper**, inspect and summarize local changes, commit the intended changes, push to `origin main`, report the commit SHA, and remind the user to pull GitHub changes into the personal Overleaf project and recompile.
 - If the user asks for collaborator updates, fetch `upstream-overleaf` first. Compare it with local `main`, explain differences and possible conflicts, and wait for the user's confirmation before merging.
 - Keep LaTeX build products out of commits; keep source `.tex`, `.bib`, style files, and required figures.
+- Put newly redrawn figure previews in `figures/hcw_figures/`, and update `\includegraphics` paths only when the user selects a figure for the paper.
