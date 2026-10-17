@@ -398,7 +398,7 @@ We record the execution time of each pipeline stage, with results shown in Figur
 For clarity, we report the average execution time across all stages except the last one given these stages contain an identical number of layers (marked as \emph{Other Stage}), while the execution time of the last stage is reported separately as \emph{Last Stage}.
 We also measure the duration of pipeline bubbles, defined as GPU idle periods between batches, and denote them as \emph{IDLE}.
 This demonstrates that the last stage takes significantly longer to execute than the other stages.
-Furthermore, the idle durations are notably brief (XXX ms for Llama3-8B and XXX ms for Llama3-70B), rendering dynamic adjustment techniques ineffective for reducing these bubbles.
+Furthermore, the idle durations are notably brief (\hcwplaceholder{XXX} ms for Llama3-8B and \hcwplaceholder{XXX} ms for Llama3-70B), rendering dynamic adjustment techniques ineffective for reducing these bubbles.
 %In Llama3-8B, its execution time exceeds that of the preceding stages by 6.6\% on average, and by 3.2\% in Llama3-70B.
 %This prolonged last stage, combined with pipeline bubbles, results in substantial GPU idle time during inference. 
 %In Llama3-70B, idle time can account for up to 60.4\% of total inference time, whereas in Llama3-8B, it can reach as high as 33.1\%.
@@ -444,7 +444,7 @@ Furthermore, the idle durations are notably brief (XXX ms for Llama3-8B and XXX 
     \begin{minipage}[t]{0.48\textwidth}
         \centering
         \includegraphics[width=\textwidth]{figures/lifecycle_power_nq_new_new_new_new_new_new_new_new.pdf}
-        \caption{\lyzcheck{Execution time across pipeline stages for Llama3-8B and Llama3-70B.(x is model(Llama3-8B, Llama3-70B, XX), y is Stage Execution Time. Try to make that other stage + idle = last stage)}}
+        \caption{\lyzcheck{Execution time across pipeline stages for Llama3-8B and Llama3-70B.(x is model(Llama3-8B, Llama3-70B, \hcwplaceholder{XX}), y is Stage Execution Time. Try to make that other stage + idle = last stage)}}
         \label{fig:lifecyclepower}
     \end{minipage}
     \hspace{0.02\textwidth}
@@ -490,12 +490,12 @@ However, our observations show that \textit{sequence length} has only a limited 
 
 
 While the computation overhead of the Attention scales linearly with \textit{sequence length}, recent GPU kernels such as FlashDecoding++~\cite{hong2023flashdecoding++} and FlashInfer~\cite{ye2025flashinfer} substantially weaken this dependency by reorganizing memory access (e.g., double-buffered tiling) and introducing block-sparse KV storage.
-Moreover, the FFN consistently dominates layer computation—accounting for roughly XX--XX\% of decode time compared with XX--XX\% for Attention~\cite{cheng2025ecco}—and its matrix multiplications are independent of sequence length.
+Moreover, the FFN consistently dominates layer computation—accounting for roughly \hcwplaceholder{XX}--\hcwplaceholder{XX}\% of decode time compared with \hcwplaceholder{XX}--\hcwplaceholder{XX}\% for Attention~\cite{cheng2025ecco}—and its matrix multiplications are independent of sequence length.
 Together, the dominance of sequence-independent FFN compute and the efficiency of optimized attention kernels ensure that stage execution time exhibits minimal sensitivity to sequence length in practice.
 
 In our experiments, we measure stage execution time across varying sequence lengths using the Llama3-8B model deployed on four RTX 3090 GPUs and Llama3-70B deployed on eight NVIDIA A100 GPUs with the ShareGPT dataset.
 As shown in Figure~\ref{fig:duration_seqlen}, stage execution time remains highly stable, across different models, frameworks, and hardware platforms. 
-The fluctuations are minimal, measuring only XX and XX ms as the sequence length increases from XXX to XXX tokens, respectively.
+The fluctuations are minimal, measuring only \hcwplaceholder{XX} and \hcwplaceholder{XX} ms as the sequence length increases from \hcwplaceholder{XXX} to \hcwplaceholder{XXX} tokens, respectively.
 Consistent with our findings, prior work reports only a 1.5\% increase when the sequence length grows from 1000 to 4000 tokens~\cite{ye2025flashinfer}.
 These results confirm that the impact of \textit{sequence length} on stage execution time is negligible.
 Thus, the execution time of a stage can be regarded as stable under a predetermined \textit{batch size} configuration.

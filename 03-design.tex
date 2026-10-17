@@ -202,8 +202,8 @@ Our analysis focuses specifically on the execution time of every iteration in th
 Since the first three stages have the same number of layers and are executed on the same GPU hardware, their execution times are assumed to be the same and stable as discussed in Section~\ref{sec:stableexecutiontime} . 
 For simplicity, we denote the execution time of each stage as $T$. 
 We subsequently analyzed the relationship between $T$ and $f$ under varying batch sizes.
-We conducted multiple experiments with the batch size ranging from XX to XXX. 
-For each configuration, the GPU frequency was adjusted from XXXHz to XXXHz.
+We conducted multiple experiments with the batch size ranging from \hcwplaceholder{XX} to \hcwplaceholder{XXX}.
+For each configuration, the GPU frequency was adjusted from \hcwplaceholder{XXX}Hz to \hcwplaceholder{XXX}Hz.
 The detailed results are presented in Figure~\ref{profile_data}.
 
 %实验环境，写好了
@@ -226,7 +226,7 @@ T=k_1*e^{-k_2f}+k_3
 % 具体陈述背景ing
 
 We also collect additional data for each batch size to validate the model's effectiveness and to assess its accuracy. By comparing the actual value at each different frequency setting with the value predicted by the \textit{TFPrediction Model}, we found that the \emph{Mean Absolute Percentage
-Error (MAPE)} of the predictions is within XXX\% on average, which we will further discuss in Section \ref{sec:evaluatecurvefitting}.
+Error (MAPE)} of the predictions is within \hcwplaceholder{XXX}\% on average, which we will further discuss in Section \ref{sec:evaluatecurvefitting}.
 It is important to note that, although the batch size can influence the \textit{TFPrediction Model}, its values are discrete rather than continuous making them unsuitable for curve-fitting-based predictions. 
 Consequently, the \thisproj{} excludes the batch size as a parameter in the \textit{TFPrediction Model}.
 
