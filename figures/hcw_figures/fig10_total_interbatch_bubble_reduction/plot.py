@@ -1,0 +1,214 @@
+#!/usr/bin/env python3
+"""Plot relative reduction in full-run inter-batch GPU compute gaps."""
+
+import argparse
+import csv
+import json
+from pathlib import Path
+
+import matplotlib
+
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt
+import numpy as np
+
+
+HERE = Path(__file__).resolve().parent
+SARATHI = Path("dataset_runs/sarathi_llama3_8b_3090_freq_bs64_128_256")
+QWEN = Path("sglang_runs/sglang_qwen3_8b_3090_freq_bs64_128_256")
+A100 = Path("sglang_runs/sglang_llama3_70b_a100_freq_bs128_256_512/stage7_auto")
+DATASETS = [
+    ("sharegpt", "ShareGPT", "#e66b64"),
+    ("math", "MATH", "#64af85"),
+    ("natural_questions", "Natural Questions", "#77b8de"),
+]
+MODELS = [
+    ("sarathi", "Llama3-8B · Sarathi", (64, 128, 256), 2),
+    ("qwen", "Qwen3-8B · SGLang", (64, 128, 256), 2),
+    ("a100", "Llama3-70B · SGLang · A100", (128, 256, 512), 1),
+]
+
+
+def read_csv(path):
+    with path.open(newline="") as file:
+        return list(csv.DictReader(file))
+
+
+def write_csv(path, rows):
+    with path.open("w", newline="") as file:
+        writer = csv.DictWriter(file, fieldnames=list(rows[0]), lineterminator="\n")
+        writer.writeheader()
+        writer.writerows(rows)
+
+
+def sarathi_runs(data_root, dataset, bs, setting):
+    path = data_root / SARATHI / "analysis/bubble_stage_runs.csv"
+    selected = [
+        row for row in read_csv(path)
+        if row["dataset"] == dataset and int(row["bs"]) == bs
+        and row["phase"] == "scan" and row["setting"] == setting
+        and row["scope"] == "all_batches" and int(row["stage"]) in (1, 2)
+    ]
+    results = []
+    for repeat in (1, 2):
+        rows = [row for row in selected if int(row["repeat"]) == repeat]
+        if sorted(int(row["stage"]) for row in rows) != [1, 2]:
+            raise ValueError(f"Incomplete Sarathi stages: {dataset} BS{bs} {setting} rep{repeat}")
+        results.append(dict(
+            repeat=repeat,
+            gap_s=sum(float(row["gap_us"]) for row in rows) / 1e6,
+            gap_count=sum(int(row["gap_count"]) for row in rows),
+            source=str(SARATHI / "analysis/bubble_stage_runs.csv"),
+        ))
+    return results
+
+
+def sglang_stage(path, extension):
+    """Include every measured batch mode, keeping the stage's execution order."""
+    with path.open(newline="" if extension == "csv" else None) as file:
+        rows = csv.DictReader(file) if extension == "csv" else (json.loads(line) for line in file)
+        previous_end = None
+        previous_id = None
+        gap_total_ms = 0.0
+        gap_count = 0
+        for row in rows:
+            if row["phase"] != "measurement":
+                continue
+            execution_id = int(row["execution_id"])
+            start = float(row["compute_start_local_ms"])
+            end = float(row["compute_end_local_ms"])
+            if end <= start or (previous_id is not None and execution_id <= previous_id):
+                raise ValueError(f"Invalid interval order: {path}")
+            if previous_end is not None:
+                gap = start - previous_end
+                if gap < -0.02:
+                    raise ValueError(f"Overlapping GPU intervals: {path}")
+                gap_total_ms += max(0.0, gap)
+                gap_count += 1
+            previous_end = end
+            previous_id = execution_id
+    if gap_count == 0:
+        raise ValueError(f"No measured inter-batch gaps: {path}")
+    return gap_total_ms / 1000, gap_count
+
+
+def sglang_runs(data_root, model, dataset, bs, setting, repeats):
+    root = QWEN if model == "qwen" else A100
+    folder = "math_train_use" if model == "a100" and dataset == "math" else dataset
+    stages = range(1, 3) if model == "qwen" else range(1, 7)
+    extension = "csv" if model == "qwen" else "jsonl"
+    results = []
+    for repeat in range(1, repeats + 1):
+        run = root / folder / f"bs{bs}" / f"{setting}_rep{repeat}"
+        totals = [sglang_stage(data_root / run / f"stage{stage}_batches.{extension}", extension)
+                  for stage in stages]
+        results.append(dict(
+            repeat=repeat,
+            gap_s=sum(total for total, _ in totals),
+            gap_count=sum(count for _, count in totals),
+            source=str(run),
+        ))
+    return results
+
+
+def compute(data_root):
+    choices = {
+        (row["model"], row["dataset"], int(row["bs"])): row["selected_setting"]
+        for row in read_csv(HERE / "selected_settings.csv")
+    }
+    assert len(choices) == 27
+    summaries = []
+    run_rows = []
+    for model, _, sizes, repeats in MODELS:
+        for dataset, _, _ in DATASETS:
+            for bs in sizes:
+                setting = choices[model, dataset, bs]
+                getter = sarathi_runs if model == "sarathi" else sglang_runs
+                if model == "sarathi":
+                    auto = getter(data_root, dataset, bs, "auto")
+                else:
+                    auto = getter(data_root, model, dataset, bs, "auto", repeats)
+                unavailable = model == "a100" and dataset == "sharegpt" and bs == 512
+                if unavailable:
+                    selected = []  # Selected Stage 3–6 JSONL data are unreadable.
+                elif model == "sarathi":
+                    selected = getter(data_root, dataset, bs, setting)
+                else:
+                    selected = getter(data_root, model, dataset, bs, setting, repeats)
+                for label, records in (("auto", auto), (setting, selected)):
+                    for record in records:
+                        run_rows.append(dict(model=model, dataset=dataset, bs=bs,
+                                             setting=label, **record))
+                auto_mean = float(np.mean([record["gap_s"] for record in auto]))
+                selected_mean = float(np.mean([record["gap_s"] for record in selected])) if selected else None
+                summaries.append(dict(
+                    model=model, dataset=dataset, bs=bs, selected_setting=setting,
+                    auto_total_gap_s=auto_mean,
+                    selected_total_gap_s="" if selected_mean is None else selected_mean,
+                    bubble_reduction_pct="" if selected_mean is None else
+                    100 * (auto_mean - selected_mean) / auto_mean,
+                    repeats=repeats,
+                    note="Selected Stage 3–6 JSONL files unreadable" if unavailable else "",
+                ))
+    return summaries, run_rows
+
+
+def plot(summaries):
+    values = [float(row["bubble_reduction_pct"]) for row in summaries
+              if row["bubble_reduction_pct"] != ""]
+    low = min(0, 5 * np.floor((min(values) - 2) / 5))
+    high = 5 * np.ceil((max(values) + 3) / 5)
+    plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 11,
+                         "axes.titlesize": 12, "axes.labelsize": 11})
+    fig, axes = plt.subplots(1, 3, figsize=(15.4, 4.9), sharey=True)
+    for ax, (model, title, sizes, _) in zip(axes, MODELS):
+        x = np.arange(3)
+        width = 0.24
+        for group, (dataset, label, color) in enumerate(DATASETS):
+            rows = [next(row for row in summaries if row["model"] == model
+                         and row["dataset"] == dataset and row["bs"] == bs) for bs in sizes]
+            for index, row in enumerate(rows):
+                position = x[index] + (group - 1) * width
+                if row["bubble_reduction_pct"] == "":
+                    ax.text(position, 0.7, "N/A", ha="center", va="bottom",
+                            rotation=90, fontsize=9, color="dimgray")
+                    continue
+                value = float(row["bubble_reduction_pct"])
+                ax.bar(position, value, width, color=color, edgecolor="black",
+                       linewidth=0.6, label=label if index == 0 else None)
+                ax.text(position, value + (0.5 if value >= 0 else -0.5), f"{value:.1f}",
+                        ha="center", va="bottom" if value >= 0 else "top", fontsize=8.3)
+        ax.set_title(title)
+        ax.set_xticks(x, [str(bs) for bs in sizes])
+        ax.set_xlabel("Batch size")
+        ax.set_ylim(low, high)
+        ax.axhline(0, color="black", lw=0.8)
+        ax.grid(axis="y", ls="--", alpha=0.35)
+        ax.set_axisbelow(True)
+    axes[0].set_ylabel("Total bubble time reduction (%)")
+    handles, labels = axes[0].get_legend_handles_labels()
+    fig.legend(handles, labels, loc="upper center", ncol=3, frameon=False,
+               bbox_to_anchor=(0.5, 0.99), fontsize=11)
+    fig.text(0.5, 0.015,
+             "All measured inter-batch gaps on middle stages; includes prefill, mixed, and decode batches. "
+             "A100 uses output2; ShareGPT BS512 selected raw data unavailable.",
+             ha="center", fontsize=8.2)
+    fig.subplots_adjust(left=0.065, right=0.99, top=0.82, bottom=0.21, wspace=0.1)
+    for extension in ("pdf", "png"):
+        fig.savefig(HERE / f"Fig10_total_interbatch_bubble_reduction.{extension}", dpi=220)
+    plt.close(fig)
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--data-root", type=Path, default=Path("/home/hcw/LLM_pipeline_infer"))
+    args = parser.parse_args()
+    summaries, runs = compute(args.data_root)
+    write_csv(HERE / "bubble_reduction.csv", summaries)
+    write_csv(HERE / "bubble_total_runs.csv", runs)
+    plot(summaries)
+    print(f"Saved {len(summaries)} configurations, {len(runs)} source runs")
+
+
+if __name__ == "__main__":
+    main()

@@ -8,6 +8,7 @@ This folder holds the PDF and PNG figures generated for the local paper revision
 | Fig. 4 fixed-frequency example | `fig4_sarathi_sharegpt_bs256_freq1200/` contains the Sarathi ShareGPT BS256 1200 MHz rep1 plot, script, and derived tables. |
 | Fig. 6 and Fig. 7 | `Fig6_*`, `Fig7_*` (model and dataset variants) |
 | Fig. 9 and Fig. 10 | `Fig9_*`, `Fig10_*` |
+| Fig. 10 total bubble duration | `fig10_total_interbatch_bubble_reduction/` contains the latest full-run middle-stage gap-duration plot, script, and derived tables. |
 | Fig. 11 | `Fig11_sharegpt_a100_qwen_bs256_*` is the requested two-panel selection; `Fig11_all_configs_*` contains the 27-configuration overview and model sheets; `Fig11_frequency_*` is an earlier preview. |
 | Fig. 12 | `Fig12_random_five_point_fit_*` is the latest seeded random five-point fit; `Fig12_five_point_fit_*` and `Fig12_frequency_fit_*` preserve earlier fixed five-point and all-point versions. |
 | Energy and bubble reduction | `Energy_E2E_under_BatchSize_*`, `IDLE_Computing_under_BatchSize_*` |
