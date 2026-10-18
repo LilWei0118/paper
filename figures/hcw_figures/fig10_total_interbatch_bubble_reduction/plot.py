@@ -28,7 +28,6 @@ MODELS = [
     ("a100", "Llama3-70B", (128, 256, 512), 1),
 ]
 MODEL_COLORS = {"sarathi": "#77b8de", "qwen": "#e9a764", "a100": "#64af85"}
-MODEL_STEMS = {"sarathi": "llama3_8b", "qwen": "qwen3_8b", "a100": "llama3_70b"}
 
 
 def read_csv(path):
@@ -196,11 +195,6 @@ def plot(summaries):
     fig.subplots_adjust(left=0.075, right=0.99, top=0.9, bottom=0.16, wspace=0.1)
     save(fig, (HERE / "Fig10_total_interbatch_bubble_reduction",
                HERE.parent / "Fig10_math_total_bubble_reduction_three_models_20261018"))
-    for model, label, sizes, _ in MODELS:
-        fig, ax = plt.subplots(figsize=(5.5, 4.2))
-        draw_model(ax, math_rows, model, label, sizes, low, high, True)
-        fig.tight_layout()
-        save(fig, (HERE.parent / f"Fig10_math_bubble_reduction_{MODEL_STEMS[model]}_20261018",))
 
 
 def main():

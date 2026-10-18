@@ -1,11 +1,9 @@
 # Fig. 10 preview: MATH full-run inter-batch bubble duration
 
-The current plot shows the **MATH** dataset only. It has three panels, one for
-each model, and also saves three standalone PNG/PDF pairs in the parent folder:
-`Fig10_math_bubble_reduction_{llama3_8b,qwen3_8b,llama3_70b}_20261018.*`.
-The same color always denotes the same model. The overview omits the dataset
-title and explanatory footer. BS64 has no Llama3-70B run; BS512 has no 8B
-runs. The script saves the overview both here and as
+The current plot shows the **MATH** dataset only, with three panels in one
+figure, one for each model. The same color always denotes the same model. The
+figure omits the dataset title and explanatory footer. BS64 has no Llama3-70B
+run; BS512 has no 8B runs. The script saves the figure both here and as
 `../Fig10_math_total_bubble_reduction_three_models_20261018.{png,pdf}`.
 
 This version compares **total inter-batch gap duration**, not gap fractions.
