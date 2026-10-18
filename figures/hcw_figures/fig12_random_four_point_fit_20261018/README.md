@@ -11,3 +11,5 @@ The measurements are a snapshot of the earlier Fig. 12 scan: intermediate decode
 The earlier five-point and all-point versions remain in the parent directory. The manuscript's LaTeX figure reference is unchanged.
 
 `python stage_alignment.py` uses the ShareGPT fit coefficients and the checked-in `last_stage_auto_sharegpt.csv` to solve for the frequency at which the fitted mean intermediate-stage decode time equals the mean Auto decode time of the final stage. The nine continuous crossing frequencies appear in `sharegpt_stage_alignment.md` and, with unrounded inputs, in `sharegpt_stage_alignment.csv`. All crossings fall within the measured fixed-frequency ranges. These are stage-time alignment estimates, not measured end-to-end energy-optimal settings; the stage-0 scheduling allowance from the design section is not included.
+
+`python sharegpt_mape.py` calculates the MAPE of each ShareGPT fitted curve across **all nine** displayed measurements. It writes `sharegpt_nine_point_mape.md` and `.csv`. This all-point MAPE includes the four points used to fit each curve; the CSV also reports separate fit-point and five-point held-out MAPE values.
