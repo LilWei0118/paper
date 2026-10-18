@@ -176,9 +176,9 @@ def main():
     for ax, (model, name, sizes) in zip(axes, MODELS):
         panel(ax, model, "sharegpt", sizes, measured, fit_map)
         ax.set_title(name, fontsize=15, pad=9)
-        ax.set_xlabel("Frequency (MHz)")
+        ax.set_xlabel("Frequency (MHz)", fontsize=13.5)
         ax.set_ylabel("T (ms)")
-    fig.subplots_adjust(left=0.11, right=0.89, top=0.90, bottom=0.075, hspace=0.48)
+    fig.subplots_adjust(left=0.11, right=0.89, top=0.90, bottom=0.075, hspace=0.57)
     save(fig, "Fig12_random_four_point_fit_sharegpt_output2_20261018")
     print("Saved ShareGPT Fig. 12; retained fit records for 27 configurations")
 

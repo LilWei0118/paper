@@ -59,7 +59,7 @@ def draw(ax, group, title):
     right.set_ylim(min(time) - max(1, time_range * 0.02),
                    max(time) + max(1, time_range * 0.30))
     ax.set_title(title, fontsize=15, pad=9)
-    ax.set_xlabel("Frequency (MHz)")
+    ax.set_xlabel("Frequency (MHz)", fontsize=13.5)
     ax.set_ylabel("Total energy (kJ)", color=ENERGY)
     right.set_ylabel("Inference time (s)", color=TIME)
     ax.tick_params(axis="both", which="both", direction="in")
@@ -85,7 +85,7 @@ def main():
         lines = draw(ax, [row for row in rows if row["model"] == model], title)
     fig.legend(lines, [line.get_label() for line in lines], loc="upper center",
                bbox_to_anchor=(0.5, 0.995), ncol=2, frameon=True, fontsize=12)
-    fig.subplots_adjust(left=0.11, right=0.89, top=0.90, bottom=0.075, hspace=0.48)
+    fig.subplots_adjust(left=0.11, right=0.89, top=0.90, bottom=0.075, hspace=0.57)
     fig.savefig(OUTPUT.with_suffix(".png"), dpi=220)
     fig.savefig(OUTPUT.with_suffix(".pdf"))
     plt.close(fig)
