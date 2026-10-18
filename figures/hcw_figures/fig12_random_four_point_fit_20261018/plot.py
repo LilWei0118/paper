@@ -153,7 +153,8 @@ def panel(ax, model, dataset, sizes, measured, fit_map, compact=False):
     ax.grid(ls="--", alpha=0.35)
     ax.set_axisbelow(True)
     ax.spines[["top", "right"]].set_visible(False)
-    ax.tick_params(labelsize=8 if compact else 9)
+    ax.tick_params(axis="both", which="both", direction="in",
+                   labelsize=8 if compact else 9)
     ax.legend(fontsize=7.5 if compact else 9, ncol=3, loc="upper right")
     ax.set_xlim(left=min(row["frequency_mhz"] for row in measured
                          if row["model"] == model) - 20)

@@ -61,6 +61,7 @@ def main():
                                 va="bottom" if value >= 0 else "top", fontsize=7.3)
             ax.set_title(f"{dataset_title}\n{title}", fontsize=10.5)
             ax.set_xticks(x, [str(bs) for bs in sizes])
+            ax.tick_params(axis="both", which="both", direction="in")
             ax.set_xlabel("Batch size")
             if j == 0:
                 ax.set_ylabel("Change relative to Auto (%)")

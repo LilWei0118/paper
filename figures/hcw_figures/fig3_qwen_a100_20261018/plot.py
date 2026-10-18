@@ -51,6 +51,8 @@ def main():
                     f"{height:.1f}", ha="center", va="center", color="white",
                     fontweight="bold", fontsize=12)
     ax.set_xticks(x, [row["model"] for row in rows])
+    ax.tick_params(axis="x", which="both", bottom=False, top=False)
+    ax.tick_params(axis="y", which="both", direction="in")
     ax.set_ylabel("Time (ms)")
     ax.set_xlabel("Model")
     ax.set_ylim(0, max(row[key] for row in rows for _, key, _, _ in SERIES) * 1.2)

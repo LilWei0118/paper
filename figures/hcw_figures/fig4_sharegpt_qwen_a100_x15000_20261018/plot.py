@@ -57,6 +57,7 @@ def panel(ax, rows, key, title, sizes, show_legend=False, show_ylabel=True):
            ylabel="Stage Duration (ms)" if show_ylabel else "")
     if Y_LOWER[key] == 5:
         ax.set_yticks([5, 6, 8, 10, 12, 14, 16])
+    ax.tick_params(axis="both", which="both", direction="in")
     ax.grid(ls="--", alpha=0.25)
     ax.set_axisbelow(True)
     if show_legend:

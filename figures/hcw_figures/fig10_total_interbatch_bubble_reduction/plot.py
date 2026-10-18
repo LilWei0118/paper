@@ -165,6 +165,7 @@ def draw_model(ax, math_rows, model, label, sizes, low, high, show_ylabel):
                 ha="center", va="bottom", fontsize=9)
     ax.set_title(label)
     ax.set_xticks(x, [str(bs) for bs in sizes])
+    ax.tick_params(axis="both", which="both", direction="in")
     ax.set_xlabel("Batch size")
     if show_ylabel:
         ax.set_ylabel("Total bubble time reduction (%)")

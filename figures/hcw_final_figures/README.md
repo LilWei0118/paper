@@ -2,6 +2,8 @@
 
 This folder keeps copies of the current PNG/PDF figure previews. The manuscript's `\includegraphics` paths have not been changed. Run `python sync.py` here after updating a source figure to refresh the copies; the script verifies that every copy matches its source in `../hcw_figures/`.
 
+Tick marks point into the plot on numeric horizontal and vertical axes. Fig. 3 uses model names on the horizontal axis, so its horizontal tick marks are hidden. The right-hand vertical axis in Fig. 11 also uses inward tick marks.
+
 | Figure | Current version | Selection |
 |---|---|---|
 | Fig. 3 | [PNG](Fig3_auto_stage_idle_sharegpt_bs256_20261017.png) · [PDF](Fig3_auto_stage_idle_sharegpt_bs256_20261017.pdf) | ShareGPT, BS256, Qwen3-8B and Llama3-70B only |

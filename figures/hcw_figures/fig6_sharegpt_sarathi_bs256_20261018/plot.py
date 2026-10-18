@@ -91,6 +91,7 @@ def main():
                              if SAMPLE_RANGE[0] <= sample <= SAMPLE_RANGE[1]) / 25)
     ax.set(xlabel="Sample Times", ylabel="Power (W)",
            xlim=SAMPLE_RANGE, ylim=(0, top))
+    ax.tick_params(axis="both", which="both", direction="in")
     ax.grid(ls="--", alpha=0.25)
     ax.legend(ncol=5, fontsize=8, loc="upper center", frameon=False)
     ax.spines[["top", "right"]].set_visible(False)
