@@ -18,7 +18,8 @@ data provenance remains clear. Blue bars still show energy-efficiency gain.
 The A100 ShareGPT BS512 aggregate remains marked provisional with an asterisk;
 the paper caption explains it. The bottom annotation has been removed, the
 vertical axes read "Change Rate", and the panels are taller to fill more of the
-two-column figure area.
+two-column figure area. Dataset and model names appear on one line in each panel;
+panel spacing is tighter and plot text is slightly larger.
 Every bar is labeled with its signed percentage value, rounded to one decimal.
 The paper's LaTeX source references the selected PDF.
 The panel titles contain only dataset and model names; framework and GPU

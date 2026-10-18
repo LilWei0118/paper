@@ -37,8 +37,9 @@ def load():
 def main():
     rows = load()
     lookup = {(row["model"], row["dataset"], int(row["bs"])): row for row in rows}
-    plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 11,
-                         "axes.titlesize": 12, "axes.labelsize": 11})
+    plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 12,
+                         "axes.titlesize": 14, "axes.labelsize": 12,
+                         "xtick.labelsize": 11.5, "ytick.labelsize": 11.5})
     fig, axes = plt.subplots(3, 3, figsize=(16.8, 11.2), sharey=True)
     values = [float(row[key]) for row in rows for key, _, _ in METRICS]
     ylo = 5 * np.floor((min(values) - 2) / 5)
@@ -58,8 +59,8 @@ def main():
                                 (bar.get_x() + bar.get_width() / 2, value),
                                 xytext=(0, 3 if value >= 0 else -3),
                                 textcoords="offset points", ha="center",
-                                va="bottom" if value >= 0 else "top", fontsize=7.3)
-            ax.set_title(f"{dataset_title}\n{title}", fontsize=10.5)
+                                va="bottom" if value >= 0 else "top", fontsize=8.2)
+            ax.set_title(f"{dataset_title} · {title}", fontsize=14)
             ax.set_xticks(x, [str(bs) for bs in sizes])
             ax.tick_params(axis="both", which="both", direction="in")
             ax.set_xlabel("Batch size")
@@ -74,9 +75,9 @@ def main():
                 ax.text(2, yhi - 2, "*", ha="center", fontsize=18)
     handles, labels = axes[0, 0].get_legend_handles_labels()
     fig.legend(handles, labels, ncol=3, loc="upper center", frameon=False,
-               bbox_to_anchor=(0.5, 0.995), fontsize=12)
-    fig.subplots_adjust(top=0.93, bottom=0.065, left=0.06, right=0.99,
-                        hspace=0.48, wspace=0.16)
+               bbox_to_anchor=(0.5, 0.995), fontsize=13)
+    fig.subplots_adjust(top=0.93, bottom=0.05, left=0.055, right=0.995,
+                        hspace=0.34, wspace=0.10)
     fig.savefig(OUTPUT.with_suffix(".png"), dpi=220)
     fig.savefig(OUTPUT.with_suffix(".pdf"))
     plt.close(fig)
