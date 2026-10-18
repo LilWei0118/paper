@@ -1,5 +1,8 @@
 # Fig. 12: four-point fits with nine measurements per curve
 
+The three ShareGPT model panels are stacked vertically in a near-square figure,
+matching the overall proportions of Fig. 11.
+
 Run `python plot.py` to regenerate the ShareGPT three-model PNG/PDF figure in the parent directory. The script uses only the checked-in `measurements.csv` and records every prediction and selected frequency in `measured_predicted.csv` and `fit_coefficients.csv`. Fit records retain all three datasets for provenance and existing calculations; only ShareGPT is selected for the current Fig. 12 preview.
 
 Each of the nine plotted ShareGPT model–batch-size curves shows nine measured fixed-frequency points. A stable per-configuration seed, derived from master seed `20261018`, selects **four** of those points uniformly without replacement for an unweighted fit of `T = k1 exp(-k2 f) + k3`. The other **five** points are used for held-out validation. All nine points appear as solid markers, and every fitted curve is solid. The fit/validation distinction remains in the CSV, not in the plotted marker style. The reported validation MAPE is calculated only from the five held-out points. The fit records still include 27 configurations across all three datasets; their overall mean validation MAPE is 7.27% for this one seeded split.

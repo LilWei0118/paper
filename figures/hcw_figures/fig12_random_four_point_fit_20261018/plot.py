@@ -171,15 +171,14 @@ def main():
     fit_map = {(row["model"], row["dataset"], row["bs"]): row for row in fits}
     plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 9})
 
-    fig, axes = plt.subplots(1, 3, figsize=(15.2, 4.25))
-    for i, (model, name, sizes) in enumerate(MODELS):
-        panel(axes[i], model, "sharegpt", sizes, measured, fit_map)
-        axes[i].set_title(name, fontsize=11)
-        axes[i].set_xlabel("GPU SM clock cap f (MHz)")
-        if i == 0:
-            axes[i].set_ylabel("Middle-stage decode time T (ms)")
+    fig, axes = plt.subplots(3, 1, figsize=(9.2, 9.0))
+    for ax, (model, name, sizes) in zip(axes, MODELS):
+        panel(ax, model, "sharegpt", sizes, measured, fit_map)
+        ax.set_title(name, fontsize=11)
+        ax.set_xlabel("GPU SM clock cap f (MHz)")
+        ax.set_ylabel("Middle-stage decode time T (ms)")
     fig.suptitle("Fig. 12 · ShareGPT · random four-point fits", fontsize=14, y=0.99)
-    fig.subplots_adjust(left=0.07, right=0.99, top=0.83, bottom=0.16, wspace=0.23)
+    fig.subplots_adjust(left=0.11, right=0.95, top=0.92, bottom=0.075, hspace=0.34)
     save(fig, "Fig12_random_four_point_fit_sharegpt_output2_20261018")
     print("Saved ShareGPT Fig. 12; retained fit records for 27 configurations")
 
