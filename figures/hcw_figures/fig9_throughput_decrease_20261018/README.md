@@ -15,8 +15,11 @@ these bars are always on the same side of zero as the orange inference-time
 change bars. The CSV retains the original signed throughput change so the
 data provenance remains clear. Blue bars still show energy-efficiency gain.
 
-The A100 ShareGPT BS512 aggregate remains marked provisional in the figure.
+The A100 ShareGPT BS512 aggregate remains marked provisional with an asterisk;
+the paper caption explains it. The bottom annotation has been removed, the
+vertical axes read "Change Rate", and the panels are taller to fill more of the
+two-column figure area.
 Every bar is labeled with its signed percentage value, rounded to one decimal.
-The paper's LaTeX source does not yet reference this preview.
+The paper's LaTeX source references the selected PDF.
 The panel titles contain only dataset and model names; framework and GPU
 details remain in this provenance note.

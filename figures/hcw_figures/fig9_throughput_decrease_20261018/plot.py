@@ -39,7 +39,7 @@ def main():
     lookup = {(row["model"], row["dataset"], int(row["bs"])): row for row in rows}
     plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 11,
                          "axes.titlesize": 12, "axes.labelsize": 11})
-    fig, axes = plt.subplots(3, 3, figsize=(16.8, 10.2), sharey=True)
+    fig, axes = plt.subplots(3, 3, figsize=(16.8, 11.2), sharey=True)
     values = [float(row[key]) for row in rows for key, _, _ in METRICS]
     ylo = 5 * np.floor((min(values) - 2) / 5)
     yhi = 5 * np.ceil((max(values) + 4) / 5)
@@ -64,7 +64,7 @@ def main():
             ax.tick_params(axis="both", which="both", direction="in")
             ax.set_xlabel("Batch size")
             if j == 0:
-                ax.set_ylabel("Change relative to Auto (%)")
+                ax.set_ylabel("Change Rate")
             ax.set_ylim(ylo, yhi)
             ax.spines[["top", "right"]].set_visible(True)
             ax.axhline(0, color="black", lw=0.8)
@@ -75,12 +75,8 @@ def main():
     handles, labels = axes[0, 0].get_legend_handles_labels()
     fig.legend(handles, labels, ncol=3, loc="upper center", frameon=False,
                bbox_to_anchor=(0.5, 0.995), fontsize=12)
-    fig.text(0.5, 0.014,
-             "Lowest energy with ≤5% inference-time increase. "
-             "* ShareGPT BS512 aggregate is provisional.",
-             ha="center", fontsize=9)
-    fig.subplots_adjust(top=0.91, bottom=0.095, left=0.065, right=0.99,
-                        hspace=0.58, wspace=0.18)
+    fig.subplots_adjust(top=0.93, bottom=0.065, left=0.06, right=0.99,
+                        hspace=0.48, wspace=0.16)
     fig.savefig(OUTPUT.with_suffix(".png"), dpi=220)
     fig.savefig(OUTPUT.with_suffix(".pdf"))
     plt.close(fig)
