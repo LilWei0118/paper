@@ -14,9 +14,9 @@ import numpy as np
 HERE = Path(__file__).resolve().parent
 OUTPUT = HERE.parent / "Fig11_sharegpt_three_models_bs256_output2_20261018"
 PANELS = (
-    ("sarathi", "(a) Llama3-8B · ShareGPT · BS256 · RTX 3090 · Sarathi"),
-    ("qwen", "(b) Qwen3-8B · ShareGPT · BS256 · RTX 3090 · SGLang"),
-    ("a100", "(c) Llama3-70B · ShareGPT · BS256 · A100 · SGLang"),
+    ("sarathi", "Llama3-8B"),
+    ("qwen", "Qwen3-8B"),
+    ("a100", "Llama3-70B"),
 )
 ENERGY = "#6baed6"
 TIME = "#ff766d"
