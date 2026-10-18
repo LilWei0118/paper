@@ -1,6 +1,6 @@
 # Fig. 4: Qwen3-8B and Llama3-70B, ShareGPT
 
-The main `../Fig4_auto_context_main_range_20261017.png` and `.pdf` now show
+The archived `../Fig4_auto_context_qwen_a100_20261017.png` and `.pdf` show
 two vertically stacked panels: Qwen3-8B/SGLang/RTX 3090 above
 Llama3-70B/SGLang/A100. The visible titles show only model names, and the
 two panels share one y-axis title and one BS color legend. The two

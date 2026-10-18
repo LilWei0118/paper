@@ -13,7 +13,7 @@ from matplotlib.lines import Line2D
 
 HERE = Path(__file__).resolve().parent
 OUTPUT = HERE.parent
-COMBINED = "Fig4_auto_context_main_range_20261017"
+COMBINED = "Fig4_auto_context_qwen_a100_20261017"
 MODELS = (
     ("SGLang / Qwen3-8B / 3090", "Qwen3-8B", (64, 128, 256), "qwen"),
     ("SGLang / Llama3-70B / A100", "Llama3-70B", (128, 256, 512), "llama70b"),

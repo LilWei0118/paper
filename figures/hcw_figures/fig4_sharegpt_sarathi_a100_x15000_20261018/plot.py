@@ -1,0 +1,128 @@
+#!/usr/bin/env python3
+"""Rebuild the Llama3-8B/70B ShareGPT Fig. 4, x = 0–15,000 tokens."""
+
+import csv
+from pathlib import Path
+from statistics import median
+
+import matplotlib
+
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt
+from matplotlib.lines import Line2D
+
+
+HERE = Path(__file__).resolve().parent
+OUTPUT = HERE.parent
+COMBINED = "Fig4_auto_context_main_range_20261017"
+MODELS = (
+    ("Sarathi / Llama3-8B / 3090", "Llama3-8B", (64, 128, 256), "llama8b"),
+    ("SGLang / Llama3-70B / A100", "Llama3-70B", (128, 256, 512), "llama70b"),
+)
+BS_COLORS = {64: "#479ad1", 128: "#f3af42", 256: "#39b49b", 512: "#9467bd"}
+Y_LOWER = {"Sarathi / Llama3-8B / 3090": 0, "SGLang / Llama3-70B / A100": 5}
+COMBINED_Y_LOWER = {"Sarathi / Llama3-8B / 3090": 2.4,
+                    "SGLang / Llama3-70B / A100": 7.5}
+
+
+def load():
+    with (HERE / "values.csv").open(newline="") as file:
+        rows = list(csv.DictReader(file))
+    assert len(rows) == 8627
+    for row in rows:
+        assert row["dataset"] == "sharegpt"
+        row["bs"] = int(row["bs"])
+        row["requests"] = int(row["requests"])
+        row["x"] = int(row["x"])
+        row["ms"] = float(row["ms"])
+        assert 0 <= row["x"] <= 15000 and row["ms"] > 0
+    return rows
+
+
+def panel(ax, rows, key, title, sizes, show_legend=False, show_ylabel=True,
+          y_lower=None):
+    selected = [row for row in rows if row["model"] == key]
+    assert selected
+    # Two isolated Sarathi BS128 pauses exceed three times the series median.
+    # Keep their x positions visible as triangles at the capped upper edge.
+    medians = {bs: median(row["ms"] for row in selected if row["bs"] == bs)
+               for bs in sizes}
+    visible = [row for row in selected if row["ms"] <= 3 * medians[row["bs"]]]
+    clipped = [row for row in selected if row["ms"] > 3 * medians[row["bs"]]]
+    assert len(clipped) == (2 if title == "Llama3-8B" else 0)
+    y_min = min(row["ms"] for row in visible)
+    y_max = max(row["ms"] for row in visible)
+    y_margin = (y_max - y_min) * 0.05
+    for bs in sizes:
+        series = sorted((row for row in visible if row["bs"] == bs),
+                        key=lambda row: row["x"])
+        assert series
+        requests = {row["requests"] for row in series}
+        assert len(requests) == 1
+        ax.scatter([row["x"] for row in series], [row["ms"] for row in series],
+                   c=BS_COLORS[bs], s=9, alpha=0.6, edgecolors="none",
+                   label=f"BS{bs}")
+    if clipped:
+        ax.scatter([row["x"] for row in clipped],
+                   [y_max + 0.55 * y_margin] * len(clipped),
+                   c=[BS_COLORS[row["bs"]] for row in clipped], marker="^",
+                   s=38, edgecolors="black", linewidths=0.4, zorder=5)
+    lower = Y_LOWER[key] if y_lower is None else y_lower
+    ax.set(xlim=(0, 15000), ylim=(lower, y_max + y_margin),
+           title=title,
+           xlabel="Sequence Length",
+           ylabel="Stage Duration (ms)" if show_ylabel else "")
+    if lower == 5:
+        ax.set_yticks([5, 6, 8, 10, 12, 14, 16])
+    elif lower == 7.5:
+        ax.set_yticks([8, 10, 12, 14, 16])
+    ax.tick_params(axis="both", which="both", direction="in")
+    ax.grid(ls="--", alpha=0.25)
+    ax.set_axisbelow(True)
+    if show_legend:
+        ax.legend(fontsize=9, loc="lower right")
+    ax.spines[["top", "right"]].set_visible(True)
+
+
+def save(fig, path, tight=True):
+    for extension in ("png", "pdf"):
+        options = {"bbox_inches": "tight"} if tight else {}
+        fig.savefig(path.with_suffix(f".{extension}"), dpi=180, **options)
+    plt.close(fig)
+
+
+def main():
+    rows = load()
+    plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 11,
+                         "axes.titlesize": 12, "axes.labelsize": 11})
+    plt.rcParams.update({"font.size": 17, "axes.titlesize": 19,
+                         "axes.labelsize": 15, "xtick.labelsize": 14,
+                         "ytick.labelsize": 14})
+    fig, axes = plt.subplots(2, 1, figsize=(8.0, 7.27), sharex=True)
+    for ax, (key, title, sizes, _) in zip(axes, MODELS):
+        panel(ax, rows, key, title, sizes, show_ylabel=False,
+              y_lower=COMBINED_Y_LOWER[key])
+    axes[0].set_xlabel("")
+    axes[1].set_xticks(range(0, 15001, 3000))
+    fig.supylabel("Stage Duration (ms)", x=0.03)
+    handles = [Line2D([], [], marker="o", linestyle="None", color=color,
+                      markersize=6, label=f"BS{bs}")
+               for bs, color in BS_COLORS.items()]
+    fig.legend(handles=handles, loc="lower center", ncol=4, frameon=False,
+               bbox_to_anchor=(0.5, 0.035), fontsize=17,
+               handletextpad=0.3, columnspacing=0.8)
+    fig.subplots_adjust(left=0.17, right=0.92, top=0.93, bottom=0.22, hspace=0.23)
+    save(fig, OUTPUT / COMBINED, tight=False)
+    plt.rcParams.update({"font.size": 11, "axes.titlesize": 12,
+                         "axes.labelsize": 11, "xtick.labelsize": "medium",
+                         "ytick.labelsize": "medium"})
+    for key, title, sizes, stem in MODELS:
+        fig, ax = plt.subplots(figsize=(7.2, 5.0))
+        panel(ax, rows, key, title, sizes, show_legend=True)
+        fig.tight_layout()
+        save(fig, HERE / f"Fig4_sharegpt_{stem}_x0_15000")
+    print("Saved two-panel Fig. 4 and two model-specific views")
+
+
+if __name__ == "__main__":
+    main()
