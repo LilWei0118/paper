@@ -5,6 +5,7 @@ This folder holds the PDF and PNG figures generated for the local paper revision
 | Figure group | Files |
 | --- | --- |
 | Fig. 3 and Fig. 4 | `Fig3_*`, `Fig4_*` |
+| Fig. 3 current selection | `Fig3_auto_stage_idle_sharegpt_bs256_20261017.*` now shows Qwen3-8B and Llama3-70B only; `fig3_qwen_a100_20261018/` contains its script and values. |
 | Fig. 4 fixed-frequency example | `fig4_sarathi_sharegpt_bs256_freq1200/` contains the Sarathi ShareGPT BS256 1200 MHz rep1 plot, script, and derived tables. |
 | Fig. 6 and Fig. 7 | `Fig6_*`, `Fig7_*` (model and dataset variants) |
 | Fig. 9 and Fig. 10 | `Fig9_*`, `Fig10_*` |
