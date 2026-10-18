@@ -13,3 +13,5 @@ The bars use separate statistics: Other Stages and Last Stage are average
 pure-decode compute durations; IDLE is the average gap between adjacent
 pure-decode compute intervals on nonfinal stages. The bars should not be
 summed. The paper's LaTeX source does not yet reference this preview.
+The visible x-axis labels contain only model names; framework and GPU details
+remain in this provenance note.

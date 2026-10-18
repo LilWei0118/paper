@@ -18,3 +18,5 @@ data provenance remains clear. Blue bars still show energy-efficiency gain.
 The A100 ShareGPT BS512 aggregate remains marked provisional in the figure.
 Every bar is labeled with its signed percentage value, rounded to one decimal.
 The paper's LaTeX source does not yet reference this preview.
+The panel titles contain only dataset and model names; framework and GPU
+details remain in this provenance note.

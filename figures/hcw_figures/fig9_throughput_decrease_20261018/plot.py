@@ -15,9 +15,9 @@ HERE = Path(__file__).resolve().parent
 OUTPUT = HERE.parent / "Fig9_energy_performance_three_models_output2_20261017"
 DATASETS = (("sharegpt", "ShareGPT"), ("math", "MATH"),
             ("natural_questions", "Natural Questions"))
-MODELS = (("sarathi", "Llama3-8B · Sarathi", (64, 128, 256)),
-          ("qwen", "Qwen3-8B · SGLang", (64, 128, 256)),
-          ("a100", "Llama3-70B · SGLang · A100", (128, 256, 512)))
+MODELS = (("sarathi", "Llama3-8B", (64, 128, 256)),
+          ("qwen", "Qwen3-8B", (64, 128, 256)),
+          ("a100", "Llama3-70B", (128, 256, 512)))
 METRICS = (("energy_efficiency_improvement_pct", "Energy efficiency gain", "#82c7e5"),
            ("inference_time_change_pct", "Inference time change", "#f0a526"),
            ("throughput_decrease_pct", "Throughput decrease", "#60b793"))
@@ -75,7 +75,7 @@ def main():
     fig.legend(handles, labels, ncol=3, loc="upper center", frameon=False,
                bbox_to_anchor=(0.5, 0.995), fontsize=12)
     fig.text(0.5, 0.014,
-             "Lowest energy with ≤5% inference-time increase. A100 uses output2 (Stage 7 Auto). "
+             "Lowest energy with ≤5% inference-time increase. "
              "* ShareGPT BS512 aggregate is provisional.",
              ha="center", fontsize=9)
     fig.subplots_adjust(top=0.91, bottom=0.095, left=0.065, right=0.99,

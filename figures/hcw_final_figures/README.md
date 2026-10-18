@@ -3,6 +3,7 @@
 This folder keeps copies of the current PNG/PDF figure previews. The manuscript's `\includegraphics` paths have not been changed. Run `python sync.py` here after updating a source figure to refresh the copies; the script verifies that every copy matches its source in `../hcw_figures/`.
 
 Tick marks point into the plot on numeric horizontal and vertical axes. Fig. 3 uses model names on the horizontal axis, so its horizontal tick marks are hidden. The right-hand vertical axis in Fig. 11 also uses inward tick marks.
+Model labels in the figures show model names only; framework and GPU details remain in the source documentation.
 
 | Figure | Current version | Selection |
 |---|---|---|

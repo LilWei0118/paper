@@ -50,7 +50,7 @@ def main():
             ax.text(bar.get_x() + bar.get_width() / 2, height / 2,
                     f"{height:.1f}", ha="center", va="center", color="white",
                     fontweight="bold", fontsize=12)
-    ax.set_xticks(x, [row["model"] for row in rows])
+    ax.set_xticks(x, [row["model"].split("\n")[0] for row in rows])
     ax.tick_params(axis="x", which="both", bottom=False, top=False)
     ax.tick_params(axis="y", which="both", direction="in")
     ax.set_ylabel("Time (ms)")
