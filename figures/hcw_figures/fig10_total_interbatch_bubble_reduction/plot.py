@@ -163,7 +163,7 @@ def draw_model(ax, math_rows, model, label, sizes, low, high, show_ylabel):
                edgecolor="black", linewidth=0.6)
         ax.text(position, value + 0.5, f"{value:.1f}",
                 ha="center", va="bottom", fontsize=11.5)
-    ax.set_title(label)
+    ax.set_title(label, pad=11)
     ax.set_xticks(x, [str(bs) for bs in sizes])
     ax.tick_params(axis="both", which="both", direction="in")
     ax.set_xlabel("Batch size")
