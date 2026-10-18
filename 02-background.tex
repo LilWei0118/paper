@@ -450,8 +450,8 @@ Furthermore, the idle durations are notably brief (\hcwplaceholder{XXX} ms for L
     \hspace{0.02\textwidth}
     \begin{minipage}[t]{0.48\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{figures/duration_seqlen_new_new.pdf}
-        \caption{\lyzcheck{Stage execution time of Llama3-8B and Llama3-70B across different sequence lengths under different batch size, running on SARATHI and SGLang framework respectively. The top is Llama3-8B, while the bottom is Llama3-70B. Each color corresponds to a distinct batch size configuration.(Two figures, one on the top about Llama3-8B running on SARATHI, the bottom is about Llama3-70B running on SGLang. The x is sequence length, y is the corresponding Stage Execution Time(decoding).)}}
+        \includegraphics[width=\textwidth]{figures/hcw_final_figures/Fig4_auto_context_main_range_20261017.pdf}
+        \caption{\byhcw{Middle-stage decode time versus aggregate batch context length on ShareGPT. Llama3-8B (Sarathi) is above Llama3-70B (SGLang); colors denote batch sizes. Two clipped Llama3-8B timing spikes are marked by triangles.}}
         \label{fig:duration_seqlen}
     \end{minipage}
 \end{figure}
@@ -493,9 +493,7 @@ While the computation overhead of the Attention scales linearly with \textit{seq
 Moreover, the FFN consistently dominates layer computation—accounting for roughly \hcwplaceholder{XX}--\hcwplaceholder{XX}\% of decode time compared with \hcwplaceholder{XX}--\hcwplaceholder{XX}\% for Attention~\cite{cheng2025ecco}—and its matrix multiplications are independent of sequence length.
 Together, the dominance of sequence-independent FFN compute and the efficiency of optimized attention kernels ensure that stage execution time exhibits minimal sensitivity to sequence length in practice.
 
-In our experiments, we measure stage execution time across varying sequence lengths using the Llama3-8B model deployed on four RTX 3090 GPUs and Llama3-70B deployed on eight NVIDIA A100 GPUs with the ShareGPT dataset.
-As shown in Figure~\ref{fig:duration_seqlen}, stage execution time remains highly stable, across different models, frameworks, and hardware platforms. 
-The fluctuations are minimal, measuring only \hcwplaceholder{XX} and \hcwplaceholder{XX} ms as the sequence length increases from \hcwplaceholder{XXX} to \hcwplaceholder{XXX} tokens, respectively.
+\byhcw{Using ShareGPT at Auto GPU frequency, we measure the mean middle-stage decode time for Llama3-8B on four RTX 3090 GPUs with Sarathi and Llama3-70B on eight A100 GPUs with SGLang. The horizontal axis in Figure~\ref{fig:duration_seqlen} is the sum of request context lengths in a pure-decode batch. At BS256, the median stage time increases by only 0.38 ms for Llama3-8B and 0.27 ms for Llama3-70B when comparing aggregate context lengths of 5,000--6,000 and 14,000--15,000 tokens.}
 Consistent with our findings, prior work reports only a 1.5\% increase when the sequence length grows from 1000 to 4000 tokens~\cite{ye2025flashinfer}.
 These results confirm that the impact of \textit{sequence length} on stage execution time is negligible.
 Thus, the execution time of a stage can be regarded as stable under a predetermined \textit{batch size} configuration.
