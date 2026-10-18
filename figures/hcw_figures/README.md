@@ -17,7 +17,8 @@ This folder holds the PDF and PNG figures generated for the local paper revision
 | Fig. 11 current selection | `Fig11_sharegpt_three_models_bs256_output2_20261018.*` shows all three models on ShareGPT BS256, plotting actual energy and time at fixed frequencies without Auto; `fig11_sharegpt_three_models_bs256_20261018/` contains its script and values. |
 | Fig. 11 BS128 comparison | `Fig11_sharegpt_three_models_bs128_output2_20261018.*` shows the same view for BS128; `fig11_sharegpt_three_models_bs128_20261018/` contains its script and source values. Earlier two-panel and atlas previews remain available. |
 | Fig. 11 atlas energy axis | `Fig11_all_configs_atlas_output2_20261017.*` now shows measured total energy on the blue axis; `fig11_all_configs_atlas_actual_energy/` contains its script and values. |
-| Fig. 12 | `Fig12_random_five_point_fit_*` is the latest seeded random five-point fit; `Fig12_five_point_fit_*` and `Fig12_frequency_fit_*` preserve earlier fixed five-point and all-point versions. |
+| Fig. 12 current selection | `Fig12_random_four_point_fit_*_output2_20261018.*` shows four randomly selected fitting points and five held-out points among nine measurements per curve; `fig12_random_four_point_fit_20261018/` contains the script and values. |
+| Fig. 12 earlier versions | `Fig12_random_five_point_fit_*`, `Fig12_five_point_fit_*`, and `Fig12_frequency_fit_*` preserve earlier five-point and all-point plots. |
 | Energy and bubble reduction | `Energy_E2E_under_BatchSize_*`, `IDLE_Computing_under_BatchSize_*` |
 
 The current LaTeX source does not reference these dated files. If a figure is selected for the paper, update its `\includegraphics` path to `figures/hcw_figures/<filename>.pdf`.
