@@ -10,6 +10,7 @@ This folder holds the PDF and PNG figures generated for the local paper revision
 | Fig. 4 current selection | `Fig4_auto_context_main_range_20261017.*` now shows Qwen3-8B and Llama3-70B on ShareGPT with x = 0–15,000; `fig4_sharegpt_qwen_a100_x15000_20261018/` contains the script, values, and single-model views. |
 | Fig. 6 and Fig. 7 | `Fig6_*`, `Fig7_*` (model and dataset variants) |
 | Fig. 6 current selection | `Fig6_power_sarathi_20261017.*` shows ShareGPT / Llama3-8B / Sarathi / RTX 3090 / BS256; `fig6_sharegpt_sarathi_bs256_20261018/` contains the plotting script and sampled values. |
+| Fig. 7 current selection | `Fig7_frequency_stage_time_llama_sharegpt_20261018.*` shows only Llama3-8B and Llama3-70B on ShareGPT; `fig7_llama_sharegpt_20261018/` contains the script and values. |
 | Fig. 9 and Fig. 10 | `Fig9_*`, `Fig10_*` |
 | Fig. 10 total bubble duration | `fig10_total_interbatch_bubble_reduction/` contains the latest full-run middle-stage gap-duration plot, script, and derived tables. |
 | Fig. 11 | `Fig11_sharegpt_a100_qwen_bs256_*` is the requested two-panel selection; `Fig11_all_configs_*` contains the 27-configuration overview and model sheets; `Fig11_frequency_*` is an earlier preview. |
