@@ -19,6 +19,7 @@ MODELS = (
     ("SGLang / Llama3-70B / A100", "Llama3-70B · SGLang · A100", (128, 256, 512), "llama70b"),
 )
 BS_COLORS = {64: "#479ad1", 128: "#f3af42", 256: "#39b49b", 512: "#9467bd"}
+Y_LOWER = {"SGLang / Qwen3-8B / 3090": 0, "SGLang / Llama3-70B / A100": 5}
 
 
 def load():
@@ -38,6 +39,9 @@ def load():
 def panel(ax, rows, key, title, sizes, show_legend=False):
     selected = [row for row in rows if row["model"] == key]
     assert selected
+    y_min = min(row["ms"] for row in selected)
+    y_max = max(row["ms"] for row in selected)
+    y_margin = (y_max - y_min) * 0.05
     for bs in sizes:
         series = sorted((row for row in selected if row["bs"] == bs),
                         key=lambda row: row["x"])
@@ -47,10 +51,12 @@ def panel(ax, rows, key, title, sizes, show_legend=False):
         ax.scatter([row["x"] for row in series], [row["ms"] for row in series],
                    c=BS_COLORS[bs], s=9, alpha=0.6, edgecolors="none",
                    label=f"BS{bs}")
-    ax.set(xlim=(0, 15000), ylim=(0, max(row["ms"] for row in selected) * 1.08),
+    ax.set(xlim=(0, 15000), ylim=(Y_LOWER[key], y_max + y_margin),
            title=title,
            xlabel="Sum of context lengths (tokens)",
-           ylabel="Mean middle-stage CUDA time (ms)")
+           ylabel="Stage Duration (ms)")
+    if Y_LOWER[key] == 5:
+        ax.set_yticks([5, 6, 8, 10, 12, 14, 16])
     ax.grid(ls="--", alpha=0.25)
     ax.set_axisbelow(True)
     if show_legend:
