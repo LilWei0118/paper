@@ -82,9 +82,9 @@ def main():
     rows = load()
     plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 11,
                          "axes.titlesize": 12, "axes.labelsize": 11})
-    plt.rcParams.update({"font.size": 24, "axes.titlesize": 26,
-                         "axes.labelsize": 26, "xtick.labelsize": 24,
-                         "ytick.labelsize": 24})
+    plt.rcParams.update({"font.size": 17, "axes.titlesize": 19,
+                         "axes.labelsize": 18, "xtick.labelsize": 16,
+                         "ytick.labelsize": 16})
     fig, axes = plt.subplots(2, 1, figsize=(8.0, 7.27), sharex=True)
     for ax, (key, title, sizes, _) in zip(axes, MODELS):
         panel(ax, rows, key, title, sizes, show_ylabel=False,
@@ -95,11 +95,10 @@ def main():
     handles = [Line2D([], [], marker="o", linestyle="None", color=color,
                       markersize=6, label=f"BS{bs}")
                for bs, color in BS_COLORS.items()]
-    handles = [handles[i] for i in (0, 2, 1, 3)]
-    fig.legend(handles=handles, loc="lower center", ncol=2, frameon=False,
-               bbox_to_anchor=(0.5, 0.01), fontsize=24,
-               handletextpad=0.3, columnspacing=1.0)
-    fig.subplots_adjust(left=0.17, right=0.90, top=0.93, bottom=0.27, hspace=0.23)
+    fig.legend(handles=handles, loc="lower center", ncol=4, frameon=False,
+               bbox_to_anchor=(0.5, 0.035), fontsize=17,
+               handletextpad=0.3, columnspacing=0.8)
+    fig.subplots_adjust(left=0.17, right=0.92, top=0.93, bottom=0.22, hspace=0.23)
     save(fig, OUTPUT / COMBINED, tight=False)
     plt.rcParams.update({"font.size": 11, "axes.titlesize": 12,
                          "axes.labelsize": 11, "xtick.labelsize": "medium",

@@ -36,8 +36,8 @@ def load():
 
 def main():
     rows = load()
-    plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 24,
-                         "axes.labelsize": 26, "axes.spines.top": True,
+    plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 18,
+                         "axes.labelsize": 19, "axes.spines.top": True,
                          "axes.spines.right": True})
     fig, ax = plt.subplots(figsize=(8.0, 7.27))
     x = np.arange(len(rows))
@@ -49,7 +49,7 @@ def main():
             height = bar.get_height()
             ax.text(bar.get_x() + bar.get_width() / 2, height / 2,
                     f"{height:.1f}", ha="center", va="center", color="white",
-                    fontweight="bold", fontsize=24)
+                    fontweight="bold", fontsize=18)
     ax.set_xticks(x, [row["model"].split("\n")[0] for row in rows])
     ax.tick_params(axis="x", which="both", bottom=False, top=False)
     ax.tick_params(axis="y", which="both", direction="in")
@@ -58,13 +58,10 @@ def main():
     ax.set_ylim(0, max(row[key] for row in rows for _, key, _, _ in SERIES) * 1.2)
     ax.yaxis.grid(True, ls="--", alpha=0.35)
     ax.set_axisbelow(True)
-    handles, labels = ax.get_legend_handles_labels()
-    order = (0, 2, 1)  # Matplotlib fills two-column legends by column.
-    fig.legend([handles[i] for i in order], [labels[i] for i in order],
-               ncol=2, loc="lower center", bbox_to_anchor=(0.5, -0.005),
-               frameon=False, fontsize=24, handletextpad=0.3,
+    fig.legend(ncol=3, loc="lower center", bbox_to_anchor=(0.5, 0.035),
+               frameon=False, fontsize=17, handletextpad=0.3,
                columnspacing=1.0)
-    fig.subplots_adjust(left=0.16, right=0.97, top=0.93, bottom=0.27)
+    fig.subplots_adjust(left=0.16, right=0.97, top=0.93, bottom=0.22)
     for extension in ("pdf", "png"):
         fig.savefig(OUTPUT / f"{STEM}.{extension}", dpi=240)
     plt.close(fig)
