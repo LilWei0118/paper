@@ -15,8 +15,10 @@ repetitions. Each Llama3-70B point averages Stages 1–6 and has one repetition.
 Auto is excluded because it has no single fixed clock. A100 uses the
 `stage7_auto` dataset (formerly `output2`).
 
-The A100 ShareGPT BS512 series is dashed and marked provisional, as in the
-earlier three-model preview: some original raw files were previously flagged
-as missing, so its imported stage summaries still need validation before
-using that series as a final quantitative claim. The paper's LaTeX source
-does not yet reference this preview.
+The panels show only model names in their titles, use "Frequency" and
+"T(ms)" as axis labels, and draw every batch-size series with a solid line.
+For the A100 ShareGPT BS512 series, some original raw files were previously
+flagged as missing. Its imported stage summaries still need validation
+before using that series as a final quantitative claim; this provenance is
+retained in the CSV even though the plot does not mark it separately. The
+paper's LaTeX source does not yet reference this preview.
