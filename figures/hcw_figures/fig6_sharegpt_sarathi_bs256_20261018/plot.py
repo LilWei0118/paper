@@ -17,7 +17,7 @@ HERE = Path(__file__).resolve().parent
 OUTPUT = HERE.parent / "Fig6_power_sarathi_20261017"
 SOURCE = Path("/home/hcw/LLM_pipeline_infer/dataset_runs/"
               "sarathi_llama3_8b_3090_freq_bs64_128_256/sharegpt/bs256/scan")
-SETTINGS = ("auto", "freq1800", "freq1200", "freq900", "freq600")
+SETTINGS = ("auto", "freq1800", "freq1500", "freq600", "freq300")
 COLORS = ("#232323", "#0072B2", "#009E73", "#E69F00", "#CC79A7")
 GPU_INDEX = 5  # Physical RTX 3090, nonfinal pipeline Stage 1.
 SAMPLE_RANGE = (100, 680)

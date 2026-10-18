@@ -1,7 +1,10 @@
 # Fig. 6: Llama3-8B / Sarathi / RTX 3090 / ShareGPT / BS256
 
 `../Fig6_power_sarathi_20261017.png` and `.pdf` show the five rep1 traces:
-Auto, 1800, 1200, 900, and 600 MHz. The x-axis label is “Sample Times” and
+Auto, 1800, 1500, 600, and 300 MHz. These settings were selected from the
+measured frequency scan to show more distinct power levels. Their mean power
+over sample indices 100–680 is approximately 220, 178, 149, 134, and 124 W,
+respectively. The x-axis label is “Sample Times” and
 denotes the sample index within each run's inference window; the y axis is
 measured instantaneous GPU power in watts. The plotted interval is sample
 indices 100–680, with no plot title. All five measured traces cover this
