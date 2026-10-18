@@ -15,8 +15,8 @@ HERE = Path(__file__).resolve().parent
 OUTPUT = HERE.parent
 COMBINED = "Fig4_auto_context_main_range_20261017"
 MODELS = (
-    ("SGLang / Qwen3-8B / 3090", "Qwen3-8B · SGLang · RTX 3090", (64, 128, 256), "qwen"),
-    ("SGLang / Llama3-70B / A100", "Llama3-70B · SGLang · A100", (128, 256, 512), "llama70b"),
+    ("SGLang / Qwen3-8B / 3090", "Qwen3-8B", (64, 128, 256), "qwen"),
+    ("SGLang / Llama3-70B / A100", "Llama3-70B", (128, 256, 512), "llama70b"),
 )
 BS_COLORS = {64: "#479ad1", 128: "#f3af42", 256: "#39b49b", 512: "#9467bd"}
 Y_LOWER = {"SGLang / Qwen3-8B / 3090": 0, "SGLang / Llama3-70B / A100": 5}
@@ -36,7 +36,7 @@ def load():
     return rows
 
 
-def panel(ax, rows, key, title, sizes, show_legend=False):
+def panel(ax, rows, key, title, sizes, show_legend=False, show_ylabel=True):
     selected = [row for row in rows if row["model"] == key]
     assert selected
     y_min = min(row["ms"] for row in selected)
@@ -53,8 +53,8 @@ def panel(ax, rows, key, title, sizes, show_legend=False):
                    label=f"BS{bs}")
     ax.set(xlim=(0, 15000), ylim=(Y_LOWER[key], y_max + y_margin),
            title=title,
-           xlabel="Sum of context lengths (tokens)",
-           ylabel="Stage Duration (ms)")
+           xlabel="Sequence Length",
+           ylabel="Stage Duration (ms)" if show_ylabel else "")
     if Y_LOWER[key] == 5:
         ax.set_yticks([5, 6, 8, 10, 12, 14, 16])
     ax.grid(ls="--", alpha=0.25)
@@ -76,8 +76,9 @@ def main():
                          "axes.titlesize": 12, "axes.labelsize": 11})
     fig, axes = plt.subplots(2, 1, figsize=(8.0, 9.0), sharex=True)
     for ax, (key, title, sizes, _) in zip(axes, MODELS):
-        panel(ax, rows, key, title, sizes)
+        panel(ax, rows, key, title, sizes, show_ylabel=False)
     axes[0].set_xlabel("")
+    fig.supylabel("Stage Duration (ms)")
     handles = [Line2D([], [], marker="o", linestyle="None", color=color,
                       markersize=6, label=f"BS{bs}")
                for bs, color in BS_COLORS.items()]
