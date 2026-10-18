@@ -217,17 +217,18 @@ The predicted frequency is \hcwplaceholder{XXX}, which closely aligns with the e
     \centering
     \begin{minipage}[t]{0.48\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{figures/power_lantency_math_lyz_new_new_new_new_new_new.pdf}
-        \caption{\bylyz{Enegry efficiency and performance variations on the \hcwplaceholder{XXX} dataset using Llama3-70B (batchsize: \hcwplaceholder{XX}) and \hcwplaceholder{XXX} (batchsize: \hcwplaceholder{XX}) with different frequency settings.
-        \lyzcheck{(Two figures. The top is about Llama3-70B, while the bottom is about \hcwplaceholder{XXX}. The X is Frequency Settings and left y is Energy Efficiency and right y is Inference Time.(There use the actual value not percentage.))}}}
+        \includegraphics[width=\textwidth]{figures/hcw_final_figures/Fig11_sharegpt_three_models_bs256_output2_20261018.pdf}
+        \caption{\lyzcheck{Energy consumption and inference time variations on the XXX dataset using Llama3-70B(top) and Qwen3-8B(bottom) with different frequency settings.
+        % \lyzcheck{(Two figures. The top is about Llama3-70B, while the bottom is about XXX. The X is Frequency Settings and left y is Energy Efficiency and right y is Inference Time.(There use the actual value not percentage.))}
+        }}
         \label{power_lantency_math}
     \end{minipage}
     \hspace{0.02\textwidth}
     \begin{minipage}[t]{0.48\textwidth}
         \centering
-        \includegraphics[width=0.87\textwidth]{figures/execution_time_prediction_new_new_new.pdf}
+        \includegraphics[width=\textwidth]{figures/hcw_final_figures/Fig12_random_four_point_fit_sharegpt_output2_20261018.pdf}
         \caption{Curve fitting for the relationship between frequency $f$ and stage execution time $T$ across different batch size, models, and platforms. The scatter points represent actual measured values, while the curves are derived from the fitted model.
-        \lyzcheck{Three figures, left Llama3-8B, middle Llama3-80B, right \hcwplaceholder{XXX}. The x is $f$, the y is $T$. Different Color Means different Batch Size.}
+        % \lyzcheck{Three figures, left Llama3-8B, middle Llama3-80B, right XXX. The x is $f$, the y is $T$. Different Color Means different Batch Size.}
         }
         \label{fig:curvefit}
     \end{minipage}
