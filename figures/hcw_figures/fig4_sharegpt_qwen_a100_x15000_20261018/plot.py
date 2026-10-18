@@ -20,8 +20,8 @@ MODELS = (
 )
 BS_COLORS = {64: "#479ad1", 128: "#f3af42", 256: "#39b49b", 512: "#9467bd"}
 Y_LOWER = {"SGLang / Qwen3-8B / 3090": 0, "SGLang / Llama3-70B / A100": 5}
-COMBINED_Y_LOWER = {"SGLang / Qwen3-8B / 3090": 2,
-                    "SGLang / Llama3-70B / A100": 7.1}
+COMBINED_Y_LOWER = {"SGLang / Qwen3-8B / 3090": 2.4,
+                    "SGLang / Llama3-70B / A100": 7.5}
 
 
 def load():
@@ -61,7 +61,7 @@ def panel(ax, rows, key, title, sizes, show_legend=False, show_ylabel=True,
            ylabel="Stage Duration (ms)" if show_ylabel else "")
     if lower == 5:
         ax.set_yticks([5, 6, 8, 10, 12, 14, 16])
-    elif lower == 7.1:
+    elif lower == 7.5:
         ax.set_yticks([8, 10, 12, 14, 16])
     ax.tick_params(axis="both", which="both", direction="in")
     ax.grid(ls="--", alpha=0.25)
@@ -81,7 +81,7 @@ def main():
     rows = load()
     plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 11,
                          "axes.titlesize": 12, "axes.labelsize": 11})
-    fig, axes = plt.subplots(2, 1, figsize=(8.0, 7.64), sharex=True)
+    fig, axes = plt.subplots(2, 1, figsize=(8.0, 7.27), sharex=True)
     for ax, (key, title, sizes, _) in zip(axes, MODELS):
         panel(ax, rows, key, title, sizes, show_ylabel=False,
               y_lower=COMBINED_Y_LOWER[key])
