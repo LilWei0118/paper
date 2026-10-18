@@ -106,10 +106,13 @@
 \newcommand{\bylyz}[1]{\textcolor{blue}{#1}}
 \newcommand{\lyzcheck}[1]{\textcolor{purple}{#1}}
 \newcommand{\notethis}[1]{\textcolor{purple}{\hl{(#1)}}}
-\definecolor{gptrevision}{RGB}{0,110,75}
+\definecolor{hcwrevision}{RGB}{0,110,75}
+\DeclareRobustCommand{\byhcw}[1]{{\color{hcwrevision}#1}}
+\pdfstringdefDisableCommands{\def\byhcw#1{#1}}
+\definecolor{gptrevision}{RGB}{180,70,0}
 \DeclareRobustCommand{\bygpt}[1]{{\color{gptrevision}#1}}
 \pdfstringdefDisableCommands{\def\bygpt#1{#1}}
-\DeclareRobustCommand{\hcwplaceholder}[1]{{\color{gptrevision}#1}}
+\DeclareRobustCommand{\hcwplaceholder}[1]{{\color{hcwrevision}#1}}
 \pdfstringdefDisableCommands{\def\hcwplaceholder#1{#1}}
 \newcommand{\bygemini}[1]{\textcolor{brown}{#1}}
 
