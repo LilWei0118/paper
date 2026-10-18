@@ -12,8 +12,11 @@ is the **sum of request context lengths in a pure-decode batch**, limited to
 axis is the mean CUDA compute duration of the middle pipeline stages. Each
 color consistently denotes one global batch size across both panels. The
 values already average batches with exactly equal x; no smoothing or y-value
-filtering is applied. The Qwen3-8B y axis starts at 0 ms and the Llama3-70B
-y axis starts at 5 ms; both upper limits retain a 5% data-range margin.
+filtering is applied. In the combined figure, the Qwen3-8B y axis starts at
+2 ms and the Llama3-70B y axis at 7.1 ms to trim lower blank space. The panel
+heights shrink with those ranges, keeping the data's vertical scale approximately
+unchanged. The separately saved single-model views retain their 0 ms and 5 ms
+lower limits. All upper limits retain a 5% data-range margin.
 
 `values.csv` contains the 11,512 in-range rows from
 `/home/hcw/LLM_pipeline_infer/analysis/fig4_auto_context_20261017/exact_x_means.csv`.

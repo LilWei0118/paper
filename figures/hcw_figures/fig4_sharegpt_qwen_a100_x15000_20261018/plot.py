@@ -20,6 +20,8 @@ MODELS = (
 )
 BS_COLORS = {64: "#479ad1", 128: "#f3af42", 256: "#39b49b", 512: "#9467bd"}
 Y_LOWER = {"SGLang / Qwen3-8B / 3090": 0, "SGLang / Llama3-70B / A100": 5}
+COMBINED_Y_LOWER = {"SGLang / Qwen3-8B / 3090": 2,
+                    "SGLang / Llama3-70B / A100": 7.1}
 
 
 def load():
@@ -36,7 +38,8 @@ def load():
     return rows
 
 
-def panel(ax, rows, key, title, sizes, show_legend=False, show_ylabel=True):
+def panel(ax, rows, key, title, sizes, show_legend=False, show_ylabel=True,
+          y_lower=None):
     selected = [row for row in rows if row["model"] == key]
     assert selected
     y_min = min(row["ms"] for row in selected)
@@ -51,12 +54,15 @@ def panel(ax, rows, key, title, sizes, show_legend=False, show_ylabel=True):
         ax.scatter([row["x"] for row in series], [row["ms"] for row in series],
                    c=BS_COLORS[bs], s=9, alpha=0.6, edgecolors="none",
                    label=f"BS{bs}")
-    ax.set(xlim=(0, 15000), ylim=(Y_LOWER[key], y_max + y_margin),
+    lower = Y_LOWER[key] if y_lower is None else y_lower
+    ax.set(xlim=(0, 15000), ylim=(lower, y_max + y_margin),
            title=title,
            xlabel="Sequence Length",
            ylabel="Stage Duration (ms)" if show_ylabel else "")
-    if Y_LOWER[key] == 5:
+    if lower == 5:
         ax.set_yticks([5, 6, 8, 10, 12, 14, 16])
+    elif lower == 7.1:
+        ax.set_yticks([8, 10, 12, 14, 16])
     ax.tick_params(axis="both", which="both", direction="in")
     ax.grid(ls="--", alpha=0.25)
     ax.set_axisbelow(True)
@@ -75,9 +81,10 @@ def main():
     rows = load()
     plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 11,
                          "axes.titlesize": 12, "axes.labelsize": 11})
-    fig, axes = plt.subplots(2, 1, figsize=(8.0, 9.0), sharex=True)
+    fig, axes = plt.subplots(2, 1, figsize=(8.0, 7.64), sharex=True)
     for ax, (key, title, sizes, _) in zip(axes, MODELS):
-        panel(ax, rows, key, title, sizes, show_ylabel=False)
+        panel(ax, rows, key, title, sizes, show_ylabel=False,
+              y_lower=COMBINED_Y_LOWER[key])
     axes[0].set_xlabel("")
     fig.supylabel("Stage Duration (ms)")
     handles = [Line2D([], [], marker="o", linestyle="None", color=color,
