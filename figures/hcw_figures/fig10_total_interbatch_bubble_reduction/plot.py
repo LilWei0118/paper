@@ -28,6 +28,7 @@ MODELS = [
     ("a100", "Llama3-70B", (128, 256, 512), 1),
 ]
 MODEL_COLORS = {"sarathi": "#77b8de", "qwen": "#e9a764", "a100": "#64af85"}
+MODEL_STEMS = {"sarathi": "llama3_8b", "qwen": "qwen3_8b", "a100": "llama3_70b"}
 
 
 def read_csv(path):
@@ -154,6 +155,33 @@ def compute(data_root):
     return summaries, run_rows
 
 
+def draw_model(ax, math_rows, model, label, sizes, low, high, show_ylabel):
+    x = np.arange(len(sizes))
+    for position, bs in zip(x, sizes):
+        row = next(row for row in math_rows if row["model"] == model and int(row["bs"]) == bs)
+        value = float(row["bubble_reduction_pct"])
+        ax.bar(position, value, 0.62, color=MODEL_COLORS[model],
+               edgecolor="black", linewidth=0.6)
+        ax.text(position, value + 0.5, f"{value:.1f}",
+                ha="center", va="bottom", fontsize=9)
+    ax.set_title(label)
+    ax.set_xticks(x, [str(bs) for bs in sizes])
+    ax.set_xlabel("Batch size")
+    if show_ylabel:
+        ax.set_ylabel("Total bubble time reduction (%)")
+    ax.set_ylim(low, high)
+    ax.axhline(0, color="black", lw=0.8)
+    ax.grid(axis="y", ls="--", alpha=0.35)
+    ax.set_axisbelow(True)
+
+
+def save(fig, stems):
+    for stem in stems:
+        for extension in ("pdf", "png"):
+            fig.savefig(stem.with_suffix(f".{extension}"), dpi=220)
+    plt.close(fig)
+
+
 def plot(summaries):
     math_rows = [row for row in summaries if row["dataset"] == "math"]
     assert len(math_rows) == 9 and all(row["bubble_reduction_pct"] for row in math_rows)
@@ -162,33 +190,17 @@ def plot(summaries):
     high = 5 * np.ceil((max(values) + 3) / 5)
     plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 11,
                          "axes.titlesize": 12, "axes.labelsize": 11})
-    fig, ax = plt.subplots(figsize=(9.2, 4.8))
-    batch_sizes = (64, 128, 256, 512)
-    x = np.arange(len(batch_sizes))
-    width = 0.24
-    for group, (model, label, sizes, _) in enumerate(MODELS):
-        for bs in sizes:
-            row = next(row for row in math_rows if row["model"] == model and int(row["bs"]) == bs)
-            position = x[batch_sizes.index(bs)] + (group - 1) * width
-            value = float(row["bubble_reduction_pct"])
-            ax.bar(position, value, width, color=MODEL_COLORS[model],
-                   edgecolor="black", linewidth=0.6, label=label if bs == sizes[0] else None)
-            ax.text(position, value + 0.5, f"{value:.1f}",
-                    ha="center", va="bottom", fontsize=9)
-    ax.set_xticks(x, [str(bs) for bs in batch_sizes])
-    ax.set_xlabel("Batch size")
-    ax.set_ylabel("Total bubble time reduction (%)")
-    ax.set_ylim(low, high)
-    ax.axhline(0, color="black", lw=0.8)
-    ax.grid(axis="y", ls="--", alpha=0.35)
-    ax.set_axisbelow(True)
-    ax.legend(loc="upper right", frameon=False, fontsize=10)
-    fig.subplots_adjust(left=0.105, right=0.98, top=0.97, bottom=0.15)
-    for stem in (HERE / "Fig10_total_interbatch_bubble_reduction",
-                 HERE.parent / "Fig10_math_total_bubble_reduction_three_models_20261018"):
-        for extension in ("pdf", "png"):
-            fig.savefig(stem.with_suffix(f".{extension}"), dpi=220)
-    plt.close(fig)
+    fig, axes = plt.subplots(1, 3, figsize=(15.4, 4.5), sharey=True)
+    for ax, (model, label, sizes, _) in zip(axes, MODELS):
+        draw_model(ax, math_rows, model, label, sizes, low, high, ax is axes[0])
+    fig.subplots_adjust(left=0.075, right=0.99, top=0.9, bottom=0.16, wspace=0.1)
+    save(fig, (HERE / "Fig10_total_interbatch_bubble_reduction",
+               HERE.parent / "Fig10_math_total_bubble_reduction_three_models_20261018"))
+    for model, label, sizes, _ in MODELS:
+        fig, ax = plt.subplots(figsize=(5.5, 4.2))
+        draw_model(ax, math_rows, model, label, sizes, low, high, True)
+        fig.tight_layout()
+        save(fig, (HERE.parent / f"Fig10_math_bubble_reduction_{MODEL_STEMS[model]}_20261018",))
 
 
 def main():

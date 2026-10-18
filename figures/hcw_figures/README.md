@@ -13,7 +13,7 @@ This folder holds the PDF and PNG figures generated for the local paper revision
 | Fig. 7 current selection | `Fig7_frequency_stage_time_llama_sharegpt_20261018.*` shows only Llama3-8B and Llama3-70B on ShareGPT; `fig7_llama_sharegpt_20261018/` contains the script and values. |
 | Fig. 9 and Fig. 10 | `Fig9_*`, `Fig10_*` |
 | Fig. 9 current selection | `Fig9_energy_performance_three_models_output2_20261017.*` plots throughput decrease, which is the negative of the original throughput change; `fig9_throughput_decrease_20261018/` contains the script and selected values. |
-| Fig. 10 current selection | `Fig10_math_total_bubble_reduction_three_models_20261018.*` shows MATH for all three models, colored by model; `fig10_total_interbatch_bubble_reduction/` contains the same plot, script, and full-run gap-duration tables. |
+| Fig. 10 current selection | `Fig10_math_total_bubble_reduction_three_models_20261018.*` shows three MATH model panels; `Fig10_math_bubble_reduction_*_20261018.*` contains one image per model; `fig10_total_interbatch_bubble_reduction/` contains the script and full-run gap-duration tables. |
 | Fig. 11 | `Fig11_sharegpt_a100_qwen_bs256_*` is the requested two-panel selection; `Fig11_all_configs_*` contains the 27-configuration overview and model sheets; `Fig11_frequency_*` is an earlier preview. |
 | Fig. 11 atlas energy axis | `Fig11_all_configs_atlas_output2_20261017.*` now shows measured total energy on the blue axis; `fig11_all_configs_atlas_actual_energy/` contains its script and values. |
 | Fig. 12 | `Fig12_random_five_point_fit_*` is the latest seeded random five-point fit; `Fig12_five_point_fit_*` and `Fig12_frequency_fit_*` preserve earlier fixed five-point and all-point versions. |
