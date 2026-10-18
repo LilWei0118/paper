@@ -38,23 +38,29 @@ def load():
 
 
 def draw(ax, group, title):
-    rows = sorted(group, key=lambda row: (row["setting"] != "auto",
-                                          -int(row["frequency_mhz"] or 0)))
+    rows = sorted((row for row in group if row["setting"] != "auto"),
+                  key=lambda row: -int(row["frequency_mhz"]))
     x = np.arange(len(rows))
-    energy_line, = ax.plot(x, [float(row["energy_saved_vs_auto_kj"]) for row in rows],
+    energy = [float(row["energy_kj"]) for row in rows]
+    time = [float(row["inference_time_s"]) for row in rows]
+    energy_line, = ax.plot(x, energy,
                            "-o", color=ENERGY, lw=2, ms=4.8,
-                           label="Energy saved vs Auto (kJ)")
+                           label="Total energy (kJ)")
     right = ax.twinx()
-    time_line, = right.plot(x, [float(row["inference_time_s"]) for row in rows],
+    time_line, = right.plot(x, time,
                             "-s", color=TIME, lw=2, ms=4.5,
                             label="Inference time (s)")
-    ax.axhline(0, color="#777777", lw=0.7)
-    ax.set_xticks(x, ["Auto" if row["setting"] == "auto" else row["frequency_mhz"]
-                      for row in rows])
+    ax.set_xticks(x, [row["frequency_mhz"] for row in rows])
     ax.set_xlim(-0.45, len(rows) - 0.55)
+    energy_range = max(energy) - min(energy)
+    time_range = max(time) - min(time)
+    ax.set_ylim(max(0, min(energy) - max(1, energy_range * 0.25)),
+                max(energy) + max(1, energy_range * 0.14))
+    right.set_ylim(min(time) - max(1, time_range * 0.02),
+                   max(time) + max(1, time_range * 0.30))
     ax.set_title(title, fontsize=11)
     ax.set_xlabel("GPU SM clock cap (MHz)")
-    ax.set_ylabel("Energy saved vs Auto (kJ)", color=ENERGY)
+    ax.set_ylabel("Total energy (kJ)", color=ENERGY)
     right.set_ylabel("Inference time (s)", color=TIME)
     ax.tick_params(axis="y", colors=ENERGY)
     right.tick_params(axis="y", colors=TIME)
@@ -77,7 +83,7 @@ def main():
     fig.savefig(OUTPUT.with_suffix(".png"), dpi=220, bbox_inches="tight")
     fig.savefig(OUTPUT.with_suffix(".pdf"), bbox_inches="tight")
     plt.close(fig)
-    print(f"Saved {len(rows)} ShareGPT BS128 frequency points in three panels")
+    print(f"Saved {len(rows) - 3} capped-frequency points in three panels")
 
 
 if __name__ == "__main__":
