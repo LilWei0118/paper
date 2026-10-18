@@ -4,7 +4,7 @@ Each percentage averages the absolute percentage errors at all nine measured fre
 
 | Model | BS64 | BS128 | BS256 | BS512 |
 |---|---:|---:|---:|---:|
-| Llama3-8B | 2.88% | 8.49% | 3.07% | — |
+| Llama3-8B | 2.88% | 2.81% | 3.07% | — |
 | Qwen3-8B | 4.62% | 2.98% | 3.62% | — |
 | Llama3-70B | — | 4.42% | 4.38% | 2.46% |
 
