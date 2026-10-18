@@ -44,20 +44,22 @@ def panel(ax, model, title, bss, rows):
     ax.grid(ls="--", alpha=0.4)
     ax.set_axisbelow(True)
     ax.spines[["top", "right"]].set_visible(True)
-    ax.legend(fontsize=9, loc="upper right")
+    ax.legend(fontsize=14, loc="upper right")
 
 
 def main():
     rows = load()
-    plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 11,
-                         "axes.titlesize": 12, "axes.labelsize": 11})
-    fig, axes = plt.subplots(2, 1, figsize=(8.4, 6.8))
+    plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 16,
+                         "axes.titlesize": 19, "axes.labelsize": 17,
+                         "xtick.labelsize": 14, "ytick.labelsize": 14})
+    fig, axes = plt.subplots(2, 1, figsize=(8.0, 7.27))
     for ax, (model, title, bss) in zip(axes, MODELS):
         panel(ax, model, title, bss, rows)
-    fig.tight_layout()
+    fig.subplots_adjust(left=0.14, right=0.97, top=0.93, bottom=0.22,
+                        hspace=0.42)
     for stem in (OUTPUT, LEGACY_PREVIEW):
-        fig.savefig(stem.with_suffix(".png"), dpi=220, bbox_inches="tight")
-        fig.savefig(stem.with_suffix(".pdf"), bbox_inches="tight")
+        fig.savefig(stem.with_suffix(".png"), dpi=220)
+        fig.savefig(stem.with_suffix(".pdf"))
     plt.close(fig)
     print(f"Saved {OUTPUT}.png and .pdf")
 

@@ -78,9 +78,10 @@ def main():
         extract()
     traces = load()
     assert all(len(trace) > SAMPLE_RANGE[1] for trace in traces.values())
-    plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 11,
-                         "axes.titlesize": 12, "axes.labelsize": 11})
-    fig, ax = plt.subplots(figsize=(6.0, 5.0))
+    plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 16,
+                         "axes.labelsize": 17, "xtick.labelsize": 14,
+                         "ytick.labelsize": 14})
+    fig, ax = plt.subplots(figsize=(8.0, 7.27))
     for setting, color in zip(SETTINGS, COLORS):
         trace = traces[setting]
         label = "Auto" if setting == "auto" else setting.removeprefix("freq") + " MHz"
@@ -93,11 +94,14 @@ def main():
            xlim=SAMPLE_RANGE, ylim=(0, top))
     ax.tick_params(axis="both", which="both", direction="in")
     ax.grid(ls="--", alpha=0.25)
-    ax.legend(ncol=3, fontsize=8, loc="upper center", frameon=False)
+    fig.legend(*ax.get_legend_handles_labels(), ncol=5, fontsize=16,
+               loc="lower center", bbox_to_anchor=(0.5, 0.035),
+               frameon=False, handlelength=1.2, handletextpad=0.3,
+               columnspacing=0.7)
     ax.spines[["top", "right"]].set_visible(True)
-    fig.tight_layout()
-    fig.savefig(OUTPUT.with_suffix(".png"), dpi=220, bbox_inches="tight")
-    fig.savefig(OUTPUT.with_suffix(".pdf"), bbox_inches="tight")
+    fig.subplots_adjust(left=0.14, right=0.97, top=0.93, bottom=0.22)
+    fig.savefig(OUTPUT.with_suffix(".png"), dpi=220)
+    fig.savefig(OUTPUT.with_suffix(".pdf"))
     plt.close(fig)
     print(f"Saved {OUTPUT}.png and .pdf; sample counts: " +
           ", ".join(f"{setting}={len(traces[setting])}" for setting in SETTINGS))

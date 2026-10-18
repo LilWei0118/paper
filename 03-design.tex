@@ -94,14 +94,14 @@ This guarantees that all batches execute under a uniform frequency and mitigates
     \centering
     \begin{minipage}[t]{0.48\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{figures/power_nq_lyz_new_new_new.pdf}
-        \caption{\lyzcheck{Real-time power consumption on the Natural Questions dataset using the Llama3-8B model on an RTX 3090 GPU. Different colors represent different GPU frequency settings.(The x is Sample Times, the y is Power(W). Different colors means different frequency settings.)}}
+        \includegraphics[width=\textwidth]{figures/hcw_final_figures/Fig6_power_sarathi_20261017.pdf}
+        \caption{\lyzcheck{Real-time power consumption during inference under various GPU frequency constraints. Different colors represent distinct GPU frequency settings.}}
         \label{power-runtime}
     \end{minipage}
     \hspace{0.02\textwidth}
     \begin{minipage}[t]{0.48\textwidth}
         \centering
-        \includegraphics[width=0.85\textwidth]{figures/execution_time_sampling_new_new_new_new_new_new.pdf}
+        \includegraphics[width=\textwidth]{figures/hcw_final_figures/Fig7_frequency_stage_time_llama_sharegpt_20261018.pdf}
         \caption{\lyzcheck{Variation of $T$ with different batch size across four Nvidia RTX 3090 GPUs and eight Nvidia A100 GPUs, using Llama3-8B and Llama3-70B on the ShareGPT dataset.(The x is $f$, y is $T$. The scatter is the sampled data about $f$ and $T$. Use the line to connect these scatters.)}}
         \label{profile_data}
     \end{minipage}

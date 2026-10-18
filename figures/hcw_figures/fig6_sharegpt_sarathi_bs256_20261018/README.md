@@ -7,8 +7,9 @@ measured instantaneous GPU power in watts. The plotted interval is sample
 indices 100–680, with no plot title. All five measured traces cover this
 interval; the shortest trace ends at index 682. Curves are not smoothed or aligned in
 time. The CSV preserves the full inference traces.
-The plotting area uses a near-square aspect ratio; the five-frequency legend
-is arranged in two rows to keep it readable.
+The PDF uses the same 8 × 7.27 inch page size as Fig. 7 for equal-width
+placement in adjacent LaTeX minipages. The five-frequency legend is below the
+plot in one row.
 
 Samples come from physical RTX 3090 GPU index 5, pipeline Stage 1, and are
 restricted to the `measurement.json` inference start/end timestamps. The
@@ -20,4 +21,4 @@ run provenance and summary statistics.
 Run `python plot.py` to rebuild PNG/PDF from the included CSV. Run
 `python plot.py --refresh-data` on the experiment machine to extract fresh
 samples from the original telemetry before plotting. The paper's LaTeX source
-does not yet reference this preview.
+references this selected preview.

@@ -5,6 +5,8 @@ Llama3-8B/Sarathi/RTX 3090 above Llama3-70B/SGLang/A100. Run `python plot.py`
 to regenerate them from the included CSV snapshots. The older
 `Fig7_frequency_stage_time_three_models_sharegpt_20261017.*` preview name is
 also updated with the same two-panel figure for existing links.
+The selected PDF uses the same 8 × 7.27 inch page size as Fig. 6 for
+equal-width placement in adjacent LaTeX minipages.
 
 The plotted values come from the existing
 `/home/hcw/LLM_pipeline_infer/analysis/fig7_frequency_stage_time_three_models_20261017/`
@@ -21,4 +23,4 @@ For the A100 ShareGPT BS512 series, some original raw files were previously
 flagged as missing. Its imported stage summaries still need validation
 before using that series as a final quantitative claim; this provenance is
 retained in the CSV even though the plot does not mark it separately. The
-paper's LaTeX source does not yet reference this preview.
+paper's LaTeX source references this selected preview.

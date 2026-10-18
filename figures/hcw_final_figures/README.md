@@ -1,6 +1,6 @@
 # Selected paper figures and tables
 
-This folder keeps copies of the current PNG/PDF figure previews. The manuscript's `\includegraphics` paths have not been changed. Run `python sync.py` here after updating a source figure to refresh the copies; the script verifies that every copy matches its source in `../hcw_figures/`.
+This folder keeps copies of the current PNG/PDF figure previews. The manuscript now references the selected Fig. 6 and Fig. 7 PDFs; other figure references remain unchanged. Run `python sync.py` here after updating a source figure to refresh the copies; the script verifies that every copy matches its source in `../hcw_figures/`.
 
 Tick marks point into the plot on numeric horizontal and vertical axes. Fig. 3 uses model names on the horizontal axis, so its horizontal tick marks are hidden. The right-hand vertical axis in Fig. 11 also uses inward tick marks.
 Model labels in the figures show model names only; framework and GPU details remain in the source documentation.
@@ -12,8 +12,8 @@ they align when inserted at the same width in adjacent LaTeX minipages.
 |---|---|---|
 | Fig. 3 | [PNG](Fig3_auto_stage_idle_sharegpt_bs256_20261017.png) · [PDF](Fig3_auto_stage_idle_sharegpt_bs256_20261017.pdf) | ShareGPT, BS256, Qwen3-8B and Llama3-70B only |
 | Fig. 4 | [PNG](Fig4_auto_context_main_range_20261017.png) · [PDF](Fig4_auto_context_main_range_20261017.pdf) | ShareGPT, Qwen3-8B above Llama3-70B, sequence length 0–15,000; shorter panels crop lower blank space while retaining the data scale |
-| Fig. 6 | [PNG](Fig6_power_sarathi_20261017.png) · [PDF](Fig6_power_sarathi_20261017.pdf) | Sarathi Llama3-8B, ShareGPT BS256, samples 100–680, near-square layout |
-| Fig. 7 | [PNG](Fig7_frequency_stage_time_llama_sharegpt_20261018.png) · [PDF](Fig7_frequency_stage_time_llama_sharegpt_20261018.pdf) | ShareGPT, Llama3-8B and Llama3-70B |
+| Fig. 6 | [PNG](Fig6_power_sarathi_20261017.png) · [PDF](Fig6_power_sarathi_20261017.pdf) | Sarathi Llama3-8B, ShareGPT BS256, samples 100–680; page size matched to Fig. 7 |
+| Fig. 7 | [PNG](Fig7_frequency_stage_time_llama_sharegpt_20261018.png) · [PDF](Fig7_frequency_stage_time_llama_sharegpt_20261018.pdf) | ShareGPT, Llama3-8B and Llama3-70B; page size matched to Fig. 6 |
 | Fig. 9 | [PNG](Fig9_energy_performance_three_models_output2_20261017.png) · [PDF](Fig9_energy_performance_three_models_output2_20261017.pdf) | Three models, signed values labeled on bars |
 | Fig. 10 | [PNG](Fig10_math_total_bubble_reduction_three_models_20261018.png) · [PDF](Fig10_math_total_bubble_reduction_three_models_20261018.pdf) | MATH, three panels in one figure, total inter-batch gap-duration reduction |
 | Fig. 11 | [PNG](Fig11_sharegpt_three_models_bs256_output2_20261018.png) · [PDF](Fig11_sharegpt_three_models_bs256_output2_20261018.pdf) | ShareGPT BS256, actual total energy and inference time, no Auto point |
