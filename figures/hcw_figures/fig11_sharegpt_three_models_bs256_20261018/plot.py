@@ -59,7 +59,7 @@ def draw(ax, group, title):
     right.set_ylim(min(time) - max(1, time_range * 0.02),
                    max(time) + max(1, time_range * 0.30))
     ax.set_title(title, fontsize=15, pad=9)
-    ax.set_xlabel("GPU SM clock cap (MHz)")
+    ax.set_xlabel("Frequency (MHz)")
     ax.set_ylabel("Total energy (kJ)", color=ENERGY)
     right.set_ylabel("Inference time (s)", color=TIME)
     ax.tick_params(axis="both", which="both", direction="in")
