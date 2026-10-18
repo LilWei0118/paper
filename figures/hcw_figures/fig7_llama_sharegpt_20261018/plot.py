@@ -56,8 +56,8 @@ def main():
     for ax, (model, title, bss) in zip(axes, MODELS):
         panel(ax, model, title, bss, rows)
     axes[0].set_xlabel("")
-    fig.subplots_adjust(left=0.14, right=0.97, top=0.93, bottom=0.22,
-                        hspace=0.42)
+    fig.subplots_adjust(left=0.11, right=0.99, top=0.93, bottom=0.18,
+                        hspace=0.30)
     for stem in (OUTPUT, LEGACY_PREVIEW):
         fig.savefig(stem.with_suffix(".png"), dpi=220)
         fig.savefig(stem.with_suffix(".pdf"))
