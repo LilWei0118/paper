@@ -39,7 +39,7 @@ def panel(ax, model, title, bss, rows):
                 [float(row["middle_stage_ms"]) for row in series],
                 marker="o", color=color, lw=2, ms=4.5,
                 label=f"BS{bs}", ls="-")
-    ax.set(title=title, xlabel="Frequency", ylabel="T(ms)")
+    ax.set(title=title, xlabel="Frequency (MHz)", ylabel="T(ms)")
     ax.tick_params(axis="both", which="both", direction="in")
     ax.grid(ls="--", alpha=0.4)
     ax.set_axisbelow(True)
