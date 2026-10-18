@@ -75,7 +75,7 @@ def main():
                 ax.text(2, yhi - 2, "*", ha="center", fontsize=18)
     handles, labels = axes[0, 0].get_legend_handles_labels()
     fig.legend(handles, labels, ncol=3, loc="upper center", frameon=False,
-               bbox_to_anchor=(0.5, 0.995), fontsize=13)
+               bbox_to_anchor=(0.5, 0.995), fontsize=16)
     fig.subplots_adjust(top=0.93, bottom=0.05, left=0.055, right=0.995,
                         hspace=0.34, wspace=0.10)
     fig.savefig(OUTPUT.with_suffix(".png"), dpi=220)
