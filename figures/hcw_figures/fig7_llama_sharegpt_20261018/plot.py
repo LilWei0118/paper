@@ -55,6 +55,7 @@ def main():
     fig, axes = plt.subplots(2, 1, figsize=(8.0, 7.27))
     for ax, (model, title, bss) in zip(axes, MODELS):
         panel(ax, model, title, bss, rows)
+    axes[0].set_xlabel("")
     fig.subplots_adjust(left=0.14, right=0.97, top=0.93, bottom=0.22,
                         hspace=0.42)
     for stem in (OUTPUT, LEGACY_PREVIEW):
