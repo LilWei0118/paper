@@ -80,7 +80,7 @@ def main():
     assert all(len(trace) > SAMPLE_RANGE[1] for trace in traces.values())
     plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 11,
                          "axes.titlesize": 12, "axes.labelsize": 11})
-    fig, ax = plt.subplots(figsize=(8.2, 3.7))
+    fig, ax = plt.subplots(figsize=(6.0, 5.0))
     for setting, color in zip(SETTINGS, COLORS):
         trace = traces[setting]
         label = "Auto" if setting == "auto" else setting.removeprefix("freq") + " MHz"
@@ -93,7 +93,7 @@ def main():
            xlim=SAMPLE_RANGE, ylim=(0, top))
     ax.tick_params(axis="both", which="both", direction="in")
     ax.grid(ls="--", alpha=0.25)
-    ax.legend(ncol=5, fontsize=8, loc="upper center", frameon=False)
+    ax.legend(ncol=3, fontsize=8, loc="upper center", frameon=False)
     ax.spines[["top", "right"]].set_visible(True)
     fig.tight_layout()
     fig.savefig(OUTPUT.with_suffix(".png"), dpi=220, bbox_inches="tight")

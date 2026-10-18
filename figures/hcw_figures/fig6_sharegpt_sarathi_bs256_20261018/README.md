@@ -6,6 +6,8 @@ denotes the sample index within each run's inference window; the y axis is
 measured instantaneous GPU power in watts. The plotted interval is sample
 indices 100–400, with no plot title. Curves are not smoothed or aligned in
 time. The CSV preserves the full inference traces.
+The plotting area uses a near-square aspect ratio; the five-frequency legend
+is arranged in two rows to keep it readable.
 
 Samples come from physical RTX 3090 GPU index 5, pipeline Stage 1, and are
 restricted to the `measurement.json` inference start/end timestamps. The

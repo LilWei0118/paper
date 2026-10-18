@@ -10,7 +10,7 @@ Every plotting area has a closed four-sided border, including Fig. 11's dual-axi
 |---|---|---|
 | Fig. 3 | [PNG](Fig3_auto_stage_idle_sharegpt_bs256_20261017.png) · [PDF](Fig3_auto_stage_idle_sharegpt_bs256_20261017.pdf) | ShareGPT, BS256, Qwen3-8B and Llama3-70B only |
 | Fig. 4 | [PNG](Fig4_auto_context_main_range_20261017.png) · [PDF](Fig4_auto_context_main_range_20261017.pdf) | ShareGPT, Qwen3-8B above Llama3-70B, sequence length 0–15,000; shorter panels crop lower blank space while retaining the data scale |
-| Fig. 6 | [PNG](Fig6_power_sarathi_20261017.png) · [PDF](Fig6_power_sarathi_20261017.pdf) | Sarathi Llama3-8B, ShareGPT BS256, samples 100–400 |
+| Fig. 6 | [PNG](Fig6_power_sarathi_20261017.png) · [PDF](Fig6_power_sarathi_20261017.pdf) | Sarathi Llama3-8B, ShareGPT BS256, samples 100–400, near-square layout |
 | Fig. 7 | [PNG](Fig7_frequency_stage_time_llama_sharegpt_20261018.png) · [PDF](Fig7_frequency_stage_time_llama_sharegpt_20261018.pdf) | ShareGPT, Llama3-8B and Llama3-70B |
 | Fig. 9 | [PNG](Fig9_energy_performance_three_models_output2_20261017.png) · [PDF](Fig9_energy_performance_three_models_output2_20261017.pdf) | Three models, signed values labeled on bars |
 | Fig. 10 | [PNG](Fig10_math_total_bubble_reduction_three_models_20261018.png) · [PDF](Fig10_math_total_bubble_reduction_three_models_20261018.pdf) | MATH, three panels in one figure, total inter-batch gap-duration reduction |
