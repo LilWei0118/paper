@@ -5,6 +5,7 @@ figure, one for each model. The same color always denotes the same model. The
 figure omits the dataset title and explanatory footer. BS64 has no Llama3-70B
 run; BS512 has no 8B runs. The script saves the figure both here and as
 `../Fig10_math_total_bubble_reduction_three_models_20261018.{png,pdf}`.
+Model titles, axes, ticks, and bar values use enlarged text for the paper layout.
 
 This version compares **total inter-batch gap duration**, not gap fractions.
 For each model/dataset/batch size, the selected frequency comes from the saved

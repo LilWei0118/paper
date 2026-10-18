@@ -162,7 +162,7 @@ def draw_model(ax, math_rows, model, label, sizes, low, high, show_ylabel):
         ax.bar(position, value, 0.62, color=MODEL_COLORS[model],
                edgecolor="black", linewidth=0.6)
         ax.text(position, value + 0.5, f"{value:.1f}",
-                ha="center", va="bottom", fontsize=9)
+                ha="center", va="bottom", fontsize=11.5)
     ax.set_title(label)
     ax.set_xticks(x, [str(bs) for bs in sizes])
     ax.tick_params(axis="both", which="both", direction="in")
@@ -189,8 +189,9 @@ def plot(summaries):
     values = [float(row["bubble_reduction_pct"]) for row in math_rows]
     low = min(0, 5 * np.floor((min(values) - 2) / 5))
     high = 5 * np.ceil((max(values) + 3) / 5)
-    plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 11,
-                         "axes.titlesize": 12, "axes.labelsize": 11})
+    plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 13,
+                         "axes.titlesize": 16, "axes.labelsize": 14,
+                         "xtick.labelsize": 13, "ytick.labelsize": 13})
     fig, axes = plt.subplots(1, 3, figsize=(15.4, 4.5), sharey=True)
     for ax, (model, label, sizes, _) in zip(axes, MODELS):
         draw_model(ax, math_rows, model, label, sizes, low, high, ax is axes[0])
