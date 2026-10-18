@@ -41,7 +41,7 @@ def main():
                          "axes.titlesize": 12, "axes.labelsize": 11})
     fig, axes = plt.subplots(3, 3, figsize=(16.8, 10.2), sharey=True)
     values = [float(row[key]) for row in rows for key, _, _ in METRICS]
-    ylo = 5 * np.floor(min(values) / 5)
+    ylo = 5 * np.floor((min(values) - 2) / 5)
     yhi = 5 * np.ceil((max(values) + 4) / 5)
     for i, (model, title, sizes) in enumerate(MODELS):
         for j, (dataset, dataset_title) in enumerate(DATASETS):
@@ -53,10 +53,12 @@ def main():
                 metric_values = [float(row[key]) for row in panel_rows]
                 bars = ax.bar(x + (k - 1) * width, metric_values, width,
                               label=label, color=color, edgecolor="black", linewidth=0.5)
-                if key == "energy_efficiency_improvement_pct":
-                    for bar, value in zip(bars, metric_values):
-                        ax.text(bar.get_x() + bar.get_width() / 2, value + 0.7,
-                                f"{value:.1f}", ha="center", va="bottom", fontsize=8)
+                for bar, value in zip(bars, metric_values):
+                    ax.annotate(f"{value:.1f}",
+                                (bar.get_x() + bar.get_width() / 2, value),
+                                xytext=(0, 3 if value >= 0 else -3),
+                                textcoords="offset points", ha="center",
+                                va="bottom" if value >= 0 else "top", fontsize=7.3)
             ax.set_title(f"{dataset_title}\n{title}", fontsize=10.5)
             ax.set_xticks(x, [str(bs) for bs in sizes])
             ax.set_xlabel("Batch size")
