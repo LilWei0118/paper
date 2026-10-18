@@ -1,4 +1,10 @@
-# Fig. 10 preview: full-run inter-batch bubble duration
+# Fig. 10 preview: MATH full-run inter-batch bubble duration
+
+The current plot shows the **MATH** dataset only: Llama3-8B, Qwen3-8B, and
+Llama3-70B across their available batch sizes. The same color always denotes
+the same model. BS64 has no Llama3-70B run; BS512 has no 8B runs. The script
+saves this plot both here and as
+`../Fig10_math_total_bubble_reduction_three_models_20261018.{png,pdf}`.
 
 This version compares **total inter-batch gap duration**, not gap fractions.
 For each model/dataset/batch size, the selected frequency comes from the saved
@@ -24,6 +30,8 @@ It is not the difference in gap fractions, nor total GPU-device idle time.
 A100 ShareGPT BS512 is N/A because the selected run's Stage 3–6 records
 cannot be decoded. The previous Fig. 10 preview is retained separately.
 
-Run `python plot.py --data-root /home/hcw/LLM_pipeline_infer` to regenerate
-the PDF, PNG, and per-run/summary CSVs. The experimental raw data are
-outside the paper repository; the selected frequency table is saved here.
+Run `python plot.py` to regenerate the PDF and PNG from the saved summary CSV.
+Run `python plot.py --refresh-data --data-root /home/hcw/LLM_pipeline_infer`
+to recompute all-dataset summary/per-run CSVs from the raw experimental data
+before plotting. The raw data are outside the paper repository; the selected
+frequency table and summary values are saved here.

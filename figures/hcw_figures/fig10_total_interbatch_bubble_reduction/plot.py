@@ -23,10 +23,11 @@ DATASETS = [
     ("natural_questions", "Natural Questions", "#77b8de"),
 ]
 MODELS = [
-    ("sarathi", "Llama3-8B · Sarathi", (64, 128, 256), 2),
-    ("qwen", "Qwen3-8B · SGLang", (64, 128, 256), 2),
-    ("a100", "Llama3-70B · SGLang · A100", (128, 256, 512), 1),
+    ("sarathi", "Llama3-8B", (64, 128, 256), 2),
+    ("qwen", "Qwen3-8B", (64, 128, 256), 2),
+    ("a100", "Llama3-70B", (128, 256, 512), 1),
 ]
+MODEL_COLORS = {"sarathi": "#77b8de", "qwen": "#e9a764", "a100": "#64af85"}
 
 
 def read_csv(path):
@@ -154,60 +155,60 @@ def compute(data_root):
 
 
 def plot(summaries):
-    values = [float(row["bubble_reduction_pct"]) for row in summaries
-              if row["bubble_reduction_pct"] != ""]
+    math_rows = [row for row in summaries if row["dataset"] == "math"]
+    assert len(math_rows) == 9 and all(row["bubble_reduction_pct"] for row in math_rows)
+    values = [float(row["bubble_reduction_pct"]) for row in math_rows]
     low = min(0, 5 * np.floor((min(values) - 2) / 5))
     high = 5 * np.ceil((max(values) + 3) / 5)
     plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 11,
                          "axes.titlesize": 12, "axes.labelsize": 11})
-    fig, axes = plt.subplots(1, 3, figsize=(15.4, 4.9), sharey=True)
-    for ax, (model, title, sizes, _) in zip(axes, MODELS):
-        x = np.arange(3)
-        width = 0.24
-        for group, (dataset, label, color) in enumerate(DATASETS):
-            rows = [next(row for row in summaries if row["model"] == model
-                         and row["dataset"] == dataset and row["bs"] == bs) for bs in sizes]
-            for index, row in enumerate(rows):
-                position = x[index] + (group - 1) * width
-                if row["bubble_reduction_pct"] == "":
-                    ax.text(position, 0.7, "N/A", ha="center", va="bottom",
-                            rotation=90, fontsize=9, color="dimgray")
-                    continue
-                value = float(row["bubble_reduction_pct"])
-                ax.bar(position, value, width, color=color, edgecolor="black",
-                       linewidth=0.6, label=label if index == 0 else None)
-                ax.text(position, value + (0.5 if value >= 0 else -0.5), f"{value:.1f}",
-                        ha="center", va="bottom" if value >= 0 else "top", fontsize=8.3)
-        ax.set_title(title)
-        ax.set_xticks(x, [str(bs) for bs in sizes])
-        ax.set_xlabel("Batch size")
-        ax.set_ylim(low, high)
-        ax.axhline(0, color="black", lw=0.8)
-        ax.grid(axis="y", ls="--", alpha=0.35)
-        ax.set_axisbelow(True)
-    axes[0].set_ylabel("Total bubble time reduction (%)")
-    handles, labels = axes[0].get_legend_handles_labels()
-    fig.legend(handles, labels, loc="upper center", ncol=3, frameon=False,
-               bbox_to_anchor=(0.5, 0.99), fontsize=11)
+    fig, ax = plt.subplots(figsize=(9.2, 4.8))
+    batch_sizes = (64, 128, 256, 512)
+    x = np.arange(len(batch_sizes))
+    width = 0.24
+    for group, (model, label, sizes, _) in enumerate(MODELS):
+        for bs in sizes:
+            row = next(row for row in math_rows if row["model"] == model and int(row["bs"]) == bs)
+            position = x[batch_sizes.index(bs)] + (group - 1) * width
+            value = float(row["bubble_reduction_pct"])
+            ax.bar(position, value, width, color=MODEL_COLORS[model],
+                   edgecolor="black", linewidth=0.6, label=label if bs == sizes[0] else None)
+            ax.text(position, value + 0.5, f"{value:.1f}",
+                    ha="center", va="bottom", fontsize=9)
+    ax.set_title("MATH")
+    ax.set_xticks(x, [str(bs) for bs in batch_sizes])
+    ax.set_xlabel("Batch size")
+    ax.set_ylabel("Total bubble time reduction (%)")
+    ax.set_ylim(low, high)
+    ax.axhline(0, color="black", lw=0.8)
+    ax.grid(axis="y", ls="--", alpha=0.35)
+    ax.set_axisbelow(True)
+    ax.legend(loc="upper right", frameon=False, fontsize=10)
     fig.text(0.5, 0.015,
-             "All measured inter-batch gaps on middle stages; includes prefill, mixed, and decode batches. "
-             "A100 uses output2; ShareGPT BS512 selected raw data unavailable.",
-             ha="center", fontsize=8.2)
-    fig.subplots_adjust(left=0.065, right=0.99, top=0.82, bottom=0.21, wspace=0.1)
-    for extension in ("pdf", "png"):
-        fig.savefig(HERE / f"Fig10_total_interbatch_bubble_reduction.{extension}", dpi=220)
+             "Full-run inter-batch gaps on middle stages; selected frequency minimizes energy within 5% of Auto time.",
+             ha="center", fontsize=8.4)
+    fig.subplots_adjust(left=0.105, right=0.98, top=0.92, bottom=0.2)
+    for stem in (HERE / "Fig10_total_interbatch_bubble_reduction",
+                 HERE.parent / "Fig10_math_total_bubble_reduction_three_models_20261018"):
+        for extension in ("pdf", "png"):
+            fig.savefig(stem.with_suffix(f".{extension}"), dpi=220)
     plt.close(fig)
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--data-root", type=Path, default=Path("/home/hcw/LLM_pipeline_infer"))
+    parser.add_argument("--refresh-data", action="store_true",
+                        help="Recompute the all-dataset CSVs from local experimental runs")
     args = parser.parse_args()
-    summaries, runs = compute(args.data_root)
-    write_csv(HERE / "bubble_reduction.csv", summaries)
-    write_csv(HERE / "bubble_total_runs.csv", runs)
+    if args.refresh_data:
+        summaries, runs = compute(args.data_root)
+        write_csv(HERE / "bubble_reduction.csv", summaries)
+        write_csv(HERE / "bubble_total_runs.csv", runs)
+    else:
+        summaries = read_csv(HERE / "bubble_reduction.csv")
     plot(summaries)
-    print(f"Saved {len(summaries)} configurations, {len(runs)} source runs")
+    print("Saved nine MATH configurations")
 
 
 if __name__ == "__main__":
