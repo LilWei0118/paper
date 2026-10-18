@@ -146,18 +146,10 @@ def panel(ax, model, dataset, sizes, measured, fit_map, compact=False):
         fine = np.linspace(min(frequencies), max(frequencies), 240)
         curve = fit["shifted_amplitude"] * np.exp(-fit["k2"] *
                 (fine - fit["offset_mhz"])) + fit["k3"]
-        ax.plot(fine, curve, color=color, lw=1.8,
-                ls="--" if fit["provisional"] else "-")
-        fitted = [row for row in rows if row["role"] == "fit"]
-        held = [row for row in rows if row["role"] == "validation"]
-        ax.scatter([row["frequency_mhz"] for row in fitted],
-                   [row["measured_stage_ms"] for row in fitted], color=color,
-                   s=27 if compact else 34, zorder=3,
-                   label=f"BS{bs}" + (" *" if fit["provisional"] else ""))
-        ax.scatter([row["frequency_mhz"] for row in held],
-                   [row["measured_stage_ms"] for row in held], facecolors="white",
-                   edgecolors=color, linewidths=1.5,
-                   s=32 if compact else 40, zorder=3)
+        ax.plot(fine, curve, color=color, lw=1.8)
+        ax.scatter([row["frequency_mhz"] for row in rows],
+                   [row["measured_stage_ms"] for row in rows], color=color,
+                   s=27 if compact else 34, zorder=3, label=f"BS{bs}")
     ax.grid(ls="--", alpha=0.35)
     ax.set_axisbelow(True)
     ax.spines[["top", "right"]].set_visible(False)
@@ -194,10 +186,7 @@ def main():
             if i == 2:
                 ax.set_xlabel("GPU SM clock cap f (MHz)")
     fig.suptitle("Fig. 12 · Random four-point frequency–stage-time fits", fontsize=15, y=0.995)
-    fig.text(0.5, 0.015,
-             "Per curve: 4 filled fit points + 5 hollow validation points  ·  * A100 ShareGPT BS512 provisional",
-             ha="center", fontsize=9)
-    fig.subplots_adjust(left=0.075, right=0.985, top=0.92, bottom=0.08,
+    fig.subplots_adjust(left=0.075, right=0.985, top=0.92, bottom=0.07,
                         hspace=0.46, wspace=0.28)
     save(fig, "Fig12_random_four_point_fit_atlas_output2_20261018")
 
@@ -210,11 +199,7 @@ def main():
             if i == 0:
                 axes[i].set_ylabel("Middle-stage decode time T (ms)")
         fig.suptitle(f"Fig. 12 · {dataset_name} · random four-point fits", fontsize=14, y=0.99)
-        fig.text(0.5, 0.025,
-                 "Per curve: 4 filled fit points + 5 hollow validation points"
-                 + ("  ·  * A100 BS512 provisional" if dataset == "sharegpt" else ""),
-                 ha="center", fontsize=9)
-        fig.subplots_adjust(left=0.07, right=0.99, top=0.83, bottom=0.21, wspace=0.23)
+        fig.subplots_adjust(left=0.07, right=0.99, top=0.83, bottom=0.16, wspace=0.23)
         save(fig, f"Fig12_random_four_point_fit_{dataset}_output2_20261018")
     print(f"Saved 27 fits, {sum(row['role'] == 'fit' for row in measured)} fit and "
           f"{sum(row['role'] == 'validation' for row in measured)} held-out points")
