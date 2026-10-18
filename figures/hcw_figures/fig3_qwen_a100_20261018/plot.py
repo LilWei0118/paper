@@ -37,7 +37,8 @@ def load():
 def main():
     rows = load()
     plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 18,
-                         "axes.labelsize": 19, "axes.spines.top": True,
+                         "axes.labelsize": 16, "xtick.labelsize": 15,
+                         "ytick.labelsize": 15, "axes.spines.top": True,
                          "axes.spines.right": True})
     fig, ax = plt.subplots(figsize=(8.0, 7.27))
     x = np.arange(len(rows))

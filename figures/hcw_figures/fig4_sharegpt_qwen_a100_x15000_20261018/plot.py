@@ -83,8 +83,8 @@ def main():
     plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 11,
                          "axes.titlesize": 12, "axes.labelsize": 11})
     plt.rcParams.update({"font.size": 17, "axes.titlesize": 19,
-                         "axes.labelsize": 18, "xtick.labelsize": 16,
-                         "ytick.labelsize": 16})
+                         "axes.labelsize": 15, "xtick.labelsize": 14,
+                         "ytick.labelsize": 14})
     fig, axes = plt.subplots(2, 1, figsize=(8.0, 7.27), sharex=True)
     for ax, (key, title, sizes, _) in zip(axes, MODELS):
         panel(ax, rows, key, title, sizes, show_ylabel=False,
