@@ -2,7 +2,8 @@
 
 The current plot shows the **MATH** dataset only: Llama3-8B, Qwen3-8B, and
 Llama3-70B across their available batch sizes. The same color always denotes
-the same model. BS64 has no Llama3-70B run; BS512 has no 8B runs. The script
+the same model. The plot omits the dataset title and explanatory footer. BS64
+has no Llama3-70B run; BS512 has no 8B runs. The script
 saves this plot both here and as
 `../Fig10_math_total_bubble_reduction_three_models_20261018.{png,pdf}`.
 

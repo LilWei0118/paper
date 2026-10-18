@@ -175,7 +175,6 @@ def plot(summaries):
                    edgecolor="black", linewidth=0.6, label=label if bs == sizes[0] else None)
             ax.text(position, value + 0.5, f"{value:.1f}",
                     ha="center", va="bottom", fontsize=9)
-    ax.set_title("MATH")
     ax.set_xticks(x, [str(bs) for bs in batch_sizes])
     ax.set_xlabel("Batch size")
     ax.set_ylabel("Total bubble time reduction (%)")
@@ -184,10 +183,7 @@ def plot(summaries):
     ax.grid(axis="y", ls="--", alpha=0.35)
     ax.set_axisbelow(True)
     ax.legend(loc="upper right", frameon=False, fontsize=10)
-    fig.text(0.5, 0.015,
-             "Full-run inter-batch gaps on middle stages; selected frequency minimizes energy within 5% of Auto time.",
-             ha="center", fontsize=8.4)
-    fig.subplots_adjust(left=0.105, right=0.98, top=0.92, bottom=0.2)
+    fig.subplots_adjust(left=0.105, right=0.98, top=0.97, bottom=0.15)
     for stem in (HERE / "Fig10_total_interbatch_bubble_reduction",
                  HERE.parent / "Fig10_math_total_bubble_reduction_three_models_20261018"):
         for extension in ("pdf", "png"):
