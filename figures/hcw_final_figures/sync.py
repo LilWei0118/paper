@@ -17,9 +17,6 @@ FIGURES = (
     "Fig10_math_total_bubble_reduction_three_models_20261018",
     "Fig11_sharegpt_three_models_bs256_output2_20261018",
     "Fig12_random_four_point_fit_sharegpt_output2_20261018",
-    "Fig12_random_four_point_fit_math_output2_20261018",
-    "Fig12_random_four_point_fit_natural_questions_output2_20261018",
-    "Fig12_random_four_point_fit_atlas_output2_20261018",
 )
 TABLE_SOURCE = SOURCE / "fig12_random_four_point_fit_20261018"
 TABLES = {

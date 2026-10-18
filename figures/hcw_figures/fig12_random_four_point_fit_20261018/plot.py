@@ -22,11 +22,6 @@ MODELS = (
     ("a100", "Llama3-70B", (128, 256, 512)),
     ("qwen", "Qwen3-8B", (64, 128, 256)),
 )
-DATASETS = (
-    ("sharegpt", "ShareGPT"),
-    ("math", "MATH"),
-    ("natural_questions", "Natural Questions"),
-)
 COLORS = ("#dec464", "#d76677", "#76c5e9")
 FIELDS = ("model", "dataset", "bs", "frequency_mhz", "measured_stage_ms",
           "repeats", "provisional", "source")
@@ -176,34 +171,17 @@ def main():
     fit_map = {(row["model"], row["dataset"], row["bs"]): row for row in fits}
     plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 9})
 
-    fig, axes = plt.subplots(3, 3, figsize=(15.5, 11.5))
+    fig, axes = plt.subplots(1, 3, figsize=(15.2, 4.25))
     for i, (model, name, sizes) in enumerate(MODELS):
-        for j, (dataset, dataset_name) in enumerate(DATASETS):
-            ax = axes[i, j]
-            panel(ax, model, dataset, sizes, measured, fit_map, compact=True)
-            ax.set_title(f"{name} · {dataset_name}", fontsize=9)
-            if j == 0:
-                ax.set_ylabel("Middle-stage decode time T (ms)")
-            if i == 2:
-                ax.set_xlabel("GPU SM clock cap f (MHz)")
-    fig.suptitle("Fig. 12 · Random four-point frequency–stage-time fits", fontsize=15, y=0.995)
-    fig.subplots_adjust(left=0.075, right=0.985, top=0.92, bottom=0.07,
-                        hspace=0.46, wspace=0.28)
-    save(fig, "Fig12_random_four_point_fit_atlas_output2_20261018")
-
-    for dataset, dataset_name in DATASETS:
-        fig, axes = plt.subplots(1, 3, figsize=(15.2, 4.25))
-        for i, (model, name, sizes) in enumerate(MODELS):
-            panel(axes[i], model, dataset, sizes, measured, fit_map)
-            axes[i].set_title(name, fontsize=11)
-            axes[i].set_xlabel("GPU SM clock cap f (MHz)")
-            if i == 0:
-                axes[i].set_ylabel("Middle-stage decode time T (ms)")
-        fig.suptitle(f"Fig. 12 · {dataset_name} · random four-point fits", fontsize=14, y=0.99)
-        fig.subplots_adjust(left=0.07, right=0.99, top=0.83, bottom=0.16, wspace=0.23)
-        save(fig, f"Fig12_random_four_point_fit_{dataset}_output2_20261018")
-    print(f"Saved 27 fits, {sum(row['role'] == 'fit' for row in measured)} fit and "
-          f"{sum(row['role'] == 'validation' for row in measured)} held-out points")
+        panel(axes[i], model, "sharegpt", sizes, measured, fit_map)
+        axes[i].set_title(name, fontsize=11)
+        axes[i].set_xlabel("GPU SM clock cap f (MHz)")
+        if i == 0:
+            axes[i].set_ylabel("Middle-stage decode time T (ms)")
+    fig.suptitle("Fig. 12 · ShareGPT · random four-point fits", fontsize=14, y=0.99)
+    fig.subplots_adjust(left=0.07, right=0.99, top=0.83, bottom=0.16, wspace=0.23)
+    save(fig, "Fig12_random_four_point_fit_sharegpt_output2_20261018")
+    print("Saved ShareGPT Fig. 12; retained fit records for 27 configurations")
 
 
 if __name__ == "__main__":
