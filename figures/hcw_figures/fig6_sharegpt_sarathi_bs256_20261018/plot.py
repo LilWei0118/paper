@@ -20,6 +20,7 @@ SOURCE = Path("/home/hcw/LLM_pipeline_infer/dataset_runs/"
 SETTINGS = ("auto", "freq1800", "freq1200", "freq900", "freq600")
 COLORS = ("#232323", "#0072B2", "#009E73", "#E69F00", "#CC79A7")
 GPU_INDEX = 5  # Physical RTX 3090, nonfinal pipeline Stage 1.
+SAMPLE_RANGE = (100, 400)
 
 
 def extract():
@@ -76,6 +77,7 @@ def main():
     if args.refresh_data:
         extract()
     traces = load()
+    assert all(len(trace) > SAMPLE_RANGE[1] for trace in traces.values())
     plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 11,
                          "axes.titlesize": 12, "axes.labelsize": 11})
     fig, ax = plt.subplots(figsize=(8.2, 3.7))
@@ -85,14 +87,14 @@ def main():
         ax.plot([sample for sample, _ in trace], [power for _, power in trace],
                 lw=1.15, color=color, alpha=0.9, label=label)
     top = 25 * math.ceil(max(power for trace in traces.values()
-                             for _, power in trace) / 25)
-    ax.set(title="Llama3-8B · Sarathi · RTX 3090",
+                             for sample, power in trace
+                             if SAMPLE_RANGE[0] <= sample <= SAMPLE_RANGE[1]) / 25)
+    ax.set(title="Llama3-8B",
            xlabel="Sample Times", ylabel="Power (W)",
-           xlim=(0, max(map(len, traces.values()))), ylim=(0, top))
+           xlim=SAMPLE_RANGE, ylim=(0, top))
     ax.grid(ls="--", alpha=0.25)
     ax.legend(ncol=5, fontsize=8, loc="upper center", frameon=False)
     ax.spines[["top", "right"]].set_visible(False)
-    fig.suptitle("ShareGPT · BS256 · repeat 1", y=1.02)
     fig.tight_layout()
     fig.savefig(OUTPUT.with_suffix(".png"), dpi=220, bbox_inches="tight")
     fig.savefig(OUTPUT.with_suffix(".pdf"), bbox_inches="tight")

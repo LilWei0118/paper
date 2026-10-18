@@ -3,8 +3,9 @@
 `../Fig6_power_sarathi_20261017.png` and `.pdf` show the five rep1 traces:
 Auto, 1800, 1200, 900, and 600 MHz. The x-axis label is “Sample Times” and
 denotes the sample index within each run's inference window; the y axis is
-measured instantaneous GPU power in watts. Curves are not smoothed or aligned
-in time. Differences in curve length reflect differences in inference time.
+measured instantaneous GPU power in watts. The plotted interval is sample
+indices 100–400, and the only title is “Llama3-8B”. Curves are not smoothed
+or aligned in time. The CSV preserves the full inference traces.
 
 Samples come from physical RTX 3090 GPU index 5, pipeline Stage 1, and are
 restricted to the `measurement.json` inference start/end timestamps. The
