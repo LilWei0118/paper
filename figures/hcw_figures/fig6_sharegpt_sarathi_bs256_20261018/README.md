@@ -4,7 +4,8 @@
 Auto, 1800, 1200, 900, and 600 MHz. The x-axis label is “Sample Times” and
 denotes the sample index within each run's inference window; the y axis is
 measured instantaneous GPU power in watts. The plotted interval is sample
-indices 100–400, with no plot title. Curves are not smoothed or aligned in
+indices 100–680, with no plot title. All five measured traces cover this
+interval; the shortest trace ends at index 682. Curves are not smoothed or aligned in
 time. The CSV preserves the full inference traces.
 The plotting area uses a near-square aspect ratio; the five-frequency legend
 is arranged in two rows to keep it readable.

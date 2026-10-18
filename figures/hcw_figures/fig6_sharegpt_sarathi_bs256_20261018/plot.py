@@ -20,7 +20,7 @@ SOURCE = Path("/home/hcw/LLM_pipeline_infer/dataset_runs/"
 SETTINGS = ("auto", "freq1800", "freq1200", "freq900", "freq600")
 COLORS = ("#232323", "#0072B2", "#009E73", "#E69F00", "#CC79A7")
 GPU_INDEX = 5  # Physical RTX 3090, nonfinal pipeline Stage 1.
-SAMPLE_RANGE = (100, 400)
+SAMPLE_RANGE = (100, 680)
 
 
 def extract():
