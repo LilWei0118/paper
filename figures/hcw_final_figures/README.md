@@ -16,8 +16,8 @@ they align when inserted at the same width in adjacent LaTeX minipages.
 | Fig. 7 | [PNG](Fig7_frequency_stage_time_llama_sharegpt_20261018.png) · [PDF](Fig7_frequency_stage_time_llama_sharegpt_20261018.pdf) | ShareGPT, Llama3-8B and Llama3-70B; page size matched to Fig. 6 |
 | Fig. 9 | [PNG](Fig9_energy_performance_three_models_output2_20261017.png) · [PDF](Fig9_energy_performance_three_models_output2_20261017.pdf) | Three models, signed values labeled on bars |
 | Fig. 10 | [PNG](Fig10_math_total_bubble_reduction_three_models_20261018.png) · [PDF](Fig10_math_total_bubble_reduction_three_models_20261018.pdf) | MATH, three panels in one figure, total inter-batch gap-duration reduction |
-| Fig. 11 | [PNG](Fig11_sharegpt_three_models_bs256_output2_20261018.png) · [PDF](Fig11_sharegpt_three_models_bs256_output2_20261018.pdf) | ShareGPT BS256, actual total energy and inference time, no Auto point |
-| Fig. 12 | [PNG](Fig12_random_four_point_fit_sharegpt_output2_20261018.png) · [PDF](Fig12_random_four_point_fit_sharegpt_output2_20261018.pdf) | ShareGPT, three vertically stacked models, four random fit points and five held-out points per curve; all markers and lines solid |
+| Fig. 11 | [PNG](Fig11_sharegpt_three_models_bs256_output2_20261018.png) · [PDF](Fig11_sharegpt_three_models_bs256_output2_20261018.pdf) | ShareGPT BS256, actual total energy and inference time, no Auto point; canvas and model rows aligned with Fig. 12 |
+| Fig. 12 | [PNG](Fig12_random_four_point_fit_sharegpt_output2_20261018.png) · [PDF](Fig12_random_four_point_fit_sharegpt_output2_20261018.pdf) | ShareGPT, model rows aligned with Fig. 11, four random fit points and five held-out points per curve; all markers and lines solid |
 
 Only the ShareGPT three-model version is kept as the current Fig. 12 preview. It accompanies the two tables below. All Fig. 12 curves display nine measured frequency points. For A100, 870 MHz is omitted consistently to reduce its ten measured frequencies to nine.
 

@@ -19,8 +19,8 @@ FIGURES = HERE.parent
 SEED = 20261018
 MODELS = (
     ("sarathi", "Llama3-8B", (64, 128, 256)),
-    ("a100", "Llama3-70B", (128, 256, 512)),
     ("qwen", "Qwen3-8B", (64, 128, 256)),
+    ("a100", "Llama3-70B", (128, 256, 512)),
 )
 COLORS = ("#dec464", "#d76677", "#76c5e9")
 FIELDS = ("model", "dataset", "bs", "frequency_mhz", "measured_stage_ms",
@@ -149,8 +149,8 @@ def panel(ax, model, dataset, sizes, measured, fit_map, compact=False):
     ax.set_axisbelow(True)
     ax.spines[["top", "right"]].set_visible(True)
     ax.tick_params(axis="both", which="both", direction="in",
-                   labelsize=8 if compact else 9)
-    ax.legend(fontsize=7.5 if compact else 9, ncol=3, loc="upper right")
+                   labelsize=9 if compact else 10.5)
+    ax.legend(fontsize=8.5 if compact else 10.5, ncol=3, loc="upper right")
     ax.set_xlim(left=min(row["frequency_mhz"] for row in measured
                          if row["model"] == model) - 20)
     ax.set_ylim(bottom=0)
@@ -159,7 +159,7 @@ def panel(ax, model, dataset, sizes, measured, fit_map, compact=False):
 def save(fig, stem):
     for suffix in ("png", "pdf"):
         fig.savefig(FIGURES / f"{stem}.{suffix}",
-                    **({"dpi": 220} if suffix == "png" else {}), bbox_inches="tight")
+                    **({"dpi": 220} if suffix == "png" else {}))
     plt.close(fig)
 
 
@@ -169,16 +169,16 @@ def main():
     write_csv(HERE / "measured_predicted.csv", measured)
     write_csv(HERE / "fit_coefficients.csv", fits)
     fit_map = {(row["model"], row["dataset"], row["bs"]): row for row in fits}
-    plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 9})
+    plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 11,
+                         "axes.labelsize": 11})
 
     fig, axes = plt.subplots(3, 1, figsize=(9.2, 9.0))
     for ax, (model, name, sizes) in zip(axes, MODELS):
         panel(ax, model, "sharegpt", sizes, measured, fit_map)
-        ax.set_title(name, fontsize=11)
+        ax.set_title(name, fontsize=15, pad=9)
         ax.set_xlabel("GPU SM clock cap f (MHz)")
         ax.set_ylabel("Middle-stage decode time T (ms)")
-    fig.suptitle("Fig. 12 · ShareGPT · random four-point fits", fontsize=14, y=0.99)
-    fig.subplots_adjust(left=0.11, right=0.95, top=0.92, bottom=0.075, hspace=0.34)
+    fig.subplots_adjust(left=0.11, right=0.89, top=0.90, bottom=0.075, hspace=0.48)
     save(fig, "Fig12_random_four_point_fit_sharegpt_output2_20261018")
     print("Saved ShareGPT Fig. 12; retained fit records for 27 configurations")
 

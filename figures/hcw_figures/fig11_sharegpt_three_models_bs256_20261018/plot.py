@@ -58,7 +58,7 @@ def draw(ax, group, title):
                 max(energy) + max(1, energy_range * 0.14))
     right.set_ylim(min(time) - max(1, time_range * 0.02),
                    max(time) + max(1, time_range * 0.30))
-    ax.set_title(title, fontsize=11)
+    ax.set_title(title, fontsize=15, pad=9)
     ax.set_xlabel("GPU SM clock cap (MHz)")
     ax.set_ylabel("Total energy (kJ)", color=ENERGY)
     right.set_ylabel("Inference time (s)", color=TIME)
@@ -77,15 +77,17 @@ def draw(ax, group, title):
 
 def main():
     rows = load()
-    plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 10})
+    plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 12,
+                         "axes.labelsize": 12, "xtick.labelsize": 11,
+                         "ytick.labelsize": 11})
     fig, axes = plt.subplots(3, 1, figsize=(9.2, 9.0))
     for ax, (model, title) in zip(axes, PANELS):
         lines = draw(ax, [row for row in rows if row["model"] == model], title)
     fig.legend(lines, [line.get_label() for line in lines], loc="upper center",
-               bbox_to_anchor=(0.5, 0.995), ncol=2, frameon=True)
-    fig.subplots_adjust(left=0.11, right=0.89, top=0.92, bottom=0.075, hspace=0.34)
-    fig.savefig(OUTPUT.with_suffix(".png"), dpi=220, bbox_inches="tight")
-    fig.savefig(OUTPUT.with_suffix(".pdf"), bbox_inches="tight")
+               bbox_to_anchor=(0.5, 0.995), ncol=2, frameon=True, fontsize=12)
+    fig.subplots_adjust(left=0.11, right=0.89, top=0.90, bottom=0.075, hspace=0.48)
+    fig.savefig(OUTPUT.with_suffix(".png"), dpi=220)
+    fig.savefig(OUTPUT.with_suffix(".pdf"))
     plt.close(fig)
     print(f"Saved {len(rows) - 3} capped-frequency points in three panels")
 
