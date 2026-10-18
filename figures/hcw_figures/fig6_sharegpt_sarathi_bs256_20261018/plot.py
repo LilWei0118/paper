@@ -89,8 +89,7 @@ def main():
     top = 25 * math.ceil(max(power for trace in traces.values()
                              for sample, power in trace
                              if SAMPLE_RANGE[0] <= sample <= SAMPLE_RANGE[1]) / 25)
-    ax.set(title="Llama3-8B",
-           xlabel="Sample Times", ylabel="Power (W)",
+    ax.set(xlabel="Sample Times", ylabel="Power (W)",
            xlim=SAMPLE_RANGE, ylim=(0, top))
     ax.grid(ls="--", alpha=0.25)
     ax.legend(ncol=5, fontsize=8, loc="upper center", frameon=False)
