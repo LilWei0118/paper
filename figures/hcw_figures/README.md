@@ -12,6 +12,7 @@ This folder holds the PDF and PNG figures generated for the local paper revision
 | Fig. 6 current selection | `Fig6_power_sarathi_20261017.*` shows ShareGPT / Llama3-8B / Sarathi / RTX 3090 / BS256; `fig6_sharegpt_sarathi_bs256_20261018/` contains the plotting script and sampled values. |
 | Fig. 7 current selection | `Fig7_frequency_stage_time_llama_sharegpt_20261018.*` shows only Llama3-8B and Llama3-70B on ShareGPT; `fig7_llama_sharegpt_20261018/` contains the script and values. |
 | Fig. 9 and Fig. 10 | `Fig9_*`, `Fig10_*` |
+| Fig. 9 current selection | `Fig9_energy_performance_three_models_output2_20261017.*` plots throughput decrease, which is the negative of the original throughput change; `fig9_throughput_decrease_20261018/` contains the script and selected values. |
 | Fig. 10 total bubble duration | `fig10_total_interbatch_bubble_reduction/` contains the latest full-run middle-stage gap-duration plot, script, and derived tables. |
 | Fig. 11 | `Fig11_sharegpt_a100_qwen_bs256_*` is the requested two-panel selection; `Fig11_all_configs_*` contains the 27-configuration overview and model sheets; `Fig11_frequency_*` is an earlier preview. |
 | Fig. 11 atlas energy axis | `Fig11_all_configs_atlas_output2_20261017.*` now shows measured total energy on the blue axis; `fig11_all_configs_atlas_actual_energy/` contains its script and values. |
