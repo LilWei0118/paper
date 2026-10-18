@@ -1,0 +1,6 @@
+setting,dataset,bs,repeat,stage,gpu_index,samples,mean_power_w,inference_time_s,source
+auto,sharegpt,256,1,1,5,701,216.56161340941512,140.285182019,/home/hcw/LLM_pipeline_infer/dataset_runs/sarathi_llama3_8b_3090_freq_bs64_128_256/sharegpt/bs256/scan/auto/rep1/telemetry.csv
+freq1800,sharegpt,256,1,1,5,683,176.9033030746706,136.753705035,/home/hcw/LLM_pipeline_infer/dataset_runs/sarathi_llama3_8b_3090_freq_bs64_128_256/sharegpt/bs256/scan/freq1800/rep1/telemetry.csv
+freq1200,sharegpt,256,1,1,5,714,139.85230532212884,142.903591454,/home/hcw/LLM_pipeline_infer/dataset_runs/sarathi_llama3_8b_3090_freq_bs64_128_256/sharegpt/bs256/scan/freq1200/rep1/telemetry.csv
+freq900,sharegpt,256,1,1,5,692,141.0167528901734,138.497252688,/home/hcw/LLM_pipeline_infer/dataset_runs/sarathi_llama3_8b_3090_freq_bs64_128_256/sharegpt/bs256/scan/freq900/rep1/telemetry.csv
+freq600,sharegpt,256,1,1,5,771,134.19285084306097,154.190969013,/home/hcw/LLM_pipeline_infer/dataset_runs/sarathi_llama3_8b_3090_freq_bs64_128_256/sharegpt/bs256/scan/freq600/rep1/telemetry.csv
