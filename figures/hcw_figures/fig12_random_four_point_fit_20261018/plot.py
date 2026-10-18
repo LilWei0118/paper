@@ -177,7 +177,7 @@ def main():
         panel(ax, model, "sharegpt", sizes, measured, fit_map)
         ax.set_title(name, fontsize=15, pad=9)
         ax.set_xlabel("GPU SM clock cap f (MHz)")
-        ax.set_ylabel("Middle-stage decode time T (ms)")
+        ax.set_ylabel("T (ms)")
     fig.subplots_adjust(left=0.11, right=0.89, top=0.90, bottom=0.075, hspace=0.48)
     save(fig, "Fig12_random_four_point_fit_sharegpt_output2_20261018")
     print("Saved ShareGPT Fig. 12; retained fit records for 27 configurations")

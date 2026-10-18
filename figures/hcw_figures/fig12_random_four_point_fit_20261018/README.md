@@ -5,6 +5,7 @@ matching the overall proportions of Fig. 11.
 The panel order is Llama3-8B, Qwen3-8B, then Llama3-70B; its exact PDF page
 size and subplot positions match Fig. 11. Plot text is larger, and the former
 top heading has been removed.
+Each panel's vertical axis is labeled `T (ms)`.
 
 Run `python plot.py` to regenerate the ShareGPT three-model PNG/PDF figure in the parent directory. The script uses only the checked-in `measurements.csv` and records every prediction and selected frequency in `measured_predicted.csv` and `fit_coefficients.csv`. Fit records retain all three datasets for provenance and existing calculations; only ShareGPT is selected for the current Fig. 12 preview.
 
