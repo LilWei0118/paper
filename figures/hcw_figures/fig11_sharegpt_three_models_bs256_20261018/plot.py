@@ -78,12 +78,12 @@ def draw(ax, group, title):
 def main():
     rows = load()
     plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 10})
-    fig, axes = plt.subplots(3, 1, figsize=(9.2, 10.3))
+    fig, axes = plt.subplots(3, 1, figsize=(9.2, 9.2))
     for ax, (model, title) in zip(axes, PANELS):
         lines = draw(ax, [row for row in rows if row["model"] == model], title)
     fig.legend(lines, [line.get_label() for line in lines], loc="upper center",
                bbox_to_anchor=(0.5, 0.995), ncol=2, frameon=True)
-    fig.subplots_adjust(left=0.11, right=0.89, top=0.93, bottom=0.065, hspace=0.53)
+    fig.subplots_adjust(left=0.11, right=0.89, top=0.92, bottom=0.075, hspace=0.38)
     fig.savefig(OUTPUT.with_suffix(".png"), dpi=220, bbox_inches="tight")
     fig.savefig(OUTPUT.with_suffix(".pdf"), bbox_inches="tight")
     plt.close(fig)
