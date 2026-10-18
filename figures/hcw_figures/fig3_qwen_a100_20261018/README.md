@@ -15,3 +15,5 @@ pure-decode compute intervals on nonfinal stages. The bars should not be
 summed. The paper's LaTeX source does not yet reference this preview.
 The visible x-axis labels contain only model names; framework and GPU details
 remain in this provenance note.
+The selected Fig. 3 PDF uses the same 8 × 7.27 inch page size as Fig. 4, with
+larger labels and legend text for side-by-side placement at equal LaTeX widths.

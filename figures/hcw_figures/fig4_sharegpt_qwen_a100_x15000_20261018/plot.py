@@ -71,9 +71,10 @@ def panel(ax, rows, key, title, sizes, show_legend=False, show_ylabel=True,
     ax.spines[["top", "right"]].set_visible(True)
 
 
-def save(fig, path):
+def save(fig, path, tight=True):
     for extension in ("png", "pdf"):
-        fig.savefig(path.with_suffix(f".{extension}"), dpi=180, bbox_inches="tight")
+        options = {"bbox_inches": "tight"} if tight else {}
+        fig.savefig(path.with_suffix(f".{extension}"), dpi=180, **options)
     plt.close(fig)
 
 
@@ -81,19 +82,28 @@ def main():
     rows = load()
     plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 11,
                          "axes.titlesize": 12, "axes.labelsize": 11})
+    plt.rcParams.update({"font.size": 24, "axes.titlesize": 26,
+                         "axes.labelsize": 26, "xtick.labelsize": 24,
+                         "ytick.labelsize": 24})
     fig, axes = plt.subplots(2, 1, figsize=(8.0, 7.27), sharex=True)
     for ax, (key, title, sizes, _) in zip(axes, MODELS):
         panel(ax, rows, key, title, sizes, show_ylabel=False,
               y_lower=COMBINED_Y_LOWER[key])
     axes[0].set_xlabel("")
-    fig.supylabel("Stage Duration (ms)")
+    axes[1].set_xticks(range(0, 15001, 3000))
+    fig.supylabel("Stage Duration (ms)", x=0.03)
     handles = [Line2D([], [], marker="o", linestyle="None", color=color,
                       markersize=6, label=f"BS{bs}")
                for bs, color in BS_COLORS.items()]
-    fig.legend(handles=handles, loc="lower center", ncol=4, frameon=False,
-               bbox_to_anchor=(0.5, 0.01))
-    fig.tight_layout(rect=(0, 0.05, 1, 1))
-    save(fig, OUTPUT / COMBINED)
+    handles = [handles[i] for i in (0, 2, 1, 3)]
+    fig.legend(handles=handles, loc="lower center", ncol=2, frameon=False,
+               bbox_to_anchor=(0.5, 0.01), fontsize=24,
+               handletextpad=0.3, columnspacing=1.0)
+    fig.subplots_adjust(left=0.17, right=0.90, top=0.93, bottom=0.27, hspace=0.23)
+    save(fig, OUTPUT / COMBINED, tight=False)
+    plt.rcParams.update({"font.size": 11, "axes.titlesize": 12,
+                         "axes.labelsize": 11, "xtick.labelsize": "medium",
+                         "ytick.labelsize": "medium"})
     for key, title, sizes, stem in MODELS:
         fig, ax = plt.subplots(figsize=(7.2, 5.0))
         panel(ax, rows, key, title, sizes, show_legend=True)

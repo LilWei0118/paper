@@ -5,6 +5,8 @@ two vertically stacked panels: Qwen3-8B/SGLang/RTX 3090 above
 Llama3-70B/SGLang/A100. The visible titles show only model names, and the
 two panels share one y-axis title and one BS color legend. The two
 model-specific PNG/PDF pairs in this folder show the same data separately.
+The combined Fig. 4 PDF uses the same 8 × 7.27 inch page size as Fig. 3,
+with larger model titles, axes, and BS legend for side-by-side placement.
 
 Only ShareGPT Auto repetition 1 is shown. The x axis, labeled "Sequence Length,"
 is the **sum of request context lengths in a pure-decode batch**, limited to
