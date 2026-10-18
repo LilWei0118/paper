@@ -152,7 +152,7 @@ def panel(ax, model, dataset, sizes, measured, fit_map, compact=False):
                    s=27 if compact else 34, zorder=3, label=f"BS{bs}")
     ax.grid(ls="--", alpha=0.35)
     ax.set_axisbelow(True)
-    ax.spines[["top", "right"]].set_visible(False)
+    ax.spines[["top", "right"]].set_visible(True)
     ax.tick_params(axis="both", which="both", direction="in",
                    labelsize=8 if compact else 9)
     ax.legend(fontsize=7.5 if compact else 9, ncol=3, loc="upper right")

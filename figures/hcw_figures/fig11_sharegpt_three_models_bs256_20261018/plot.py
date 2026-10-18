@@ -68,8 +68,10 @@ def draw(ax, group, title):
     right.tick_params(axis="x", which="both", bottom=False, top=False)
     ax.grid(axis="y", ls="--", alpha=0.4)
     ax.set_axisbelow(True)
-    ax.spines[["top"]].set_visible(False)
-    right.spines[["top"]].set_visible(False)
+    ax.spines[["top"]].set_visible(True)
+    ax.spines[["right"]].set_visible(False)
+    right.spines[["top", "left", "bottom"]].set_visible(False)
+    right.spines[["right"]].set_visible(True)
     return energy_line, time_line
 
 

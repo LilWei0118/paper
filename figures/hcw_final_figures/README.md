@@ -4,6 +4,7 @@ This folder keeps copies of the current PNG/PDF figure previews. The manuscript'
 
 Tick marks point into the plot on numeric horizontal and vertical axes. Fig. 3 uses model names on the horizontal axis, so its horizontal tick marks are hidden. The right-hand vertical axis in Fig. 11 also uses inward tick marks.
 Model labels in the figures show model names only; framework and GPU details remain in the source documentation.
+Every plotting area has a closed four-sided border, including Fig. 11's dual-axis panels.
 
 | Figure | Current version | Selection |
 |---|---|---|

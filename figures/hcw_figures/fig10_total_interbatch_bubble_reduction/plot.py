@@ -170,6 +170,7 @@ def draw_model(ax, math_rows, model, label, sizes, low, high, show_ylabel):
     if show_ylabel:
         ax.set_ylabel("Total bubble time reduction (%)")
     ax.set_ylim(low, high)
+    ax.spines[["top", "right"]].set_visible(True)
     ax.axhline(0, color="black", lw=0.8)
     ax.grid(axis="y", ls="--", alpha=0.35)
     ax.set_axisbelow(True)

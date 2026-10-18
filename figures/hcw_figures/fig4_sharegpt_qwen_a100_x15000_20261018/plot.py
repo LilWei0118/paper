@@ -62,7 +62,7 @@ def panel(ax, rows, key, title, sizes, show_legend=False, show_ylabel=True):
     ax.set_axisbelow(True)
     if show_legend:
         ax.legend(fontsize=9, loc="lower right")
-    ax.spines[["top", "right"]].set_visible(False)
+    ax.spines[["top", "right"]].set_visible(True)
 
 
 def save(fig, path):

@@ -94,7 +94,7 @@ def main():
     ax.tick_params(axis="both", which="both", direction="in")
     ax.grid(ls="--", alpha=0.25)
     ax.legend(ncol=5, fontsize=8, loc="upper center", frameon=False)
-    ax.spines[["top", "right"]].set_visible(False)
+    ax.spines[["top", "right"]].set_visible(True)
     fig.tight_layout()
     fig.savefig(OUTPUT.with_suffix(".png"), dpi=220, bbox_inches="tight")
     fig.savefig(OUTPUT.with_suffix(".pdf"), bbox_inches="tight")

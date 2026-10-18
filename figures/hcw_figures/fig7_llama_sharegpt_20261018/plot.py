@@ -43,7 +43,7 @@ def panel(ax, model, title, bss, rows):
     ax.tick_params(axis="both", which="both", direction="in")
     ax.grid(ls="--", alpha=0.4)
     ax.set_axisbelow(True)
-    ax.spines[["top", "right"]].set_visible(False)
+    ax.spines[["top", "right"]].set_visible(True)
     ax.legend(fontsize=9, loc="upper right")
 
 

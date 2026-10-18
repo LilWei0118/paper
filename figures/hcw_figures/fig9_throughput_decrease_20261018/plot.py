@@ -66,6 +66,7 @@ def main():
             if j == 0:
                 ax.set_ylabel("Change relative to Auto (%)")
             ax.set_ylim(ylo, yhi)
+            ax.spines[["top", "right"]].set_visible(True)
             ax.axhline(0, color="black", lw=0.8)
             ax.grid(axis="y", ls="--", alpha=0.35)
             ax.set_axisbelow(True)
